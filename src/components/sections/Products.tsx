@@ -35,7 +35,7 @@ export default function Products() {
               {/* Image area */}
               <div className="relative h-44 overflow-hidden bg-white">
                 <Image
-                  src={`/images/products/${product.id}.jpg`}
+                  src={`/images/products/${product.id}.png`}
                   alt={product.title}
                   fill
                   className="object-contain p-2"
