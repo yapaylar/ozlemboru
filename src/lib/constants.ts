@@ -16,19 +16,17 @@ export const COMPANY = {
 };
 
 export const NAV_LINKS = [
-  { label: "Hakkımızda", href: "#hakkimizda" },
-  { label: "Ürünlerimiz", href: "#urunlerimiz" },
-  { label: "Neden Beton Boru?", href: "#neden-beton-boru" },
-  { label: "Sertifikalar", href: "#sertifikalar" },
-  { label: "Referanslar", href: "#referanslar" },
-  { label: "İletişim", href: "#iletisim" },
+  { label: "Anasayfa", href: "/" },
+  { label: "Kurumsal", href: "/kurumsal" },
+  { label: "Ürünlerimiz", href: "/urunler" },
+  { label: "Bilgi", href: "/bilgi" },
 ];
 
 export const STATS = [
   { value: "35+", label: "Yıl Deneyim" },
   { value: "Ø150–2800mm", label: "Çap Aralığı" },
   { value: "TSE & ISO", label: "Belgeli Üretim" },
-  { value: "50+", label: "Referans Proje" },
+  { value: "60+", label: "Referans Proje" },
 ];
 
 export const ABOUT_TEXT = `ÖZLEM İNŞAAT VE ALTYAPI ELEMANLARI TİC. LTD. ŞTİ., Beton Boru ve Beton Elemanları üretimi ve satışı amacıyla 1989 yılında ÖZLEM TİCARET olarak kurulmuştur. Aile şirketinin verdiği birlik, beraberlik ve gayretli çalışmalar sonucunda 1996 yılında bugünkü ünvanını almıştır.
@@ -60,36 +58,46 @@ export const KFS_ITEMS = [
 
 export const PRODUCTS = [
   {
-    id: "beton-borular",
-    title: "Beton Borular",
+    id: "beton-betonarme-borular",
+    title: "Beton ve Betonarme Borular",
     description:
-      "TS 821 EN 1916 standardına uygun, Ø150mm ile Ø2800mm arasında, buhar kürlü beton borular. Kanalizasyon ve yağmur suyu drenaj hatlarında yaygın kullanım.",
-    imagePlaceholder: true,
-    href: "/urunler/beton-borular",
+      "Ø150mm ile Ø2800mm arasında, buhar kürlü, entegre contalı beton ve çelik takviyeli betonarme borular. Kanalizasyon ve drenaj hatlarında uzun ömürlü çözüm.",
+    href: "/urunler/beton-betonarme-borular",
   },
   {
-    id: "betonarme-borular",
-    title: "Betonarme Borular",
+    id: "muayene-bacasi-elemanlari",
+    title: "Muayene Bacası Elemanları",
     description:
-      "Yüksek yük kapasitesi gerektiren projelerde tercih edilen, çelik takviyeli betonarme borular. Büyük çaplı altyapı projelerine özel çözümler.",
-    imagePlaceholder: true,
-    href: "/urunler/betonarme-borular",
+      "TS EN 1917 standardına uygun taban elemanları, gövde bilezikleri ve konik elemanlar. Kentsel altyapı sistemlerinde güvenli erişim ve denetim.",
+    href: "/urunler/muayene-bacasi-elemanlari",
   },
   {
-    id: "muayene-bacalari",
-    title: "Muayene Bacaları",
+    id: "parsel-bacasi-elemanlari",
+    title: "Parsel Bacası Elemanları",
     description:
-      "TS EN 1917 standartlarına uygun muayene bacası taban elemanları, gövde bilezikleri ve konik elemanlar. Kentsel kanalizasyon sistemlerinde güvenli erişim.",
-    imagePlaceholder: true,
-    href: "/urunler/muayene-bacalari",
+      "TS 13473 standardına uygun, konut ve sanayi parsellerinde kanalizasyon bağlantı noktaları için üretilen dayanıklı taban ve gövde elemanları.",
+    href: "/urunler/parsel-bacasi-elemanlari",
   },
   {
-    id: "parsel-bacalari",
-    title: "Parsel Bacaları",
+    id: "yagmur-suyu-izgara-elemanlari",
+    title: "Yağmur Suyu Izgara Elemanları",
     description:
-      "Konut ve endüstriyel parsellerde kanalizasyon bağlantı noktaları için üretilen dayanıklı taban ve gövde elemanları.",
-    imagePlaceholder: true,
-    href: "/urunler/parsel-bacalari",
+      "Yol ve kaldırım yüzey sularının toplanması için üretilen beton ızgara elemanları. Kentsel drenaj altyapısında yüksek taşıma kapasitesi.",
+    href: "/urunler/yagmur-suyu-izgara-elemanlari",
+  },
+  {
+    id: "kanalizasyon-beton-ek-parcalari",
+    title: "Kanalizasyon Beton Ek Parçaları",
+    description:
+      "Boru hatlarının birleşim noktalarında kullanılan beton ek parçaları. Sızdırmazlık ve uzun ömür için özel üretim.",
+    href: "/urunler/kanalizasyon-beton-ek-parcalari",
+  },
+  {
+    id: "betonarme-su-depolari",
+    title: "Betonarme Su Depoları",
+    description:
+      "İçme suyu ve sulama amaçlı, farklı kapasitelerde betonarme su depoları. Dayanıklı yapısı ve sızdırmazlık özellikleriyle uzun yıllar sorunsuz kullanım.",
+    href: "/urunler/betonarme-su-depolari",
   },
 ];
 

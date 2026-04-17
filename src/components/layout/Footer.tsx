@@ -1,40 +1,51 @@
 import Link from "next/link";
 import { COMPANY, NAV_LINKS, CERTIFICATES } from "@/lib/constants";
 
-function LogoMark() {
-  return (
-    <svg viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-8 w-auto">
-      <circle cx="22" cy="22" r="19" stroke="white" strokeWidth="2" fill="none" opacity="0.8" />
-      <circle cx="22" cy="22" r="12" stroke="white" strokeWidth="1.5" fill="none" opacity="0.3" />
-      <circle cx="22" cy="22" r="3.5" fill="#00a8d6" />
-      <circle cx="16" cy="10.5" r="2" fill="#00a8d6" opacity="0.8" />
-      <circle cx="28" cy="10.5" r="2" fill="#00a8d6" opacity="0.8" />
-      <text x="50" y="18" fontFamily="system-ui, sans-serif" fontWeight="800" fontSize="15" fill="white" letterSpacing="-0.3">Özlem</text>
-      <text x="50" y="34" fontFamily="system-ui, sans-serif" fontWeight="400" fontSize="11.5" fill="#4caad4" letterSpacing="2">inşaat</text>
-    </svg>
-  );
-}
-
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer style={{ backgroundColor: "#080f1c" }}>
-      <div
-        className="container-max py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"
-      >
-        {/* Brand */}
-        <div className="lg:col-span-2">
-          <LogoMark />
-          <p className="mt-4 text-white/40 text-xs leading-relaxed max-w-xs">
-            {COMPANY.founded}&rsquo;dan bu yana TS 821 EN 1916 belgeli beton boru ve
-            altyapı elemanları üreticisi. ISO 9001 &amp; 14001 sertifikalı.
+    <footer style={{ backgroundColor: "#0a0a0a" }}>
+
+      {/* Main grid */}
+      <div className="container-max pt-16 pb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+
+        {/* Brand — wide column */}
+        <div className="lg:col-span-5">
+          {/* C-mark logo */}
+          <div className="flex items-center gap-3 mb-5">
+            <svg width="36" height="36" viewBox="0 0 56 56" fill="none">
+              <g transform="rotate(-20, 28, 28)">
+                <path d="M 47,39 A 22,22 0 1,1 47,17" stroke="rgba(255,255,255,0.7)" strokeWidth="1.3" strokeLinecap="round" fill="none" />
+                <path d="M 41,35.5 A 15,15 0 1,1 41,20.5" stroke="rgba(255,255,255,0.7)" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+                <path d="M 35.8,32.5 A 9,9 0 1,1 35.8,23.5" stroke="rgba(255,255,255,0.7)" strokeWidth="1.3" strokeLinecap="round" fill="none" />
+                <circle cx="41" cy="20.5" r="2.6" fill="#00a8d6" />
+                <circle cx="41" cy="35.5" r="2.6" fill="#00a8d6" />
+              </g>
+            </svg>
+            <div className="flex flex-col leading-none">
+              <span className="font-medium uppercase tracking-[0.18em]" style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.85)" }}>
+                Özlem İnşaat
+              </span>
+              <span className="font-light uppercase tracking-[0.13em]" style={{ fontSize: "0.58rem", color: "rgba(255,255,255,0.3)", marginTop: "4px" }}>
+                Beton Boru ve Beton Elemanları Sanayi
+              </span>
+            </div>
+          </div>
+
+          <p className="mt-6 text-xs font-light leading-relaxed max-w-xs" style={{ color: "rgba(255,255,255,0.35)", lineHeight: "1.8" }}>
+            {COMPANY.founded}&rsquo;dan bu yana Ankara&rsquo;da üretim yapan firmamız;
+            ISO 9001 belgeli beton boru, betonarme boru, muayene bacası ve
+            altyapı elemanları üretmektedir.
           </p>
-          <div className="mt-5 flex flex-wrap gap-2">
+
+          {/* Certificate tags */}
+          <div className="mt-6 flex flex-wrap gap-2">
             {CERTIFICATES.slice(0, 4).map((cert) => (
               <span
                 key={cert.code}
-                className="text-[10px] font-bold px-2 py-0.5 rounded-sm border border-white/10 text-white/35 tracking-wide"
+                className="text-[10px] font-light uppercase tracking-wider px-2.5 py-1 border"
+                style={{ borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.3)" }}
               >
                 {cert.code}
               </span>
@@ -42,39 +53,49 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Links */}
-        <div>
-          <h4 className="text-white/50 text-xs font-bold uppercase tracking-widest mb-4">
+        {/* Spacer */}
+        <div className="hidden lg:block lg:col-span-1" />
+
+        {/* Nav links */}
+        <div className="lg:col-span-3">
+          <p className="text-[10px] font-light uppercase tracking-[0.2em] mb-5" style={{ color: "rgba(255,255,255,0.3)" }}>
             Sayfalar
-          </h4>
-          <ul className="space-y-2.5">
+          </p>
+          <ul className="space-y-3">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-white/40 text-sm hover:text-white/80 transition-colors duration-150"
+                  className="text-xs font-light uppercase tracking-wider text-white/45 hover:text-white/90 transition-colors duration-150"
                 >
                   {link.label}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/iletisim"
+                className="text-xs font-light uppercase tracking-wider text-white/45 hover:text-white/90 transition-colors duration-150"
+              >
+                İletişim
+              </Link>
+            </li>
           </ul>
         </div>
 
         {/* Contact */}
-        <div>
-          <h4 className="text-white/50 text-xs font-bold uppercase tracking-widest mb-4">
+        <div className="lg:col-span-3">
+          <p className="text-[10px] font-light uppercase tracking-[0.2em] mb-5" style={{ color: "rgba(255,255,255,0.3)" }}>
             İletişim
-          </h4>
+          </p>
           <ul className="space-y-3">
-            <li className="flex items-start gap-2">
-              <span className="text-white/20 text-xs mt-0.5">📍</span>
-              <span className="text-white/40 text-xs leading-relaxed">{COMPANY.address}</span>
+            <li className="text-xs font-light leading-relaxed text-white/35" style={{ lineHeight: "1.7" }}>
+              {COMPANY.address}
             </li>
             <li>
               <a
                 href={`tel:${COMPANY.phone1.replace(/[\s()]/g, "")}`}
-                className="text-white/40 text-xs hover:text-white/70 transition-colors"
+                className="text-xs font-light uppercase tracking-wider text-white/45 hover:text-white/90 transition-colors duration-150"
               >
                 {COMPANY.phone1}
               </a>
@@ -82,7 +103,7 @@ export default function Footer() {
             <li>
               <a
                 href={`tel:${COMPANY.phone2.replace(/[\s()]/g, "")}`}
-                className="text-white/40 text-xs hover:text-white/70 transition-colors"
+                className="text-xs font-light uppercase tracking-wider text-white/45 hover:text-white/90 transition-colors duration-150"
               >
                 {COMPANY.phone2}
               </a>
@@ -90,7 +111,7 @@ export default function Footer() {
             <li>
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="text-white/40 text-xs hover:text-white/70 transition-colors break-all"
+                className="text-xs font-light tracking-wider text-white/45 hover:text-white/90 transition-colors duration-150 break-all"
               >
                 {COMPANY.email}
               </a>
@@ -99,15 +120,16 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom */}
-      <div className="border-t" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
-        <div className="container-max py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-white/20 text-xs">
-            &copy; {year} {COMPANY.fullName}. Tüm hakları saklıdır.
-          </p>
-          <p className="text-white/15 text-xs">{COMPANY.website}</p>
-        </div>
+      {/* Bottom bar */}
+      <div className="container-max py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p className="text-[10px] font-light uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.2)" }}>
+          &copy; {year} {COMPANY.fullName}
+        </p>
+        <p className="text-[10px] font-light uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.15)" }}>
+          {COMPANY.website}
+        </p>
       </div>
+
     </footer>
   );
 }

@@ -1,83 +1,86 @@
-import { REFERENCES, REFERENCE_INSTITUTIONS } from "@/lib/constants";
+import Image from "next/image";
+import Link from "next/link";
+import { REFERENCES } from "@/lib/constants";
+
+const LOGOS = [1, 2, 3, 4, 5, 6, 7];
+
+const VISIBLE_REFS = REFERENCES.slice(0, 10);
 
 export default function References() {
-  const half = Math.ceil(REFERENCES.length / 2);
-
   return (
     <section id="referanslar" className="section-y bg-white">
       <div className="container-max">
+
         {/* Header */}
-        <div className="mb-12">
-          <p className="label-tag">Güven</p>
-          <h2 className="section-title">Referanslarımız</h2>
-          <div className="divider-accent" />
-          <p className="mt-5 text-slate-500 text-sm max-w-lg leading-relaxed">
-            Kamu kurumları, belediyeler ve önde gelen inşaat firmaları ile
-            gerçekleştirdiğimiz projelerle Türkiye&rsquo;nin altyapısını güçlendiriyoruz.
+        <div className="flex items-end justify-between mb-12 pb-6 border-b" style={{ borderColor: "#000" }}>
+          <div>
+            <p className="text-xs font-light uppercase tracking-[0.2em] mb-4" style={{ color: "#888" }}>
+              Güven
+            </p>
+            <h2
+              className="font-light uppercase leading-none tracking-wide"
+              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#000" }}
+            >
+              Referanslarımız
+            </h2>
+          </div>
+          <p className="hidden sm:block text-sm font-light text-right" style={{ color: "#888" }}>
+            {REFERENCES.length}+ tamamlanmış proje
           </p>
         </div>
 
-        {/* Institutions — clean pill list */}
-        <div className="mb-12 pb-12 border-b" style={{ borderColor: "#e4e9f0" }}>
-          <p className="text-xs text-slate-400 uppercase tracking-widest font-medium mb-5">
-            Çalıştığımız Kurumlardan Bazıları
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {REFERENCE_INSTITUTIONS.map((name) => (
-              <span
-                key={name}
-                className="px-4 py-2 text-sm font-semibold border rounded-sm"
-                style={{
-                  borderColor: "#1b3563",
-                  color: "#1b3563",
-                  backgroundColor: "#fff",
-                }}
-              >
-                {name}
-              </span>
-            ))}
-          </div>
+        {/* Logo row */}
+        <div className="grid grid-cols-4 sm:grid-cols-7 gap-px bg-black mb-12">
+          {LOGOS.map((n) => (
+            <div key={n} className="aspect-square bg-white flex items-center justify-center p-4">
+              <Image
+                src={`/images/references/${n}.png`}
+                alt={`Referans ${n}`}
+                width={120}
+                height={120}
+                className="object-contain w-full h-full"
+              />
+            </div>
+          ))}
         </div>
 
         {/* Reference list */}
-        <div
-          className="rounded-sm overflow-hidden border"
-          style={{ borderColor: "#e4e9f0" }}
-        >
-          {/* Header bar */}
-          <div
-            className="px-8 py-4 flex items-center justify-between"
-            style={{ backgroundColor: "#1b3563" }}
-          >
-            <span className="text-white font-semibold text-sm">Referanslarımızdan Bazıları</span>
-            <span className="text-white/40 text-xs">{REFERENCES.length}+ proje</span>
-          </div>
-
-          {/* Two-column list */}
-          <div className="grid md:grid-cols-2">
-            {[REFERENCES.slice(0, half), REFERENCES.slice(half)].map((col, ci) => (
-              <div
-                key={ci}
-                className={ci === 0 ? "border-r" : ""}
-                style={{ borderColor: "#e4e9f0" }}
-              >
-                {col.map((ref, ri) => (
-                  <div
-                    key={ri}
-                    className="flex items-center gap-3 px-6 py-3 border-b text-sm"
-                    style={{ borderColor: "#f4f6fa" }}
+        <div className="grid md:grid-cols-2 border-t border-l" style={{ borderColor: "#e8e8e8" }}>
+          {[VISIBLE_REFS.slice(0, 5), VISIBLE_REFS.slice(5, 10)].map((col, ci) => (
+            <div key={ci}>
+              {col.map((ref, ri) => (
+                <div
+                  key={ri}
+                  className="flex items-center gap-4 px-6 py-4 border-b border-r text-sm font-light"
+                  style={{ borderColor: "#e8e8e8", color: "#333" }}
+                >
+                  <span
+                    className="text-xs font-light shrink-0 w-5 text-right"
+                    style={{ color: "#bbb" }}
                   >
-                    <span
-                      className="w-1 h-1 rounded-full shrink-0"
-                      style={{ backgroundColor: "#00a8d6" }}
-                    />
-                    <span className="text-slate-600">{ref}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
+                    {String(ci * 5 + ri + 1).padStart(2, "0")}
+                  </span>
+                  {ref}
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
+
+        {/* Show all button */}
+        <div className="mt-8 flex justify-start">
+          <Link
+            href="/bilgi/referanslar"
+            className="inline-flex items-center gap-3 font-light uppercase tracking-widest px-7 py-3.5 text-sm border transition-all duration-200 hover:bg-black hover:text-white"
+            style={{ borderColor: "#000", color: "#000" }}
+          >
+            +60 Referansın Tamamını Gör
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </Link>
+        </div>
+
       </div>
     </section>
   );

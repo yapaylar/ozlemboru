@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { SEO, COMPANY } from "@/lib/constants";
+import { CartProvider } from "@/context/CartContext";
+import FloatingButtons from "@/components/ui/FloatingButtons";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -132,7 +130,7 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${montserrat.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -140,7 +138,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <CartProvider>
+          {children}
+          <FloatingButtons />
+        </CartProvider>
+      </body>
     </html>
   );
 }
