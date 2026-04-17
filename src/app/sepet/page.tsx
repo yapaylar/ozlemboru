@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import CartPageClient from "./CartPageClient";
 
 export const metadata: Metadata = {
@@ -10,9 +8,7 @@ export const metadata: Metadata = {
 
 export default function SepetPage() {
   return (
-    <>
-      <Navbar />
-      <main>
+    <main>
         <section className="relative pt-[80px]" style={{ backgroundColor: "#0a0a0a", minHeight: "280px" }}>
           <div className="relative z-10 flex items-end container-max pb-10"
             style={{ minHeight: "calc(280px - 80px)" }}>
@@ -33,8 +29,6 @@ export default function SepetPage() {
             <CartPageClient />
           </div>
         </section>
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 }

@@ -4,6 +4,8 @@ import "./globals.css";
 import { SEO, COMPANY } from "@/lib/constants";
 import { CartProvider } from "@/context/CartContext";
 import FloatingButtons from "@/components/ui/FloatingButtons";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -140,7 +142,9 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         <CartProvider>
+          <Navbar />
           {children}
+          <Footer />
           <FloatingButtons />
         </CartProvider>
       </body>

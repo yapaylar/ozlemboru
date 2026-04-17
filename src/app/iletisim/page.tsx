@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { COMPANY } from "@/lib/constants";
 import ContactForm from "./ContactForm";
 
@@ -39,9 +37,7 @@ const CONTACT_ITEMS = [
 
 export default function IletisimPage() {
   return (
-    <>
-      <Navbar />
-      <main>
+    <main>
 
         {/* ── PAGE HEADER ─────────────────────────────────────────── */}
         <section
@@ -194,8 +190,6 @@ export default function IletisimPage() {
           </div>
         </section>
 
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 }

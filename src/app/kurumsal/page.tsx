@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { COMPANY, KFS_ITEMS, CERTIFICATES } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -11,9 +9,7 @@ export const metadata: Metadata = {
 
 export default function KurumsalPage() {
   return (
-    <>
-      <Navbar />
-      <main>
+    <main>
 
         {/* ── PAGE HEADER ─────────────────────────────────────────── */}
         <section
@@ -272,8 +268,6 @@ export default function KurumsalPage() {
           </div>
         </section>
 
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 }

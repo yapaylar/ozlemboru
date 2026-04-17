@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Referanslar | Özlem Beton Boru",
@@ -117,9 +115,7 @@ export default function ReferanslarPage() {
   const total = GROUPS.reduce((acc, g) => acc + g.refs.length, 0);
 
   return (
-    <>
-      <Navbar />
-      <main>
+    <main>
 
         {/* ── PAGE HEADER ─────────────────────────────────────────── */}
         <section
@@ -279,8 +275,6 @@ export default function ReferanslarPage() {
           </div>
         </section>
 
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 }

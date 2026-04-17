@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Teknik Şartnameler | Özlem Beton Boru",
@@ -54,9 +52,7 @@ const TD = ({ children, center = false, className = "" }: { children: React.Reac
 
 export default function TeknikSartnamelePage() {
   return (
-    <>
-      <Navbar />
-      <main>
+    <main>
 
         {/* ── PAGE HEADER ─────────────────────────────────────────── */}
         <section
@@ -176,8 +172,6 @@ export default function TeknikSartnamelePage() {
           </div>
         </section>
 
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 }

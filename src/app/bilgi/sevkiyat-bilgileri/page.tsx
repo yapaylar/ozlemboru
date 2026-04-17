@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Sevkiyat Bilgileri | Özlem Beton Boru",
@@ -95,9 +93,7 @@ const BIRIM_LABEL: Record<string, string> = {
 
 export default function SevkiyatBilgileriPage() {
   return (
-    <>
-      <Navbar />
-      <main>
+    <main>
 
         {/* ── PAGE HEADER ─────────────────────────────────────────── */}
         <section
@@ -253,8 +249,6 @@ export default function SevkiyatBilgileriPage() {
           </div>
         </section>
 
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 }

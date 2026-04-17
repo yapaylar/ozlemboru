@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { PRODUCT_CATEGORIES, getProductsByCategory, getCategoryBySlug } from "@/lib/products";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -31,9 +29,7 @@ export default async function CategoryPage({ params }: Props) {
   const others = PRODUCT_CATEGORIES.filter((c) => c.id !== cat.id);
 
   return (
-    <>
-      <Navbar />
-      <main>
+    <main>
 
         {/* ── PAGE HEADER ─────────────────────────────────────────── */}
         <section
@@ -187,8 +183,6 @@ export default async function CategoryPage({ params }: Props) {
           </div>
         </section>
 
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 }

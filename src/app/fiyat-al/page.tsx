@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import PriceRequestClient from "./PriceRequestClient";
 
 export const metadata: Metadata = {
@@ -12,9 +10,7 @@ export const metadata: Metadata = {
 
 export default function FiyatAlPage() {
   return (
-    <>
-      <Navbar />
-      <main>
+    <main>
 
         {/* ── HEADER ───────────────────────────────────────────────── */}
         <div
@@ -95,8 +91,6 @@ export default function FiyatAlPage() {
           </div>
         </section>
 
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 }

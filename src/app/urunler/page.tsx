@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { PRODUCT_CATEGORIES } from "@/lib/products";
 
 export const metadata: Metadata = {
@@ -13,9 +11,7 @@ export const metadata: Metadata = {
 
 export default function UrunlerPage() {
   return (
-    <>
-      <Navbar />
-      <main>
+    <main>
 
         {/* ── PAGE HEADER ─────────────────────────────────────────── */}
         <section
@@ -156,8 +152,6 @@ export default function UrunlerPage() {
           </div>
         </section>
 
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 }

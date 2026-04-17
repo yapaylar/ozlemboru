@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { PRODUCTS, getCategoryBySlug, getProductBySlug, getProductsByCategory } from "@/lib/products";
 import ProductClient from "./ProductClient";
 
@@ -31,9 +29,7 @@ export default async function ProductPage({ params }: Props) {
   const siblings = getProductsByCategory(slug).filter((p) => p.id !== productId);
 
   return (
-    <>
-      <Navbar />
-      <main>
+    <main>
 
         {/* ── BREADCRUMB ───────────────────────────────────────────── */}
         <div className="bg-white border-b" style={{ paddingTop: "calc(80px + 40px)", borderColor: "#e8e8e8" }}>
@@ -94,8 +90,6 @@ export default async function ProductPage({ params }: Props) {
           </section>
         )}
 
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 }
