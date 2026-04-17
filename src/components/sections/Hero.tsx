@@ -179,7 +179,7 @@ export default function Hero() {
           {/* Button */}
           <div className="flex-shrink-0">
             <Link
-              href="/iletisim"
+              href="/urunler"
               className="inline-flex items-center gap-2.5 font-light uppercase tracking-widest px-7 py-3.5 text-sm text-white transition-all duration-200 hover:opacity-80"
               style={{ backgroundColor: "#000000" }}
             >

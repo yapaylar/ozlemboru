@@ -171,13 +171,159 @@ export const PRODUCTS: Product[] = [
       { id: "d1400", label: "Ø1400", length: "1500", weight: "3.382" },
     ],
   },
+  // ── PARSEL BACASI ELEMANLARI ────────────────────────────────────────────
+
+  {
+    id: "pb-taban-elemani",
+    categoryId: "parsel-bacasi-elemanlari",
+    title: "Parsel Bacası Taban Elemanı",
+    shortTitle: "PB. Taban Elemanı",
+    description: "Konut ve sanayi parsellerinde kanalizasyon bağlantı hatlarında kullanılan beton parsel bacası taban elemanları.",
+    image: "/images/products/parsel-bacasi-elemanlari.png",
+    unit: "ADET",
+    standard: "TS 13473",
+    optionLabel: "Anma Boyutu / Boru Çapı",
+    options: [
+      { id: "800x800-d150", label: "800×800 / Ø150", length: "600", weight: "850" },
+      { id: "800x800-d200", label: "800×800 / Ø200", length: "600", weight: "850" },
+      { id: "1000-d200",    label: "Ø1000 / Ø200",   length: "780", weight: "1.750" },
+      { id: "1000-d300",    label: "Ø1000 / Ø300",   length: "780", weight: "1.750" },
+    ],
+  },
+  {
+    id: "pb-govde-elemani",
+    categoryId: "parsel-bacasi-elemanlari",
+    title: "Parsel Bacası Gövde Elemanı",
+    shortTitle: "PB. Gövde Elemanı",
+    description: "Parsel bacası derinliğini ayarlamak için kullanılan, farklı boy seçenekli beton gövde bilezikleri.",
+    image: "/images/products/parsel-bacasi-elemanlari.png",
+    unit: "ADET",
+    standard: "TS 13473",
+    optionLabel: "Anma Boyutu × Yükseklik",
+    options: [
+      { id: "800x800-h500", label: "800×800 / H:500", length: "500", weight: "460" },
+      { id: "800x800-h250", label: "800×800 / H:250", length: "250", weight: "240" },
+      { id: "1000-h600",    label: "Ø1000 / H:600",   length: "600", weight: "430" },
+      { id: "1000-h350",    label: "Ø1000 / H:350",   length: "350", weight: "225" },
+    ],
+  },
+  {
+    id: "pb-kapak-elemani",
+    categoryId: "parsel-bacasi-elemanlari",
+    title: "Parsel Bacası Kapak Elemanı",
+    shortTitle: "PB. Kapak Elemanı",
+    description: "Parsel bacasını üstten kapatan, çerçevesiz, profil çerçeveli ve rediksiyon kapak seçenekleri.",
+    image: "/images/products/parsel-bacasi-elemanlari.png",
+    unit: "ADET",
+    standard: "TS 13473",
+    optionLabel: "Kapak Tipi",
+    options: [
+      { id: "1000x500-cercevesiz",    label: "1000×500 Çerçevesiz",      length: "100", weight: "100" },
+      { id: "1000x500-profil",        label: "1000×500 Profil Çerçeveli", length: "100", weight: "114" },
+      { id: "1400-rediksiyon",        label: "1400 Rediksiyon",           length: "250", weight: "750" },
+      { id: "yuvarlak-ba-kapak",      label: "Yuvarlak BA Kapak",         length: "100", weight: "80" },
+    ],
+  },
+
+  // ── YAĞMUR SUYU IZGARA ELEMANLARI ───────────────────────────────────────
+
+  {
+    id: "ys-kare-taban-elemani",
+    categoryId: "yagmur-suyu-izgara-elemanlari",
+    title: "400×400 YS Kare Taban Elemanı",
+    shortTitle: "YS Kare Taban",
+    description: "Yol ve kaldırım yüzey sularının toplanması için kullanılan, 400×400 mm kare beton taban elemanı.",
+    image: "/images/products/yagmur-suyu-izgara-elemanlari.png",
+    unit: "ADET",
+    optionLabel: "Boyut",
+    options: [
+      { id: "400x400", label: "400×400", length: "400", weight: "280" },
+    ],
+  },
+  {
+    id: "ys-kare-govde-elemani",
+    categoryId: "yagmur-suyu-izgara-elemanlari",
+    title: "400×400 YS Kare Gövde Elemanı",
+    shortTitle: "YS Kare Gövde",
+    description: "Yağmur suyu kare ızgara sistemlerinde derinlik ayarı için kullanılan beton gövde elemanı.",
+    image: "/images/products/yagmur-suyu-izgara-elemanlari.png",
+    unit: "ADET",
+    optionLabel: "Boyut",
+    options: [
+      { id: "400x400", label: "400×400", length: "400", weight: "150" },
+    ],
+  },
+  {
+    id: "ys-kare-kapak-elemani",
+    categoryId: "yagmur-suyu-izgara-elemanlari",
+    title: "500×500 YS Kare Kapak Elemanı",
+    shortTitle: "YS Kare Kapak",
+    description: "Kare beton yağmur suyu ızgara sistemlerinde kullanılan 500×500 mm beton kapak elemanı.",
+    image: "/images/products/yagmur-suyu-izgara-elemanlari.png",
+    unit: "ADET",
+    optionLabel: "Boyut",
+    options: [
+      { id: "500x500", label: "500×500", length: "100", weight: "45" },
+    ],
+  },
+  {
+    id: "ys-izgara-tabani",
+    categoryId: "yagmur-suyu-izgara-elemanlari",
+    title: "Yağmur Suyu Izgara Tabanı",
+    shortTitle: "YS Izgara Tabanı",
+    description: "Yol kenarı yüzey suyu tahliyesi için tek ve çift ızgaralı, farklı boyutlarda beton ızgara taban elemanları.",
+    image: "/images/products/yagmur-suyu-izgara-elemanlari.png",
+    unit: "ADET",
+    optionLabel: "Boyut / Tip",
+    options: [
+      { id: "400x600",      label: "400×600",                    length: "1000", weight: "950" },
+      { id: "400x1200",     label: "400×1200",                   length: "700",  weight: "1.400" },
+      { id: "450x500-tek",  label: "450×500 (Tek Izgaralı)",     length: "550",  weight: "450" },
+      { id: "450x900-cift", label: "450×900 (Çift Izgaralı)",    length: "600",  weight: "400" },
+    ],
+  },
+  {
+    id: "baca-taban-ve-bilezik-1000",
+    categoryId: "yagmur-suyu-izgara-elemanlari",
+    title: "Ø1000 Baca Taban ve Beton Elemanları",
+    shortTitle: "Ø1000 Baca Elemanları",
+    description: "Ø1000 muayene ve baca sistemleri için taban elemanı, beton bilezik ve mahruti elemanlar.",
+    image: "/images/products/yagmur-suyu-izgara-elemanlari.png",
+    unit: "ADET",
+    optionLabel: "Eleman Tipi / Boy",
+    options: [
+      { id: "1000-taban-et",    label: "Ø1000 Baca Taban (E.T)",   length: "900", weight: "1.440" },
+      { id: "1000-bilezik-500", label: "Ø1000 Beton Bilezik 500",  length: "500", weight: "400" },
+      { id: "1000-bilezik-250", label: "Ø1000 Beton Bilezik 250",  length: "250", weight: "300" },
+      { id: "1000-mahruti",     label: "Ø1000 Beton Mahruti",      length: "250", weight: "370" },
+    ],
+  },
+  {
+    id: "baca-taban-ve-bilezik-800",
+    categoryId: "yagmur-suyu-izgara-elemanlari",
+    title: "Ø800 Baca Taban ve Beton Elemanları",
+    shortTitle: "Ø800 Baca Elemanları",
+    description: "Ø800 baca sistemleri için yuvarlak taban elemanı, beton bilezik ve mahruti elemanlar.",
+    image: "/images/products/yagmur-suyu-izgara-elemanlari.png",
+    unit: "ADET",
+    optionLabel: "Eleman Tipi / Boy",
+    options: [
+      { id: "800-taban-yuv",    label: "Ø800 Baca Tabanı (Yuvarlak)", length: "600", weight: "650" },
+      { id: "800-bilezik-500",  label: "Ø800 Beton Bilezik 500",      length: "500", weight: "280" },
+      { id: "800-bilezik-250",  label: "Ø800 Beton Bilezik 250",      length: "250", weight: "180" },
+      { id: "800-mahruti",      label: "Ø800 Beton Mahruti",          length: "250", weight: "250" },
+    ],
+  },
+
+  // ── KANALİZASYON BETON EK PARÇALARI ────────────────────────────────────
+
   {
     id: "entg-c-dirsek-parca",
-    categoryId: "beton-betonarme-borular",
+    categoryId: "kanalizasyon-beton-ek-parcalari",
     title: "Entegre Contalı Dirsek ve C Parçaları",
     shortTitle: "Dirsek ve C Parçaları",
     description: "Boru hatlarında yön değişimi ve T bağlantısı için kullanılan entegre contalı beton dirsek ve C parçaları.",
-    image: "/images/products/beton-betonarme-borular.png",
+    image: "/images/products/kanalizasyon-beton-ek-parcalari.png",
     unit: "ADET",
     optionLabel: "Boyut",
     options: [
@@ -191,11 +337,11 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "yukseklik-ayar-bilezigi",
-    categoryId: "beton-betonarme-borular",
+    categoryId: "kanalizasyon-beton-ek-parcalari",
     title: "MB. Baca Yükseklik Ayar Bileziği",
     shortTitle: "Yükseklik Ayar Bileziği",
     description: "Ø620 muayene bacalarında kapak seviyesini ayarlamak için kullanılan beton yükseklik ayar bilezikleri.",
-    image: "/images/products/muayene-bacasi-elemanlari.png",
+    image: "/images/products/kanalizasyon-beton-ek-parcalari.png",
     unit: "ADET",
     optionLabel: "Boy",
     options: [
@@ -208,7 +354,36 @@ export const PRODUCTS: Product[] = [
     ],
   },
 
-  // ── DİĞER KATEGORİLER (Yakında) ─────────────────────────────────────────
+  // ── BETONARME SU DEPOLARI ────────────────────────────────────────────────
+
+  {
+    id: "betonarme-su-deposu",
+    categoryId: "betonarme-su-depolari",
+    title: "Prefabrik Betonarme Su Deposu",
+    shortTitle: "Betonarme Su Deposu",
+    description: "İçme suyu ve sulama amaçlı, sızdırmaz prefabrik betonarme su depoları. Farklı kapasite seçenekleri mevcuttur.",
+    image: "/images/products/betonarme-su-depolari.png",
+    unit: "ADET",
+    optionLabel: "Kapasite",
+    options: [
+      { id: "25m3", label: "25 m³", length: "—", weight: "—" },
+    ],
+  },
+  {
+    id: "betonarme-hazne",
+    categoryId: "betonarme-su-depolari",
+    title: "Prefabrik Betonarme Hazne",
+    shortTitle: "Betonarme Hazne",
+    description: "Atık su, yağmur suyu veya sulama suyu depolamak amacıyla kullanılan prefabrik betonarme hazne elemanları.",
+    image: "/images/products/betonarme-su-depolari.png",
+    unit: "ADET",
+    optionLabel: "Kapasite",
+    options: [
+      { id: "25m3", label: "25 m³", length: "—", weight: "—" },
+    ],
+  },
+
+  // ── MEVCUT KATEGORİLER ───────────────────────────────────────────────────
 
   {
     id: "mb-taban-elemani",
