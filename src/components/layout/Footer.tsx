@@ -33,7 +33,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <p className="mt-6 text-xs font-light leading-relaxed max-w-xs" style={{ color: "rgba(255,255,255,0.35)", lineHeight: "1.8" }}>
+          <p className="mt-6 text-xs font-light leading-relaxed max-w-xs" style={{ color: "rgba(255,255,255,0.55)", lineHeight: "1.8" }}>
             {COMPANY.founded}&rsquo;dan bu yana Ankara&rsquo;da üretim yapan firmamız;
             ISO 9001 belgeli beton boru, betonarme boru, muayene bacası ve
             altyapı elemanları üretmektedir.
@@ -45,7 +45,7 @@ export default function Footer() {
               <span
                 key={cert.code}
                 className="text-[10px] font-light uppercase tracking-wider px-2.5 py-1 border"
-                style={{ borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.3)" }}
+                style={{ borderColor: "rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.5)" }}
               >
                 {cert.code}
               </span>
@@ -58,7 +58,7 @@ export default function Footer() {
 
         {/* Nav links */}
         <div className="lg:col-span-3">
-          <p className="text-[10px] font-light uppercase tracking-[0.2em] mb-5" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <p className="text-[10px] font-light uppercase tracking-[0.2em] mb-5" style={{ color: "rgba(255,255,255,0.45)" }}>
             Sayfalar
           </p>
           <ul className="space-y-3">
@@ -66,7 +66,7 @@ export default function Footer() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-xs font-light uppercase tracking-wider text-white/45 hover:text-white/90 transition-colors duration-150"
+                  className="text-xs font-light uppercase tracking-wider text-white/60 hover:text-white/90 transition-colors duration-150"
                 >
                   {link.label}
                 </Link>
@@ -75,7 +75,7 @@ export default function Footer() {
             <li>
               <Link
                 href="/iletisim"
-                className="text-xs font-light uppercase tracking-wider text-white/45 hover:text-white/90 transition-colors duration-150"
+                className="text-xs font-light uppercase tracking-wider text-white/60 hover:text-white/90 transition-colors duration-150"
               >
                 İletişim
               </Link>
@@ -85,17 +85,17 @@ export default function Footer() {
 
         {/* Contact */}
         <div className="lg:col-span-3">
-          <p className="text-[10px] font-light uppercase tracking-[0.2em] mb-5" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <p className="text-[10px] font-light uppercase tracking-[0.2em] mb-5" style={{ color: "rgba(255,255,255,0.45)" }}>
             İletişim
           </p>
           <ul className="space-y-3">
-            <li className="text-xs font-light leading-relaxed text-white/35" style={{ lineHeight: "1.7" }}>
+            <li className="text-xs font-light leading-relaxed text-white/55" style={{ lineHeight: "1.7" }}>
               {COMPANY.address}
             </li>
             <li>
               <a
                 href={`tel:${COMPANY.phone1.replace(/[\s()]/g, "")}`}
-                className="text-xs font-light uppercase tracking-wider text-white/45 hover:text-white/90 transition-colors duration-150"
+                className="text-xs font-light uppercase tracking-wider text-white/60 hover:text-white/90 transition-colors duration-150"
               >
                 {COMPANY.phone1}
               </a>
@@ -103,7 +103,7 @@ export default function Footer() {
             <li>
               <a
                 href={`tel:${COMPANY.phone2.replace(/[\s()]/g, "")}`}
-                className="text-xs font-light uppercase tracking-wider text-white/45 hover:text-white/90 transition-colors duration-150"
+                className="text-xs font-light uppercase tracking-wider text-white/60 hover:text-white/90 transition-colors duration-150"
               >
                 {COMPANY.phone2}
               </a>
@@ -111,7 +111,7 @@ export default function Footer() {
             <li>
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="text-xs font-light tracking-wider text-white/45 hover:text-white/90 transition-colors duration-150 break-all"
+                className="text-xs font-light tracking-wider text-white/60 hover:text-white/90 transition-colors duration-150 break-all"
               >
                 {COMPANY.email}
               </a>
@@ -122,10 +122,10 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="container-max py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="text-[10px] font-light uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.2)" }}>
+        <p className="text-[10px] font-light uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.4)" }}>
           &copy; {year} {COMPANY.fullName}
         </p>
-        <p className="text-[10px] font-light uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.15)" }}>
+        <p className="text-[10px] font-light uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.3)" }}>
           {COMPANY.website}
         </p>
       </div>

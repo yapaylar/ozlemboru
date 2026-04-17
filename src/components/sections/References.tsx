@@ -3,6 +3,7 @@ import Link from "next/link";
 import { REFERENCES } from "@/lib/constants";
 
 const LOGOS = [1, 2, 3, 4, 5, 6, 7];
+const LOGOS_MOBILE = [1, 2, 3, 4, 5, 6, 7, 5];
 
 const VISIBLE_REFS = REFERENCES.slice(0, 10);
 
@@ -29,10 +30,10 @@ export default function References() {
           </p>
         </div>
 
-        {/* Logo row */}
+        {/* Logo row — mobile uses 8 items (fills 4×2 grid), desktop uses 7 (fills 1×7) */}
         <div className="grid grid-cols-4 sm:grid-cols-7 gap-px bg-black mb-12">
-          {LOGOS.map((n) => (
-            <div key={n} className="aspect-square bg-white flex items-center justify-center p-4">
+          {LOGOS_MOBILE.map((n, i) => (
+            <div key={i} className={`aspect-square bg-white flex items-center justify-center p-4 ${i === 7 ? "sm:hidden" : ""}`}>
               <Image
                 src={`/images/references/${n}.png`}
                 alt={`Referans ${n}`}

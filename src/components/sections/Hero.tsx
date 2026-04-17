@@ -118,7 +118,7 @@ export default function Hero() {
         <button
           onClick={prev}
           aria-label="Önceki"
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 transition-opacity duration-500"
+          className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 z-20 transition-opacity duration-500"
           style={{ opacity: hovered ? 1 : 0 }}
         >
           <div style={{ position: "relative", width: 46, height: 72 }}>
@@ -135,7 +135,7 @@ export default function Hero() {
         <button
           onClick={next}
           aria-label="Sonraki"
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 transition-opacity duration-500"
+          className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 z-20 transition-opacity duration-500"
           style={{ opacity: hovered ? 1 : 0 }}
         >
           <div style={{ position: "relative", width: 46, height: 72 }}>

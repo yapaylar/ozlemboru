@@ -55,7 +55,7 @@ function Logo() {
         <span className="font-semibold uppercase tracking-[0.18em]" style={{ fontSize: "0.95rem", color: "#000" }}>
           Özlem İnşaat
         </span>
-        <span className="font-light uppercase tracking-[0.13em]" style={{ fontSize: "0.58rem", color: "#888", marginTop: "4px" }}>
+        <span className="hidden sm:block font-light uppercase tracking-[0.13em]" style={{ fontSize: "0.58rem", color: "#888", marginTop: "4px" }}>
           Beton Boru ve Beton Elemanları Sanayi
         </span>
       </div>
