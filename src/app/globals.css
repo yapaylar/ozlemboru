@@ -112,3 +112,75 @@
     @apply w-12 h-0.5 bg-cyan mt-5;
   }
 }
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 12mm 10mm;
+  }
+
+  body {
+    font-size: 10px;
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  /* Hide layout chrome */
+  nav,
+  footer,
+  .floating-buttons,
+  [data-floating],
+  header {
+    display: none !important;
+  }
+
+  /* Show hidden print header */
+  .print\:block {
+    display: block !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:py-4 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .print\:px-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Table */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    min-width: unset !important;
+    font-size: 9px !important;
+  }
+
+  th, td {
+    padding: 4px 6px !important;
+    border: 1px solid #ccc !important;
+    white-space: nowrap;
+  }
+
+  thead tr {
+    background-color: #eee !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f9f9f9 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  section {
+    border: 1px solid #ccc !important;
+    overflow: visible !important;
+  }
+}
