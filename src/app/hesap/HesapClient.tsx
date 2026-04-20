@@ -16,6 +16,9 @@ import {
 const fmt = (n: number) =>
   n.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
+const fmtKg = (n: number) =>
+  n > 0 ? n.toLocaleString("tr-TR") : "—";
+
 const SESSION_KEY = "hesap_auth";
 
 // ─── password gate ───────────────────────────────────────────────────────────
@@ -25,9 +28,7 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
   const [error, setError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  useEffect(() => { inputRef.current?.focus(); }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +45,6 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
   return (
     <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: "#0a0a0a" }}>
       <div className="w-full max-w-sm px-8">
-        {/* Logo area */}
         <div className="mb-10 text-center">
           <p className="text-xs font-light uppercase tracking-[0.25em] mb-3" style={{ color: "rgba(255,255,255,0.3)" }}>
             Özlem Beton Boru
@@ -71,10 +71,7 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
               onChange={(e) => setValue(e.target.value)}
               autoComplete="current-password"
               className="w-full px-4 py-3 text-sm font-light bg-transparent border focus:outline-none transition-colors"
-              style={{
-                borderColor: error ? "#e53e3e" : "rgba(255,255,255,0.2)",
-                color: "#fff",
-              }}
+              style={{ borderColor: error ? "#e53e3e" : "rgba(255,255,255,0.2)", color: "#fff" }}
               placeholder="••••••••"
             />
             {error && (
@@ -83,7 +80,6 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
               </p>
             )}
           </div>
-
           <button
             type="submit"
             className="w-full py-3 text-xs font-semibold uppercase tracking-[0.2em] bg-white text-black transition-opacity hover:opacity-80 mt-2"
@@ -115,15 +111,17 @@ function SectionPanel({ section, prices, isOpen, onToggle }: SectionPanelProps) 
     [section.items, prices]
   );
 
-  const hasMeter = rows.some((r) => r.pricePerMeter !== null);
+  const hasMeter = rows.some((r) => r.karliMetreFiyat !== null);
   const hasSteel = rows.some((r) => r.steel > 0);
+  const hasConta = rows.some((r) => r.contaPrice > 0);
+  const hasLabor = rows.some((r) => r.laborPrice > 0);
 
   return (
     <section className="bg-white border print:break-inside-avoid" style={{ borderColor: "#e0e0e0" }}>
       {/* accordion header */}
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between px-6 py-4 border-b text-left transition-colors hover:bg-gray-50 print:hidden"
+        className="w-full flex items-center justify-between px-6 py-4 border-b text-left hover:bg-gray-50 print:hidden"
         style={{ borderColor: "#e0e0e0" }}
         aria-expanded={isOpen}
       >
@@ -139,15 +137,8 @@ function SectionPanel({ section, prices, isOpen, onToggle }: SectionPanelProps) 
           </span>
         </div>
         <svg
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-          style={{
-            transition: "transform 0.2s",
-            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-            color: "#888",
-          }}
+          width="14" height="14" viewBox="0 0 14 14" fill="none"
+          style={{ transition: "transform 0.2s", transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#888" }}
         >
           <path d="M2 5l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -158,26 +149,27 @@ function SectionPanel({ section, prices, isOpen, onToggle }: SectionPanelProps) 
         <h2 className="text-sm font-semibold uppercase tracking-wide">{section.title}</h2>
       </div>
 
-      {/* table */}
-      {(isOpen) && (
+      {isOpen && (
         <div className="overflow-x-auto">
-          <table className="w-full text-sm border-collapse" style={{ minWidth: hasSteel ? "940px" : "820px" }}>
+          <table className="w-full text-sm border-collapse" style={{ minWidth: "860px" }}>
             <thead>
               <tr style={{ backgroundColor: "#f8f8f8", borderBottom: "1px solid #e4e4e4" }}>
-                {[
-                  { label: "Ürün / Boyut",      note: "",      always: true },
-                  { label: "Boy",                note: "mm",    always: hasMeter },
-                  { label: "Çimento",            note: "kg",    always: true },
-                  { label: "Agrega",             note: "kg",    always: true },
-                  { label: "Çakıl",              note: "kg",    always: true },
-                  { label: "Su",                 note: "kg",    always: true },
-                  { label: "Demir",              note: "kg",    always: hasSteel },
-                  { label: "Toplam Maliyet",     note: "₺",     always: true },
-                  { label: "Satış Fiyatı",       note: "₺",     always: true },
-                  { label: "Adet (KDV'li)",      note: "₺",     always: true },
-                  { label: "Metre Fiyatı",       note: "₺/m",   always: hasMeter },
-                ]
-                  .filter((col) => col.always)
+                {([
+                  { label: "Ürün",             note: "",     show: true },
+                  { label: "Boy",              note: "mm",   show: hasMeter },
+                  { label: "Çimento",          note: "kg",   show: true },
+                  { label: "Agrega",           note: "kg",   show: true },
+                  { label: "Demir",            note: "kg",   show: hasSteel },
+                  { label: "Conta",            note: "₺",    show: hasConta },
+                  { label: "İşçilik",          note: "₺",    show: hasLabor },
+                  { label: "Ara Toplam",       note: "₺",    show: true },
+                  { label: "Genel Gider",      note: "₺",    show: true },
+                  { label: "Toplam Maliyet",   note: "₺",    show: true },
+                  { label: "Kar",              note: "₺",    show: true },
+                  { label: "Karlı Adet Fiyat", note: "₺",    show: true },
+                  { label: "Karlı Metre Fiyat", note: "₺/m", show: hasMeter },
+                ] as { label: string; note: string; show: boolean }[])
+                  .filter((c) => c.show)
                   .map(({ label, note }) => (
                     <th
                       key={label}
@@ -204,43 +196,60 @@ function SectionPanel({ section, prices, isOpen, onToggle }: SectionPanelProps) 
                     borderBottom: "1px solid #f2f2f2",
                   }}
                 >
-                  <td className="px-4 py-2.5 text-xs font-semibold tracking-wide" style={{ color: "#000" }}>
+                  <td className="px-4 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap" style={{ color: "#000" }}>
                     {row.label}
                   </td>
+
                   {hasMeter && (
                     <td className="px-4 py-2.5 text-xs font-light tabular-nums" style={{ color: "#777" }}>
                       {row.length > 0 ? row.length.toLocaleString("tr-TR") : <span style={{ color: "#ccc" }}>—</span>}
                     </td>
                   )}
+
                   <td className="px-4 py-2.5 text-xs font-light tabular-nums" style={{ color: "#555" }}>
-                    {row.cement.toLocaleString("tr-TR")}
+                    {fmtKg(row.cement)}
                   </td>
                   <td className="px-4 py-2.5 text-xs font-light tabular-nums" style={{ color: "#555" }}>
-                    {row.aggregate.toLocaleString("tr-TR")}
+                    {fmtKg(row.aggregate)}
                   </td>
-                  <td className="px-4 py-2.5 text-xs font-light tabular-nums" style={{ color: "#555" }}>
-                    {row.gravel.toLocaleString("tr-TR")}
-                  </td>
-                  <td className="px-4 py-2.5 text-xs font-light tabular-nums" style={{ color: "#555" }}>
-                    {row.water.toLocaleString("tr-TR")}
-                  </td>
+
                   {hasSteel && (
                     <td className="px-4 py-2.5 text-xs font-light tabular-nums" style={{ color: "#555" }}>
-                      {row.steel > 0 ? row.steel.toLocaleString("tr-TR") : <span style={{ color: "#ccc" }}>—</span>}
+                      {fmtKg(row.steel)}
                     </td>
                   )}
+
+                  {hasConta && (
+                    <td className="px-4 py-2.5 text-xs font-light tabular-nums" style={{ color: "#555" }}>
+                      {row.contaPrice > 0 ? fmt(row.contaPrice) : <span style={{ color: "#ccc" }}>—</span>}
+                    </td>
+                  )}
+
+                  {hasLabor && (
+                    <td className="px-4 py-2.5 text-xs font-light tabular-nums" style={{ color: "#555" }}>
+                      {row.laborPrice > 0 ? fmt(row.laborPrice) : <span style={{ color: "#ccc" }}>—</span>}
+                    </td>
+                  )}
+
+                  <td className="px-4 py-2.5 text-xs tabular-nums font-medium" style={{ color: "#555" }}>
+                    {fmt(row.araToplamCost)}
+                  </td>
+                  <td className="px-4 py-2.5 text-xs tabular-nums font-medium" style={{ color: "#555" }}>
+                    {fmt(row.genelGider)}
+                  </td>
                   <td className="px-4 py-2.5 text-xs tabular-nums font-medium" style={{ color: "#333" }}>
-                    {fmt(row.materialCost)}
+                    {fmt(row.toplamMaliyet)}
                   </td>
                   <td className="px-4 py-2.5 text-xs tabular-nums font-medium" style={{ color: "#1b3563" }}>
-                    {fmt(row.salePrice)}
+                    {fmt(row.kar)}
                   </td>
                   <td className="px-4 py-2.5 text-xs tabular-nums font-bold" style={{ color: "#000" }}>
-                    {fmt(row.unitPriceWithVat)}
+                    {fmt(row.karliAdetFiyat)}
                   </td>
+
                   {hasMeter && (
                     <td className="px-4 py-2.5 text-xs tabular-nums font-semibold" style={{ color: "#1e72ad" }}>
-                      {row.pricePerMeter !== null ? fmt(row.pricePerMeter) : <span style={{ color: "#ccc" }}>—</span>}
+                      {row.karliMetreFiyat !== null ? fmt(row.karliMetreFiyat) : <span style={{ color: "#ccc" }}>—</span>}
                     </td>
                   )}
                 </tr>
@@ -253,21 +262,19 @@ function SectionPanel({ section, prices, isOpen, onToggle }: SectionPanelProps) 
   );
 }
 
-// ─── input field ─────────────────────────────────────────────────────────────
+// ─── unit price inputs ───────────────────────────────────────────────────────
 
-type InputRow = { key: keyof UnitPrices; label: string; unit: string };
+type InputDef = { key: keyof UnitPrices; label: string; unit: string };
 
-const INPUTS: InputRow[] = [
-  { key: "cement",     label: "Çimento",  unit: "₺/kg" },
-  { key: "aggregate",  label: "Agrega",   unit: "₺/kg" },
-  { key: "gravel",     label: "Çakıl",    unit: "₺/kg" },
-  { key: "water",      label: "Su",       unit: "₺/kg" },
-  { key: "steel",      label: "Demir",    unit: "₺/kg" },
-  { key: "profitRate", label: "KAR",      unit: "%" },
-  { key: "vatRate",    label: "KDV",      unit: "%" },
+const INPUTS: InputDef[] = [
+  { key: "cement",       label: "Çimento",      unit: "₺/kg" },
+  { key: "aggregate",    label: "Agrega",        unit: "₺/kg" },
+  { key: "steel",        label: "Demir",         unit: "₺/kg" },
+  { key: "overheadRate", label: "Genel Gider",   unit: "%" },
+  { key: "profitRate",   label: "Kar",           unit: "%" },
 ];
 
-// ─── main component ───────────────────────────────────────────────────────────
+// ─── main ─────────────────────────────────────────────────────────────────────
 
 export default function HesapClient() {
   const [authed, setAuthed] = useState<boolean | null>(null);
@@ -291,22 +298,13 @@ export default function HesapClient() {
     setOpenSections((prev) => ({ ...prev, [id]: !prev[id] }));
   }, []);
 
-  const expandAll = () =>
-    setOpenSections(Object.fromEntries(PRICE_SECTIONS.map((s) => [s.id, true])));
-  const collapseAll = () =>
-    setOpenSections(Object.fromEntries(PRICE_SECTIONS.map((s) => [s.id, false])));
-
-  // Loading (hydration)
   if (authed === null) return null;
-
-  if (!authed) {
-    return <PasswordGate onSuccess={() => setAuthed(true)} />;
-  }
+  if (!authed) return <PasswordGate onSuccess={() => setAuthed(true)} />;
 
   return (
     <main className="min-h-screen bg-[#f5f5f5]">
 
-      {/* ── HEADER ────────────────────────────────────────────────── */}
+      {/* ── HEADER ──────────────────────────────────────────────────── */}
       <header
         className="relative pt-[80px] print:hidden"
         style={{ backgroundColor: "#0a0a0a", minHeight: "220px" }}
@@ -352,7 +350,7 @@ export default function HesapClient() {
         </div>
       </header>
 
-      {/* ── PRINT HEADER ──────────────────────────────────────────── */}
+      {/* ── PRINT HEADER ────────────────────────────────────────────── */}
       <div className="hidden print:block mb-6 px-4">
         <h1 className="text-xl font-semibold uppercase tracking-wide">
           Özlem Beton Boru — Birim Fiyat Hesap
@@ -360,15 +358,15 @@ export default function HesapClient() {
         <p className="text-xs text-gray-500 mt-1">
           {new Date().toLocaleDateString("tr-TR")}
           {" | "}
-          Çimento: {fmt(prices.cement)} ₺/kg · Agrega: {fmt(prices.aggregate)} ₺/kg · Çakıl: {fmt(prices.gravel)} ₺/kg
-          {" · "}Su: {fmt(prices.water)} ₺/kg · Demir: {fmt(prices.steel)} ₺/kg
-          {" | "}KAR: %{prices.profitRate} · KDV: %{prices.vatRate}
+          Çimento: {fmt(prices.cement)} ₺/kg · Agrega: {fmt(prices.aggregate)} ₺/kg
+          {" · "}Demir: {fmt(prices.steel)} ₺/kg
+          {" | "}Genel Gider: %{prices.overheadRate} · Kar: %{prices.profitRate}
         </p>
       </div>
 
       <div className="container-max py-10 print:py-4 print:px-0">
 
-        {/* ── BİRİM FİYAT GİRDİ PANELİ ─────────────────────────── */}
+        {/* ── BİRİM FİYAT PANELİ ─────────────────────────────────────── */}
         <section className="bg-white border mb-6 print:hidden" style={{ borderColor: "#e0e0e0" }}>
           <div className="px-6 py-4 border-b flex items-center justify-between" style={{ borderColor: "#e0e0e0" }}>
             <h2 className="text-xs font-semibold uppercase tracking-[0.15em]" style={{ color: "#333" }}>
@@ -379,7 +377,7 @@ export default function HesapClient() {
             </p>
           </div>
 
-          <div className="px-6 py-6 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-5">
+          <div className="px-6 py-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
             {INPUTS.map(({ key, label, unit }) => (
               <div key={key}>
                 <label
@@ -394,7 +392,7 @@ export default function HesapClient() {
                 <input
                   type="number"
                   min={0}
-                  step={key === "profitRate" || key === "vatRate" ? 1 : 0.01}
+                  step={key === "profitRate" || key === "overheadRate" ? 1 : 0.01}
                   defaultValue={DEFAULT_UNIT_PRICES[key]}
                   onChange={(e) => handleChange(key, e.target.value)}
                   className="w-full border px-3 py-2 text-sm font-light focus:outline-none focus:border-black transition-colors"
@@ -408,21 +406,20 @@ export default function HesapClient() {
             className="px-6 py-3 border-t text-[11px] font-light"
             style={{ borderColor: "#f0f0f0", color: "#aaa", backgroundColor: "#fafafa" }}
           >
-            Maliyet = (Çimento + Agrega + Çakıl + Su + Demir) × birim fiyat &nbsp;|&nbsp;
-            Satış = Maliyet × (1 + KAR%) &nbsp;|&nbsp;
-            Adet (KDV&apos;li) = Satış × (1 + KDV%) &nbsp;|&nbsp;
-            Metre Fiyatı = Adet / boy(m)
+            Ara Toplam = Çim + Agr + Dem + Conta + İşçilik
+            &nbsp;|&nbsp; Genel Gider = Ara × %GG &nbsp;|&nbsp; Toplam Maliyet = Ara + GG
+            &nbsp;|&nbsp; Kar = Toplam × %Kar &nbsp;|&nbsp; Karlı Adet = Toplam + Kar &nbsp;|&nbsp; Karlı Metre = Karlı Adet / boy(m)
           </div>
         </section>
 
-        {/* ── BÖLÜM KONTROLLERI ────────────────────────────────────── */}
+        {/* ── BÖLÜM KONTROLLERİ ──────────────────────────────────────── */}
         <div className="flex items-center gap-4 mb-4 print:hidden">
           <p className="text-xs font-light" style={{ color: "#888" }}>
             {PRICE_SECTIONS.length} kategori
           </p>
           <div className="flex gap-2 ml-auto">
             <button
-              onClick={expandAll}
+              onClick={() => setOpenSections(Object.fromEntries(PRICE_SECTIONS.map((s) => [s.id, true])))}
               className="text-xs font-light uppercase tracking-widest transition-opacity hover:opacity-60"
               style={{ color: "#555" }}
             >
@@ -430,7 +427,7 @@ export default function HesapClient() {
             </button>
             <span style={{ color: "#ccc" }}>·</span>
             <button
-              onClick={collapseAll}
+              onClick={() => setOpenSections(Object.fromEntries(PRICE_SECTIONS.map((s) => [s.id, false])))}
               className="text-xs font-light uppercase tracking-widest transition-opacity hover:opacity-60"
               style={{ color: "#555" }}
             >
@@ -439,7 +436,7 @@ export default function HesapClient() {
           </div>
         </div>
 
-        {/* ── KATEGORİ BÖLÜMLER ────────────────────────────────────── */}
+        {/* ── BÖLÜMLER ────────────────────────────────────────────────── */}
         <div className="space-y-3">
           {PRICE_SECTIONS.map((section) => (
             <SectionPanel
@@ -452,7 +449,6 @@ export default function HesapClient() {
           ))}
         </div>
 
-        {/* ── ALT NOT ───────────────────────────────────────────────── */}
         <p className="mt-6 text-xs font-light print:hidden" style={{ color: "#aaa" }}>
           Malzeme miktarları{" "}
           <code className="font-mono text-[11px]">src/lib/pricing.ts</code> dosyasından,
