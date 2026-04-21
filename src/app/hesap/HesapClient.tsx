@@ -113,8 +113,8 @@ function SectionPanel({ section, prices, isOpen, onToggle }: SectionPanelProps) 
 
   const hasMeter = rows.some((r) => r.karliMetreFiyat !== null);
   const hasSteel = rows.some((r) => r.steel > 0);
-  const hasConta = rows.some((r) => r.contaPrice > 0);
-  const hasLabor = rows.some((r) => r.laborPrice > 0);
+  const hasConta = rows.some((r) => r.effContaPrice > 0);
+  const hasLabor = rows.some((r) => r.effLaborPrice > 0);
 
   return (
     <section className="bg-white border print:break-inside-avoid" style={{ borderColor: "#e0e0e0" }}>
@@ -221,13 +221,13 @@ function SectionPanel({ section, prices, isOpen, onToggle }: SectionPanelProps) 
 
                   {hasConta && (
                     <td className="px-4 py-2.5 text-xs font-light tabular-nums" style={{ color: "#555" }}>
-                      {row.contaPrice > 0 ? fmt(row.contaPrice) : <span style={{ color: "#ccc" }}>—</span>}
+                      {row.effContaPrice > 0 ? fmt(row.effContaPrice) : <span style={{ color: "#ccc" }}>—</span>}
                     </td>
                   )}
 
                   {hasLabor && (
                     <td className="px-4 py-2.5 text-xs font-light tabular-nums" style={{ color: "#555" }}>
-                      {row.laborPrice > 0 ? fmt(row.laborPrice) : <span style={{ color: "#ccc" }}>—</span>}
+                      {row.effLaborPrice > 0 ? fmt(row.effLaborPrice) : <span style={{ color: "#ccc" }}>—</span>}
                     </td>
                   )}
 
@@ -267,11 +267,13 @@ function SectionPanel({ section, prices, isOpen, onToggle }: SectionPanelProps) 
 type InputDef = { key: keyof UnitPrices; label: string; unit: string };
 
 const INPUTS: InputDef[] = [
-  { key: "cement",       label: "Çimento",      unit: "₺/kg" },
-  { key: "aggregate",    label: "Agrega",        unit: "₺/kg" },
-  { key: "steel",        label: "Demir",         unit: "₺/kg" },
-  { key: "overheadRate", label: "Genel Gider",   unit: "%" },
-  { key: "profitRate",   label: "Kar",           unit: "%" },
+  { key: "cement",       label: "Çimento",       unit: "₺/kg" },
+  { key: "aggregate",    label: "Agrega",         unit: "₺/kg" },
+  { key: "steel",        label: "Demir",          unit: "₺/kg" },
+  { key: "contaRate",    label: "Conta Artışı",   unit: "%" },
+  { key: "laborRate",    label: "İşçilik Artışı", unit: "%" },
+  { key: "overheadRate", label: "Genel Gider",    unit: "%" },
+  { key: "profitRate",   label: "Kar",            unit: "%" },
 ];
 
 // ─── main ─────────────────────────────────────────────────────────────────────
@@ -288,6 +290,11 @@ export default function HesapClient() {
   }, []);
 
   const handleChange = useCallback((key: keyof UnitPrices, raw: string) => {
+    // Boş veya sadece "-" girildiğinde state'i 0 olarak tut ama input'u engelleme
+    if (raw === "" || raw === "-") {
+      setPrices((prev) => ({ ...prev, [key]: 0 }));
+      return;
+    }
     const value = parseFloat(raw.replace(",", "."));
     if (!isNaN(value) && value >= 0) {
       setPrices((prev) => ({ ...prev, [key]: value }));
@@ -334,11 +341,11 @@ export default function HesapClient() {
               Çıkış
             </button>
             <button
-              onClick={() => setPrices(DEFAULT_UNIT_PRICES)}
+              onClick={() => setPrices({ ...DEFAULT_UNIT_PRICES })}
               className="px-4 py-2 text-xs font-light uppercase tracking-widest border transition-opacity hover:opacity-60"
               style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.6)" }}
             >
-              Sıfırla
+              Varsayılana Dön
             </button>
             <button
               onClick={() => window.print()}
@@ -377,7 +384,7 @@ export default function HesapClient() {
             </p>
           </div>
 
-          <div className="px-6 py-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
+          <div className="px-6 py-6 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-5">
             {INPUTS.map(({ key, label, unit }) => (
               <div key={key}>
                 <label
@@ -392,8 +399,8 @@ export default function HesapClient() {
                 <input
                   type="number"
                   min={0}
-                  step={key === "profitRate" || key === "overheadRate" ? 1 : 0.01}
-                  defaultValue={DEFAULT_UNIT_PRICES[key]}
+                  step={["profitRate", "overheadRate", "contaRate", "laborRate"].includes(key) ? 1 : 0.01}
+                  value={prices[key]}
                   onChange={(e) => handleChange(key, e.target.value)}
                   className="w-full border px-3 py-2 text-sm font-light focus:outline-none focus:border-black transition-colors"
                   style={{ borderColor: "#d0d0d0", color: "#000", backgroundColor: "#fafafa" }}

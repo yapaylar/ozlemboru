@@ -26,6 +26,8 @@ export type UnitPrices = {
   cement: number;       // Çimento ₺/kg
   aggregate: number;    // Agrega ₺/kg
   steel: number;        // Demir ₺/kg
+  contaRate: number;    // Conta fiyatına ek artış %
+  laborRate: number;    // İşçilik fiyatına ek artış %
   overheadRate: number; // Genel Gider % (Ara Toplamın yüzdesi)
   profitRate: number;   // Kar % (Toplam Maliyetin yüzdesi)
 };
@@ -35,6 +37,8 @@ export const DEFAULT_UNIT_PRICES: UnitPrices = {
   cement: 4.60,
   aggregate: 0.43,
   steel: 32.50,
+  contaRate: 0,
+  laborRate: 0,
   overheadRate: 25,
   profitRate: 25,
 };
@@ -90,15 +94,23 @@ const TABANLAR: ProductRecipe[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// GEÇİŞ ELEMANLARI — Excel: RED.BİL.GEÇİŞ PL. sekmesinden güncelleyin
+// GEÇİŞ ELEMANLARI
 // ─────────────────────────────────────────────────────────────────────────────
 
 const GECIS_ELEMANLARI: ProductRecipe[] = [
-  { id: "ge200-300", label: "Ø200 → Ø300", unit: "ADET", length: 0, cement: 0, aggregate: 0, steel: 0, contaPrice: 0, laborPrice: 0 },
-  { id: "ge300-400", label: "Ø300 → Ø400", unit: "ADET", length: 0, cement: 0, aggregate: 0, steel: 0, contaPrice: 0, laborPrice: 0 },
-  { id: "ge400-500", label: "Ø400 → Ø500", unit: "ADET", length: 0, cement: 0, aggregate: 0, steel: 0, contaPrice: 0, laborPrice: 0 },
-  { id: "ge500-600", label: "Ø500 → Ø600", unit: "ADET", length: 0, cement: 0, aggregate: 0, steel: 0, contaPrice: 0, laborPrice: 0 },
-  { id: "ge600-800", label: "Ø600 → Ø800", unit: "ADET", length: 0, cement: 0, aggregate: 0, steel: 0, contaPrice: 0, laborPrice: 0 },
+  // ── Bilezikler ──
+  { id: "ge-1000x35",   label: "Ø1000×35 Bilezik",        unit: "ADET", length: 0, cement:  75, aggregate:  450, steel:  0, contaPrice: 260, laborPrice:  190 },
+  { id: "ge-1000x60",   label: "Ø1000×60 Bilezik",        unit: "ADET", length: 0, cement:  90, aggregate:  800, steel:  0, contaPrice: 260, laborPrice:  190 },
+  { id: "ge-1200x35",   label: "Ø1200×35 Bilezik",        unit: "ADET", length: 0, cement:  70, aggregate:  520, steel:  4, contaPrice: 300, laborPrice:  200 },
+  { id: "ge-1200x60",   label: "Ø1200×60 Bilezik",        unit: "ADET", length: 0, cement: 110, aggregate:  900, steel:  6, contaPrice: 300, laborPrice:  200 },
+  // ── Geçiş Plakları ──
+  { id: "ge-1200x800",  label: "Ø1200×800 Geçiş Plağı",   unit: "ADET", length: 0, cement: 135, aggregate:  600, steel: 10, contaPrice:   0, laborPrice:  500 },
+  { id: "ge-1200x1000", label: "Ø1200×1000 Geçiş Plağı",  unit: "ADET", length: 0, cement: 135, aggregate:  950, steel: 15, contaPrice:   0, laborPrice:  500 },
+  { id: "ge-1200x1200", label: "Ø1200×1200 Geçiş Plağı",  unit: "ADET", length: 0, cement: 135, aggregate:  950, steel: 15, contaPrice:   0, laborPrice:  500 },
+  { id: "ge-1200x1400", label: "Ø1200×1400 Geçiş Plağı",  unit: "ADET", length: 0, cement: 190, aggregate: 1000, steel: 15, contaPrice:   0, laborPrice:  750 },
+  // ── Redüksiyonlar ──
+  { id: "ge-red-1400",  label: "Ø1400 Redüksiyon",         unit: "ADET", length: 0, cement:  75, aggregate:  500, steel: 14, contaPrice:   0, laborPrice:  900 },
+  { id: "ge-red-1600",  label: "Ø1600 Redüksiyon",         unit: "ADET", length: 0, cement:  95, aggregate:  720, steel: 14, contaPrice:   0, laborPrice: 1100 },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -148,6 +160,8 @@ export type CalculatedRow = ProductRecipe & {
   cementCost: number;
   aggregateCost: number;
   steelCost: number;
+  effContaPrice: number;        // Artış uygulanmış conta fiyatı
+  effLaborPrice: number;        // Artış uygulanmış işçilik fiyatı
   araToplamCost: number;        // Ara Toplam
   genelGider: number;           // Genel Gider (araToplamCost × overheadRate%)
   toplamMaliyet: number;        // Toplam Maliyet (Ara Toplam + Genel Gider)
@@ -164,9 +178,11 @@ export function calculateRows(
     const cementCost    = r.cement * prices.cement;
     const aggregateCost = r.aggregate * prices.aggregate;
     const steelCost     = r.steel * prices.steel;
+    const effConta      = r.contaPrice * (1 + prices.contaRate / 100);
+    const effLabor      = r.laborPrice * (1 + prices.laborRate / 100);
 
     const araToplamCost = cementCost + aggregateCost + steelCost
-                          + r.contaPrice + r.laborPrice;
+                          + effConta + effLabor;
     const genelGider    = araToplamCost * (prices.overheadRate / 100);
     const toplamMaliyet = araToplamCost + genelGider;
     const kar           = toplamMaliyet * (prices.profitRate / 100);
@@ -176,6 +192,7 @@ export function calculateRows(
     return {
       ...r,
       cementCost, aggregateCost, steelCost,
+      effContaPrice: effConta, effLaborPrice: effLabor,
       araToplamCost, genelGider, toplamMaliyet, kar,
       karliAdetFiyat, karliMetreFiyat,
     };
