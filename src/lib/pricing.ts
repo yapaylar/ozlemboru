@@ -51,7 +51,7 @@ const BORULAR: ProductRecipe[] = [
   // Beton borular
   { id: "b200",      label: "Ø200 Beton",       unit: "MT", length: 1500, cement:   20, aggregate:   150, steel:   0, contaPrice:   36.5, laborPrice:   60 },
   { id: "b300",      label: "Ø300 Beton",       unit: "MT", length: 1500, cement:   30, aggregate:   225, steel:   0, contaPrice:   72.0, laborPrice:   90 },
-  { id: "b400",      label: "Ø400 Beton",       unit: "MT", length: 1500, cement:   66, aggregate:   466, steel:   0, contaPrice:  125.0, laborPrice:  180 },
+  { id: "b400",      label: "Ø400 Beton",       unit: "MT", length: 2000, cement:   66, aggregate:   466, steel:   0, contaPrice:  125.0, laborPrice:  180 },
   { id: "b500",      label: "Ø500 Beton",       unit: "MT", length: 2000, cement:   70, aggregate:   750, steel:   0, contaPrice:  155.0, laborPrice:  200 },
   { id: "b600",      label: "Ø600 Beton",       unit: "MT", length: 2000, cement:   85, aggregate:   930, steel:   0, contaPrice:  182.5, laborPrice:  210 },
   // Betonarme borular
