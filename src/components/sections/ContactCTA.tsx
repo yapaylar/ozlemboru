@@ -1,38 +1,51 @@
+import Link from "next/link";
 import { COMPANY } from "@/lib/constants";
 
 export default function ContactCTA() {
   return (
-    <section id="iletisim" className="section-y" style={{ backgroundColor: "#0d1a2b" }}>
+    <section id="iletisim-cta" className="section-y" style={{ backgroundColor: "#0a0a0a" }}>
       <div className="container-max">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
           {/* Left */}
           <div>
-            <p className="label-tag text-sky/60">İletişim</p>
+            <p className="text-xs font-light uppercase tracking-[0.2em] mb-6" style={{ color: "rgba(255,255,255,0.4)" }}>
+              İletişim
+            </p>
             <h2
-              className="font-bold text-white mt-3 leading-tight"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", letterSpacing: "-0.02em" }}
+              className="font-light text-white uppercase leading-[1.08] tracking-wide"
+              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
             >
               Projeniz İçin<br />
-              <span style={{ color: "#4caad4" }}>Teklif Alın.</span>
+              Teklif Alın.
             </h2>
-            <p className="mt-5 text-white/50 leading-relaxed text-sm max-w-sm">
+            <div className="mt-8 mb-8 border-t" style={{ borderColor: "rgba(255,255,255,0.15)" }} />
+            <p className="font-light leading-relaxed text-sm max-w-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
               Beton boru ve altyapı elemanları ihtiyaçlarınız için teknik şartname,
               fiyat teklifi ve sevkiyat bilgisi hazırlayabiliriz.
             </p>
 
-            <a
-              href={`mailto:${COMPANY.email}`}
-              className="mt-8 inline-flex items-center gap-2.5 font-semibold text-white px-7 py-3.5 rounded-sm transition hover:opacity-90"
-              style={{ backgroundColor: "#00a8d6" }}
-            >
-              Teklif Talebi Gönder
-              <ArrowIcon className="w-4 h-4" />
-            </a>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link
+                href="/fiyat-al"
+                className="inline-flex items-center gap-3 font-light uppercase tracking-widest px-7 py-3.5 text-sm text-black transition-all duration-200 hover:opacity-80"
+                style={{ backgroundColor: "#ffffff" }}
+              >
+                Fiyat Teklifi Al
+                <ArrowIcon className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/iletisim"
+                className="inline-flex items-center gap-3 font-light uppercase tracking-widest px-7 py-3.5 text-sm transition-all duration-200 hover:bg-white/10"
+                style={{ border: "1px solid rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.7)" }}
+              >
+                İletişime Geç
+              </Link>
+            </div>
           </div>
 
           {/* Right — contact details */}
-          <div className="space-y-px">
+          <div>
             <ContactRow
               icon={<PhoneIcon />}
               label="Telefon"
@@ -44,7 +57,7 @@ export default function ContactCTA() {
                   >
                     {COMPANY.phone1}
                   </a>
-                  <span className="text-white/25 mx-2">·</span>
+                  <span className="mx-2" style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
                   <a
                     href={`tel:${COMPANY.phone2.replace(/[\s()]/g, "")}`}
                     className="hover:text-white transition-colors"
@@ -89,18 +102,18 @@ function ContactRow({
 }) {
   return (
     <div
-      className="flex items-start gap-5 px-6 py-5"
-      style={{ backgroundColor: "rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+      className="flex items-start gap-5 px-0 py-6 border-b"
+      style={{ borderColor: "rgba(255,255,255,0.08)" }}
     >
       <div
-        className="w-8 h-8 rounded-sm flex items-center justify-center shrink-0 mt-0.5"
-        style={{ backgroundColor: "rgba(0,168,214,0.15)" }}
+        className="w-8 h-8 flex items-center justify-center shrink-0 mt-0.5 border"
+        style={{ borderColor: "rgba(255,255,255,0.15)" }}
       >
-        <span style={{ color: "#00a8d6" }}>{icon}</span>
+        <span style={{ color: "rgba(255,255,255,0.5)" }}>{icon}</span>
       </div>
       <div>
-        <div className="text-xs text-white/30 uppercase tracking-widest mb-1">{label}</div>
-        <div className="text-sm text-white/65 leading-relaxed">{value}</div>
+        <div className="text-[10px] font-light uppercase tracking-[0.2em] mb-1.5" style={{ color: "rgba(255,255,255,0.35)" }}>{label}</div>
+        <div className="text-sm font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>{value}</div>
       </div>
     </div>
   );

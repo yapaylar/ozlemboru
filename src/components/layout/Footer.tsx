@@ -5,7 +5,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer style={{ backgroundColor: "#0a0a0a" }}>
+    <footer style={{ backgroundColor: "#023da6" }}>
 
       {/* Main grid */}
       <div className="container-max pt-16 pb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>

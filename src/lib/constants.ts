@@ -63,6 +63,7 @@ export const PRODUCTS = [
     description:
       "Ø150mm ile Ø2800mm arasında, buhar kürlü, entegre contalı beton ve çelik takviyeli betonarme borular. Kanalizasyon ve drenaj hatlarında uzun ömürlü çözüm.",
     href: "/urunler/beton-betonarme-borular",
+    hoverImage: "beton-betonarme-borular-hover.png",
   },
   {
     id: "muayene-bacasi-elemanlari",
@@ -70,6 +71,7 @@ export const PRODUCTS = [
     description:
       "TS EN 1917 standardına uygun taban elemanları, gövde bilezikleri ve konik elemanlar. Kentsel altyapı sistemlerinde güvenli erişim ve denetim.",
     href: "/urunler/muayene-bacasi-elemanlari",
+    hoverImage: "muayene-bacasi-elemanlari-hover.png",
   },
   {
     id: "parsel-bacasi-elemanlari",
@@ -77,6 +79,7 @@ export const PRODUCTS = [
     description:
       "TS 13473 standardına uygun, konut ve sanayi parsellerinde kanalizasyon bağlantı noktaları için üretilen dayanıklı taban ve gövde elemanları.",
     href: "/urunler/parsel-bacasi-elemanlari",
+    hoverImage: "parsel-bacasi-elemanlari-hover.png",
   },
   {
     id: "yagmur-suyu-izgara-elemanlari",
@@ -84,6 +87,7 @@ export const PRODUCTS = [
     description:
       "Yol ve kaldırım yüzey sularının toplanması için üretilen beton ızgara elemanları. Kentsel drenaj altyapısında yüksek taşıma kapasitesi.",
     href: "/urunler/yagmur-suyu-izgara-elemanlari",
+    hoverImage: "yagmur-suyu-izgara-elemanlari-hover.png",
   },
   {
     id: "kanalizasyon-beton-ek-parcalari",
@@ -91,6 +95,7 @@ export const PRODUCTS = [
     description:
       "Boru hatlarının birleşim noktalarında kullanılan beton ek parçaları. Sızdırmazlık ve uzun ömür için özel üretim.",
     href: "/urunler/kanalizasyon-beton-ek-parcalari",
+    hoverImage: "kanalizasyon-beton-ek-parcalari-hover.png",
   },
   {
     id: "betonarme-su-depolari",

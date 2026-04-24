@@ -5,6 +5,7 @@ import { SEO, COMPANY } from "@/lib/constants";
 import { CartProvider } from "@/context/CartContext";
 import FloatingButtons from "@/components/ui/FloatingButtons";
 import Navbar from "@/components/layout/Navbar";
+import RightSidebar from "@/components/layout/RightSidebar";
 import Footer from "@/components/layout/Footer";
 
 const montserrat = Montserrat({
@@ -20,6 +21,10 @@ export const metadata: Metadata = {
   authors: [{ name: COMPANY.fullName, url: SEO.siteUrl }],
   creator: COMPANY.fullName,
   publisher: COMPANY.fullName,
+  icons: {
+    icon: "/images/favicon.png",
+    apple: "/images/favicon.png",
+  },
   metadataBase: new URL(SEO.siteUrl),
   alternates: {
     canonical: "/",
@@ -143,8 +148,11 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <CartProvider>
           <Navbar />
-          {children}
-          <Footer />
+          <div className="flex-1 flex flex-col">
+            {children}
+            <Footer />
+          </div>
+          <RightSidebar />
           <FloatingButtons />
         </CartProvider>
       </body>

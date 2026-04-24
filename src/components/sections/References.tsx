@@ -72,8 +72,8 @@ export default function References() {
         <div className="mt-8 flex justify-start">
           <Link
             href="/bilgi/referanslar"
-            className="inline-flex items-center gap-3 font-light uppercase tracking-widest px-7 py-3.5 text-sm border transition-all duration-200 hover:bg-black hover:text-white"
-            style={{ borderColor: "#000", color: "#000" }}
+            className="inline-flex items-center gap-3 font-light uppercase tracking-widest px-6 py-2.5 text-sm text-white transition-all duration-200 hover:opacity-80"
+            style={{ backgroundColor: "#6db0e0", borderRadius: "20px" }}
           >
             +60 Referansın Tamamını Gör
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

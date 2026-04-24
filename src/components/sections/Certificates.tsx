@@ -1,12 +1,22 @@
+"use client";
+
+import { useInView, fadeUp } from "@/hooks/useInView";
 import { CERTIFICATES } from "@/lib/constants";
 
 export default function Certificates() {
+  const { ref: headerRef, inView: headerInView } = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const { ref: gridRef, inView: gridInView } = useInView<HTMLDivElement>({ threshold: 0.05 });
+
   return (
     <section id="sertifikalar" className="section-y" style={{ backgroundColor: "#f7f7f7" }}>
       <div className="container-max">
 
         {/* Header */}
-        <div className="flex items-end justify-between mb-12 pb-6 border-b" style={{ borderColor: "#000" }}>
+        <div
+          ref={headerRef}
+          className="flex items-end justify-between mb-12 pb-6 border-b"
+          style={{ borderColor: "#000", ...fadeUp(headerInView, 0) }}
+        >
           <div>
             <p className="text-xs font-light uppercase tracking-[0.2em] mb-4" style={{ color: "#888" }}>
               Belgelerimiz
@@ -24,11 +34,13 @@ export default function Certificates() {
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px" style={{ backgroundColor: "#f7f7f7" }}>
-          {CERTIFICATES.map((cert) => (
-            <div key={cert.code} className="flex flex-col p-7 gap-4" style={{ backgroundColor: "#f7f7f7" }}>
-
-              {/* Issuer tag */}
+        <div ref={gridRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px" style={{ backgroundColor: "#f7f7f7" }}>
+          {CERTIFICATES.map((cert, i) => (
+            <div
+              key={cert.code}
+              className="flex flex-col p-7 gap-4"
+              style={{ backgroundColor: "#f7f7f7", ...fadeUp(gridInView, i * 90) }}
+            >
               <span
                 className="self-start text-[10px] font-light uppercase tracking-[0.2em] px-2.5 py-1 border"
                 style={{ borderColor: "#000", color: "#000" }}
@@ -36,7 +48,6 @@ export default function Certificates() {
                 {cert.issuer}
               </span>
 
-              {/* Code + title */}
               <div>
                 <p
                   className="text-xs font-light uppercase tracking-widest mb-1.5"
@@ -52,16 +63,13 @@ export default function Certificates() {
                 </h3>
               </div>
 
-              {/* Description */}
               <p className="text-sm font-light leading-relaxed" style={{ color: "#555" }}>
                 {cert.description}
               </p>
-
             </div>
           ))}
         </div>
 
-        {/* Footer note */}
         <p className="mt-6 text-xs font-light uppercase tracking-widest text-center" style={{ color: "#aaa" }}>
           Tüm sertifikalar güncel olup talep halinde iletilmektedir.
         </p>
