@@ -73,7 +73,7 @@ function ReferenceLogosStepper({ inView }: { inView: boolean }) {
         {LOGO_IDS.slice(0, SLOTS).map((n, i) => (
           <div
             key={n}
-            className="box-border flex min-h-32 min-w-0 flex-1 items-center justify-center border-y border-l border-zinc-200/80 bg-white p-2.5 first:rounded-l first:border-l last:rounded-r last:border-r sm:min-h-40 sm:p-3"
+            className="box-border flex min-h-28 min-w-0 flex-1 items-center justify-center border-y border-l border-zinc-200/80 bg-white p-2 first:rounded-l first:border-l last:rounded-r last:border-r sm:min-h-40 sm:p-3"
             style={{ transform: `scale(${SCALES[i]})` }}
           >
             <Image
@@ -92,7 +92,7 @@ function ReferenceLogosStepper({ inView }: { inView: boolean }) {
   const step = Math.min(offset, 7);
   return (
     <div className="mt-7 w-full min-w-0 sm:mt-8">
-      <div className="w-full min-w-0 overflow-hidden" style={{ minHeight: "8rem" }} aria-hidden>
+      <div className="w-full min-w-0 overflow-hidden" style={{ minHeight: "7.25rem" }} aria-hidden>
         <div
           onTransitionEnd={onTrackTransitionEnd}
           className={
@@ -113,7 +113,7 @@ function ReferenceLogosStepper({ inView }: { inView: boolean }) {
             return (
               <div
                 key={`strip-${i}`}
-                className="-ml-px box-border flex min-h-32 min-w-0 flex-1 items-center justify-center border border-zinc-200/80 bg-white p-2.5 first:ml-0 sm:min-h-40 sm:p-3"
+                className="-ml-px box-border flex min-h-28 min-w-0 flex-1 items-center justify-center border border-zinc-200/80 bg-white p-2.5 first:ml-0 sm:min-h-40 sm:p-3"
                 style={{ transform: `scale(${scale})`, zIndex: z }}
               >
                 <Image
@@ -144,8 +144,11 @@ export default function References() {
           <div>
             <p className="section-eyebrow">Güven</p>
             <h2 className="section-h2">Referanslarımız</h2>
+            <p className="mt-0.5 text-sm font-light text-zinc-500 sm:hidden">
+              {REFERENCES.length}+ tamamlanmış proje
+            </p>
           </div>
-          <p className="section-rail section-rail--right hidden sm:block max-w-xs">
+          <p className="section-rail section-rail--right hidden sm:block sm:max-w-xs">
             {REFERENCES.length}+ tamamlanmış proje
           </p>
         </div>

@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PRODUCT_CATEGORIES } from "@/lib/products";
-import { useCart } from "@/context/CartContext";
 
 const BILGI_ITEMS = [
   { href: "/bilgi/teknik-sartnameler", label: "Teknik Şartnameler", desc: "Et kalınlıkları ve tepe yük dayanımı", no: "01" },
@@ -17,7 +16,14 @@ const BILGI_ITEMS = [
 function Logo() {
   return (
     <div aria-label="Özlem İnşaat">
-      <Image src="/images/ozlemlogotest4.png" alt="Özlem İnşaat" width={260} height={80} className="h-16 w-auto" />
+      <Image
+        src="/images/ozlemlogotest4.png"
+        alt="Özlem İnşaat"
+        width={260}
+        height={80}
+        className="h-12 w-auto sm:h-16"
+        priority
+      />
     </div>
   );
 }
@@ -38,8 +44,6 @@ export default function Navbar() {
   const bilgiTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const urunlerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastScrollY = useRef(0);
-  const { count } = useCart();
-
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
@@ -89,8 +93,7 @@ export default function Navbar() {
     >
       {/* ── MAIN BAR ── */}
       <div
-        className={`relative w-full flex items-center px-6 transition-all duration-700 border-b ${scrolled ? "h-14" : "h-[72px]"}`}
-        style={{ borderColor: "#e4e9f0" }}
+        className={`relative w-full flex items-center px-4 sm:px-6 transition-all duration-700 border-b border-zinc-200/90 ${scrolled ? "h-14" : "h-[68px] sm:h-[72px]"}`}
       >
 
         {/* ── Sol nav (desktop) ── */}
@@ -148,31 +151,16 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* ── Mobile: sepet + hamburger ── */}
-        <div className="lg:hidden flex items-center gap-1 ml-auto">
-          <Link
-            href="/sepet"
-            className="relative p-2 flex items-center justify-center transition-opacity hover:opacity-60"
-            aria-label="Sepet"
-          >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M1 1h2.5l2.1 9.3a1.25 1.25 0 001.25.98h5.9a1.25 1.25 0 001.23-1L15.5 5.5H4.4" stroke="#000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-              <circle cx="6.5" cy="15" r="1.2" fill="#000" />
-              <circle cx="12.5" cy="15" r="1.2" fill="#000" />
-            </svg>
-            {count > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 flex items-center justify-center text-[9px] font-medium text-white rounded-full" style={{ backgroundColor: "#000" }}>
-                {count > 9 ? "9+" : count}
-              </span>
-            )}
-          </Link>
+        {/* ── Mobile: sadece menü ── */}
+        <div className="ml-auto flex items-center lg:hidden">
           <button
-            className="p-2 transition-opacity hover:opacity-60"
-            style={{ color: "#000" }}
-            onClick={() => setMenuOpen(!menuOpen)}
+            type="button"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md p-2 text-zinc-900 transition-opacity hover:opacity-60 -mr-1"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-expanded={menuOpen}
             aria-label="Menü"
           >
-            {menuOpen ? <XIcon className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+            {menuOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
           </button>
         </div>
       </div>

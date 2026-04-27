@@ -12,16 +12,9 @@ const EASE = "ease";
 export default function SloganStrip() {
   const { ref, inView } = useInView<HTMLElement>({ threshold: 0.2, rootMargin: "0px 0px -5% 0px" });
   return (
-    <section
-      ref={ref}
-      className="bg-white"
-      style={{
-        paddingTop: "clamp(5rem, 8vw, 6.5rem)",
-        paddingBottom: "clamp(4rem, 6.5vw, 5.5rem)",
-      }}
-    >
-      <div className="container-max text-center text-[0.95rem] font-light leading-[1.65] tracking-[0.06em] text-zinc-600 sm:text-base sm:leading-[1.7] sm:tracking-[0.04em]">
-        <p className="text-balance max-w-4xl mx-auto">
+    <section ref={ref} className="bg-white py-10 sm:py-16 md:py-20">
+      <div className="container-max text-center text-[0.95rem] font-light leading-[1.65] tracking-[0.04em] text-zinc-600 sm:text-base sm:leading-[1.7] sm:tracking-[0.04em]">
+        <p className="mx-auto max-w-4xl text-balance">
           {SLOGAN.split("").map((char, i) => (
             <span
               key={i}

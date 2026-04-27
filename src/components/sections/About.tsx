@@ -38,7 +38,7 @@ export default function About() {
   return (
     <section id="hakkimizda" className="section-y bg-white">
       <div ref={ref} className="container-max">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7" style={fadeUp(inView, 0)}>
             <p className="section-eyebrow">Kurumsal</p>
 
@@ -70,7 +70,7 @@ export default function About() {
                 <Link
                   key={cardIndex}
                   href={card.href}
-                  className={`flex min-h-24 sm:min-h-28 items-center justify-center overflow-hidden px-4 py-5 sm:px-6 ${STAT_STACK_WIDTH[i]}`}
+                  className={`flex min-h-[5.5rem] items-center justify-center overflow-hidden px-4 py-5 sm:min-h-28 sm:px-6 ${STAT_STACK_WIDTH[i]}`}
                   style={{ backgroundColor: card.bg, ...fadeUp(inView, 160 + i * 100) }}
                 >
                   <p

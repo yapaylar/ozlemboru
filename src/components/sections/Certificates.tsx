@@ -18,6 +18,9 @@ export default function Certificates() {
           <div>
             <p className="section-eyebrow">Belgelerimiz</p>
             <h2 className="section-h2">Sertifikalar</h2>
+            <p className="mt-0.5 text-balance text-sm font-light text-zinc-500 sm:hidden">
+              Ulusal ve uluslararası bağımsız belgelendirme
+            </p>
           </div>
           <p className="section-rail section-rail--right hidden sm:block sm:max-w-xs">
             <span className="text-balance">Ulusal ve uluslararası bağımsız belgelendirme</span>
@@ -31,7 +34,7 @@ export default function Certificates() {
           {CERTIFICATES.map((cert, i) => (
             <div
               key={cert.code}
-              className="flex min-h-0 flex-col gap-3 bg-zinc-50/90 p-6 sm:gap-4 sm:p-7"
+              className="flex min-h-0 flex-col gap-3 bg-zinc-50/90 p-5 sm:gap-4 sm:p-7"
               style={fadeUp(gridInView, i * 90)}
             >
               <span className="self-start border border-zinc-200/90 bg-white px-2.5 py-1 text-[10px] font-light uppercase tracking-[0.14em] text-zinc-600">

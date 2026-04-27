@@ -18,16 +18,19 @@ export default function WhyConcrete() {
           <div>
             <p className="section-eyebrow">Teknik üstünlük</p>
             <h2 className="section-h2">Neden beton boru?</h2>
+            <p className="mt-0.5 text-balance text-sm font-light text-zinc-500 sm:hidden">
+              Yüzyılı aşkın süredir kanıtlanmış altyapı çözümü
+            </p>
           </div>
-          <p className="section-rail section-rail--right hidden sm:block text-balance sm:max-w-xs">
+          <p className="section-rail section-rail--right hidden text-balance sm:block sm:max-w-xs">
             Yüzyılı aşkın süredir kanıtlanmış altyapı çözümü
           </p>
         </div>
 
-        <div ref={bodyRef} className="mt-10 grid gap-10 lg:mt-12 lg:grid-cols-12 lg:gap-16">
+        <div ref={bodyRef} className="mt-8 grid gap-8 sm:mt-10 sm:gap-10 lg:mt-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4" style={fadeUp(bodyInView, 0)}>
             <blockquote
-              className="border-l border-zinc-200 pl-5 text-base font-light leading-[1.65] text-zinc-600 sm:pl-6 sm:text-[1.05rem] sm:leading-[1.7]"
+              className="border-l border-zinc-200 pl-4 text-[0.95rem] font-light leading-[1.65] text-zinc-600 sm:pl-6 sm:text-base sm:leading-[1.7] md:text-[1.05rem] md:leading-[1.7]"
             >
               Beton boru üretimi için sadece kum, çimento ve su ihtiyaç duyulmaktadır. Ülkemizin
               doğal hammaddeleri ile üretilen, milli sermayenin ülke içinde kalmasını sağlayan
@@ -39,7 +42,7 @@ export default function WhyConcrete() {
             {WHY_CONCRETE.map((item, i) => (
               <div
                 key={item.icon}
-                className="flex gap-4 border-b border-zinc-200 py-5 sm:gap-6 sm:py-6"
+                className="flex gap-3.5 border-b border-zinc-200 py-4 first:pt-0 sm:gap-6 sm:py-5 md:py-6"
                 style={fadeUp(bodyInView, i * 60)}
               >
                 <span className="w-6 shrink-0 pt-0.5 text-right text-[11px] font-light tabular-nums text-zinc-400 sm:text-xs">

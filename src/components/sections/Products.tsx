@@ -25,6 +25,9 @@ export default function Products() {
           <div>
             <p className="section-eyebrow">Katalog</p>
             <h2 className="section-h2">Ürün kataloğu</h2>
+            <p className="mt-0.5 text-balance text-sm font-light leading-snug text-zinc-500 sm:hidden">
+              Tüm ürünler TSE standartlarına uygun üretilmektedir.
+            </p>
           </div>
           <p className="section-rail section-rail--right hidden max-w-[12rem] sm:max-w-xs sm:block">
             Tüm ürünler TSE standartlarına uygun üretilmektedir.
@@ -106,12 +109,12 @@ function ProductCard({
 
   return (
     <div
-      className="w-[min(78vw,18rem)] shrink-0 snap-start"
+      className="w-[min(18rem,88vw)] max-w-full shrink-0 snap-start sm:w-[min(78vw,18rem)]"
       style={fadeUp(inView, delayIndex * 70)}
     >
       <Link
         href={product.href}
-        className="group flex h-full min-h-[22rem] flex-col overflow-hidden border border-zinc-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md"
+        className="group flex h-full min-h-[20rem] flex-col overflow-hidden border border-zinc-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md sm:min-h-[22rem]"
         onPointerEnter={onPointerEnter}
         onPointerLeave={onPointerLeave}
       >
@@ -163,7 +166,7 @@ function ProductCard({
           )}
         </div>
 
-        <div className="flex flex-1 flex-col p-5 text-left">
+        <div className="flex flex-1 flex-col p-4 text-left sm:p-5">
           <h3 className="mb-2.5 text-base font-light leading-[1.35] tracking-[-0.01em] text-zinc-900 sm:text-[1.05rem]">
             {product.title}
           </h3>

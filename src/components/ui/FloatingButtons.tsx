@@ -11,7 +11,7 @@ export default function FloatingButtons() {
   const [hoveredPhone, setHoveredPhone] = useState(false);
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3 lg:hidden">
+    <div className="fixed z-40 flex flex-col gap-2.5 lg:hidden bottom-[max(1rem,env(safe-area-inset-bottom,0px))] right-[max(1rem,env(safe-area-inset-right,0px))] sm:bottom-6 sm:right-6">
 
       {/* WhatsApp */}
       <div className="flex items-center justify-end gap-3">

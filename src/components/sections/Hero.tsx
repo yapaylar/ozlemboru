@@ -9,26 +9,20 @@ export default function Hero() {
   useEffect(() => { setReady(true); }, []);
 
   return (
-    <section className="relative overflow-hidden pt-[72px] h-screen">
-      {/* Video arka plan */}
+    <section className="relative min-h-dvh overflow-hidden">
       <video
         src="/herovideotest1.mp4"
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        className="absolute inset-0 h-full w-full object-cover object-center"
       />
 
-      {/* Karartma */}
       <div className="absolute inset-0 bg-black/55" />
 
-      {/* İçerik */}
-      <div
-        className="relative z-10 flex items-end"
-        style={{ minHeight: "calc(100vh - 72px)" }}
-      >
-        <div className="container-max w-full pb-16 sm:pb-20">
+      <div className="relative z-10 flex min-h-dvh flex-col justify-end pt-[68px] sm:pt-[72px]">
+        <div className="container-max w-full pb-10 [padding-bottom:max(2.5rem,env(safe-area-inset-bottom))] sm:pb-20">
           <h1
             className="max-w-3xl text-balance font-light text-white [font-size:var(--type-hero)] leading-[1.12] tracking-[-0.02em] sm:tracking-[-0.01em]"
             style={fadeLeft(ready, 0)}
@@ -45,11 +39,14 @@ export default function Hero() {
             sunuyoruz.
           </p>
 
-          <div className="mt-9 flex flex-wrap gap-3 sm:mt-10 sm:gap-4" style={fadeLeft(ready, 300)}>
-            <Link href="/urunler" className="btn-cta btn-cta--primary">
+          <div
+            className="mt-8 flex w-full max-w-md flex-col gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:flex-wrap sm:gap-4"
+            style={fadeLeft(ready, 300)}
+          >
+            <Link href="/urunler" className="btn-cta btn-cta--primary sm:shrink-0">
               Ürünleri gör
             </Link>
-            <Link href="/iletisim" className="btn-cta btn-cta--soft">
+            <Link href="/iletisim" className="btn-cta btn-cta--soft sm:shrink-0">
               İletişime geç
             </Link>
           </div>
