@@ -8,7 +8,7 @@ import References from "@/components/sections/References";
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="w-full min-w-0 overflow-x-clip">
       <Hero />
       <SloganStrip />
       <About />
