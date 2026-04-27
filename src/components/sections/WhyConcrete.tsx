@@ -10,73 +10,53 @@ export default function WhyConcrete() {
   return (
     <section id="neden-beton-boru" className="section-y bg-white">
       <div className="container-max">
-
-        {/* Header */}
         <div
           ref={headerRef}
-          className="flex items-end justify-between mb-12 pb-6 border-b"
-          style={{ borderColor: "#000", ...fadeUp(headerInView, 0) }}
+          className="section-header-row"
+          style={fadeUp(headerInView, 0)}
         >
           <div>
-            <p className="text-xs font-light uppercase tracking-[0.2em] mb-4" style={{ color: "#888" }}>
-              Teknik Üstünlük
-            </p>
-            <h2
-              className="font-light uppercase leading-none tracking-wide"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#000" }}
-            >
-              Neden Beton Boru?
-            </h2>
+            <p className="section-eyebrow">Teknik üstünlük</p>
+            <h2 className="section-h2">Neden beton boru?</h2>
           </div>
-          <p className="hidden sm:block text-sm font-light text-right max-w-xs" style={{ color: "#888" }}>
-            Yüzyılı aşkın süredir kanıtlanmış<br />altyapı çözümü
+          <p className="section-rail section-rail--right hidden sm:block text-balance sm:max-w-xs">
+            Yüzyılı aşkın süredir kanıtlanmış altyapı çözümü
           </p>
         </div>
 
-        <div ref={bodyRef} className="grid lg:grid-cols-12 gap-12 lg:gap-20">
-
-          {/* Left — pull quote */}
+        <div ref={bodyRef} className="mt-10 grid gap-10 lg:mt-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4" style={fadeUp(bodyInView, 0)}>
             <blockquote
-              className="border-l pl-6 font-light leading-relaxed text-base italic"
-              style={{ borderColor: "#000", borderLeftWidth: "1px", color: "#333" }}
+              className="border-l border-zinc-200 pl-5 text-base font-light leading-[1.65] text-zinc-600 sm:pl-6 sm:text-[1.05rem] sm:leading-[1.7]"
             >
-              Beton boru üretimi için sadece kum, çimento ve su ihtiyaç duyulmaktadır.
-              Ülkemizin doğal hammaddeleri ile üretilen, milli sermayenin ülke içinde kalmasını
-              sağlayan yerli bir üründür.
+              Beton boru üretimi için sadece kum, çimento ve su ihtiyaç duyulmaktadır. Ülkemizin
+              doğal hammaddeleri ile üretilen, milli sermayenin ülke içinde kalmasını sağlayan
+              yerli bir üründür.
             </blockquote>
           </div>
 
-          {/* Right — numbered list */}
-          <div className="lg:col-span-8">
+          <div className="space-y-0 border-t border-zinc-200 lg:col-span-8">
             {WHY_CONCRETE.map((item, i) => (
               <div
                 key={item.icon}
-                className="flex gap-6 py-6 border-b group transition-colors duration-150"
-                style={{ borderColor: "#e8e8e8", ...fadeUp(bodyInView, i * 70) }}
+                className="flex gap-4 border-b border-zinc-200 py-5 sm:gap-6 sm:py-6"
+                style={fadeUp(bodyInView, i * 60)}
               >
-                <span
-                  className="text-xs font-light shrink-0 pt-0.5 w-6 text-right"
-                  style={{ color: "#bbb" }}
-                >
+                <span className="w-6 shrink-0 pt-0.5 text-right text-[11px] font-light tabular-nums text-zinc-400 sm:text-xs">
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
-                <div>
-                  <h3
-                    className="font-medium uppercase tracking-wide text-sm mb-2"
-                    style={{ color: "#000" }}
-                  >
+                <div className="min-w-0">
+                  <h3 className="text-sm font-light text-zinc-900 sm:text-base sm:leading-tight">
                     {item.title}
                   </h3>
-                  <p className="text-sm font-light leading-relaxed" style={{ color: "#555" }}>
+                  <p className="mt-2 text-sm font-light leading-[1.65] text-zinc-600 sm:text-[0.95rem] sm:leading-[1.7]">
                     {item.description}
                   </p>
                 </div>
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </section>

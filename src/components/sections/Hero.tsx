@@ -28,36 +28,28 @@ export default function Hero() {
         className="relative z-10 flex items-end"
         style={{ minHeight: "calc(100vh - 72px)" }}
       >
-        <div className="px-8 lg:px-20 pb-16 w-full">
+        <div className="container-max w-full pb-16 sm:pb-20">
           <h1
-            className="font-semibold text-white uppercase leading-[1.1] tracking-wide"
-            style={{ fontSize: "clamp(1.9rem, 3.8vw, 3.2rem)", ...fadeLeft(ready, 0) }}
+            className="max-w-3xl text-balance font-light text-white [font-size:var(--type-hero)] leading-[1.12] tracking-[-0.02em] sm:tracking-[-0.01em]"
+            style={fadeLeft(ready, 0)}
           >
-            Beton Boru ve<br />
-            Altyapı Elemanları
+            Beton boru ve altyapı elemanları üretimi
           </h1>
 
           <p
-            className="mt-6 text-white/65 leading-relaxed"
-            style={{ fontSize: "1rem", ...fadeLeft(ready, 150) }}
+            className="mt-6 max-w-2xl text-balance text-base leading-[1.65] text-white/70 sm:text-[1.05rem] sm:leading-[1.7]"
+            style={fadeLeft(ready, 150)}
           >
-            1989&rsquo;dan bu yana Ankara&rsquo;da; ISO 9001 belgeli beton boru,
-            betonarme boru, muayene bacası ve altyapı elemanları üretimi.
+            Ankara&rsquo;da beton boru, betonarme boru ve altyapı elemanları
+            üretiyor; 1989&rsquo;dan bu yana projelere güvenilir çözümler
+            sunuyoruz.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4" style={fadeLeft(ready, 300)}>
-            <Link
-              href="/urunler"
-              className="inline-flex items-center px-6 py-2.5 text-sm font-normal text-white transition-all duration-200 hover:opacity-80"
-              style={{ backgroundColor: "#023da6", borderRadius: "20px" }}
-            >
+          <div className="mt-9 flex flex-wrap gap-3 sm:mt-10 sm:gap-4" style={fadeLeft(ready, 300)}>
+            <Link href="/urunler" className="btn-cta btn-cta--primary">
               Ürünleri gör
             </Link>
-            <Link
-              href="/iletisim"
-              className="inline-flex items-center px-6 py-2.5 text-sm font-normal text-white transition-all duration-200 hover:opacity-80"
-              style={{ backgroundColor: "#6db0e0", borderRadius: "20px" }}
-            >
+            <Link href="/iletisim" className="btn-cta btn-cta--soft">
               İletişime geç
             </Link>
           </div>

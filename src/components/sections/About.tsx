@@ -5,21 +5,21 @@ import { useInView, fadeUp } from "@/hooks/useInView";
 
 const STAT_CARDS = [
   {
-    line: "SEKTÖRDE +35 YILLIK DENEYİM",
+    line: "Sektörde 35+ yıllık deneyim",
     href: "/kurumsal",
     bg: "#023da6",
     dark: true,
   },
   {
-    line: "TSE & ISO YETERLİLİK",
+    line: "TSE ve ISO yeterlilik",
     href: "/kurumsal",
     bg: "#6db0e0",
     dark: true,
   },
   {
-    line: "60+ REFERANS",
+    line: "60+ referans",
     href: "/bilgi/referanslar",
-    bg: "#f4f6f9",
+    bg: "#f4f6fa",
     dark: false,
   },
 ] as const;
@@ -40,34 +40,24 @@ export default function About() {
       <div ref={ref} className="container-max">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <div className="lg:col-span-7" style={fadeUp(inView, 0)}>
-            <p className="text-xs font-light uppercase tracking-[0.2em] mb-6" style={{ color: "#888" }}>
-              Kurumsal
-            </p>
+            <p className="section-eyebrow">Kurumsal</p>
 
-            <h2
-              className="font-light uppercase leading-[1.08] tracking-wide"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#000" }}
-            >
-              Kalitenin
-              <br />
-              Taşıyıcı Gücü
+            <h2 className="section-h2 max-w-xl">
+              <span className="block">Beton boru ve altyapı elemanlarında</span>
+              <span className="mt-1.5 block sm:mt-2">güvenilir üretim gücü</span>
             </h2>
 
-            <div className="mt-8 mb-8 border-t" style={{ borderColor: "#000" }} />
+            <div className="mb-7 mt-7 max-w-sm border-t border-zinc-200" />
 
-            <p className="font-light leading-relaxed text-base" style={{ color: "#333" }}>
-              Her güçlü yapının arkasında, doğru üretilmiş altyapı elemanları ve tavizsiz bir kalite anlayışı yer
-              alır. Özlem İnşaat ve Altyapı Elemanları, üretimden sevkiyata uzanan tüm süreçlerde benimsediği
-              titiz yaklaşımı, belgelerle desteklenen güvenilirliği ve sektör tecrübesiyle, projelerin ihtiyaç
-              duyduğu sağlamlığı ve sürekliliği en doğru biçimde karşılamaktadır.
+            <p className="section-body leading-[1.75]">
+              Her güçlü yapının arkasında, doğru üretilmiş altyapı elemanları ve tavizsiz bir kalite anlayışı
+              yer alır. Özlem İnşaat ve Altyapı Elemanları, üretimden sevkiyata uzanan tüm süreçlerde
+              benimsediği titiz yaklaşımı, belgelerle desteklenen güvenilirliği ve sektör tecrübesiyle,
+              projelerin ihtiyaç duyduğu sağlamlığı ve sürekliliği en doğru biçimde karşılamaktadır.
             </p>
 
             <div className="mt-10">
-              <Link
-                href="/kurumsal"
-                className="inline-flex items-center px-6 py-2.5 text-sm font-normal text-white transition-all duration-200 hover:opacity-80"
-                style={{ backgroundColor: "#023da6", borderRadius: "20px" }}
-              >
+              <Link href="/kurumsal" className="btn-cta btn-cta--primary">
                 Detaylı bilgi
               </Link>
             </div>
@@ -84,12 +74,9 @@ export default function About() {
                   style={{ backgroundColor: card.bg, ...fadeUp(inView, 160 + i * 100) }}
                 >
                   <p
-                    className="font-light uppercase text-center text-balance leading-tight"
-                    style={{
-                      fontSize: "clamp(0.65rem, 0.9vw, 0.8rem)",
-                      color: card.dark ? "#fff" : "#000",
-                      letterSpacing: "0.16em",
-                    }}
+                    className={`px-1 text-center text-balance text-[0.75rem] font-light leading-snug tracking-[-0.01em] sm:text-[0.85rem] ${
+                      card.dark ? "text-white/95" : "text-zinc-800"
+                    }`}
                   >
                     {card.line}
                   </p>

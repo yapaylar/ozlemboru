@@ -5,6 +5,7 @@ import Link from "next/link";
 import { COMPANY } from "@/lib/constants";
 
 const BG = "#023da6";
+const BORDER_PAGE = "#3777c3";
 const WHATSAPP_NUMBER = "903123546484";
 const PHONE_RAW = COMPANY.phone1.replace(/[^0-9]/g, "");
 
@@ -19,8 +20,12 @@ export default function RightSidebar() {
 
   return (
     <aside
-      className="fixed top-0 right-0 h-screen z-40 hidden lg:flex flex-col items-center transition-all duration-700"
-      style={{ width: scrolled ? "64px" : "80px", backgroundColor: BG }}
+      className="fixed top-0 right-0 h-screen z-40 hidden lg:flex flex-col items-center border-l border-solid transition-all duration-700"
+      style={{
+        width: scrolled ? "64px" : "80px",
+        backgroundColor: BG,
+        borderLeftColor: BORDER_PAGE,
+      }}
     >
       {/* ── E-Katalog — header yüksekliğiyle hizalı ── */}
       <div

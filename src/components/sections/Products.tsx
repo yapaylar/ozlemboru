@@ -19,30 +19,21 @@ export default function Products() {
       <div className="container-max">
         <div
           ref={headerRef}
-          className="mb-6 flex items-end justify-between gap-6 border-b border-zinc-200 pb-6"
+          className="section-header-row"
           style={fadeUp(headerInView, 0)}
         >
           <div>
-            <p className="mb-4 text-xs font-light tracking-[0.2em] uppercase" style={{ color: "#888" }}>
-              Katalog
-            </p>
-            <h2
-              className="font-light leading-none tracking-wide uppercase"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", color: "#000" }}
-            >
-              Ürün kataloğu
-            </h2>
+            <p className="section-eyebrow">Katalog</p>
+            <h2 className="section-h2">Ürün kataloğu</h2>
           </div>
-          <p className="hidden max-w-xs text-right text-sm font-light sm:block" style={{ color: "#888" }}>
-            Tüm ürünler TSE standartlarına
-            <br />
-            uygun üretilmektedir.
+          <p className="section-rail section-rail--right hidden max-w-[12rem] sm:max-w-xs sm:block">
+            Tüm ürünler TSE standartlarına uygun üretilmektedir.
           </p>
         </div>
       </div>
 
       <div
-        className="mt-6 w-full -mx-5 sm:-mx-8 lg:-mx-12"
+        className="container-max mt-7 w-full min-w-0 sm:mt-8"
         ref={scrollerRef}
         style={fadeUp(scrollerInView, 0)}
       >
@@ -50,7 +41,8 @@ export default function Products() {
           className="overflow-x-auto scroll-smooth overscroll-x-contain pb-3 [scrollbar-gutter:stable] [scrollbar-color:rgba(0,0,0,0.2)_transparent]"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
-          <div className="flex w-max min-w-0 snap-x snap-mandatory gap-4 pl-8 pr-5 sm:pl-12 sm:pr-8 lg:pl-16 lg:pr-12">
+          {/** pl-0: sol kenar, başlık/eyebrow ile aynı (container-max yatay padding) */}
+          <div className="flex w-max min-w-0 snap-x snap-mandatory gap-4 pl-0 pr-0">
             {PRODUCTS.map((p, i) => (
               <ProductCard
                 key={p.id}
@@ -66,17 +58,13 @@ export default function Products() {
 
       <div className="container-max">
         <div
-          className="mt-10 flex flex-col items-stretch justify-between gap-4 border-t border-zinc-200 pt-8 sm:flex-row sm:items-center"
+          className="mt-7 flex flex-col items-stretch justify-between gap-4 border-t border-zinc-200 pt-6 sm:mt-8 sm:flex-row sm:items-center sm:pt-7"
           style={fadeUp(scrollerInView, 200)}
         >
-          <p className="text-sm font-light" style={{ color: "#555" }}>
+          <p className="section-body max-w-prose text-left sm:text-balance">
             Tüm ürün gruplarımızı inceleyin, teknik şartname ve fiyat teklifi alın.
           </p>
-          <Link
-            href="/urunler"
-            className="shrink-0 inline-flex items-center justify-center px-6 py-2.5 text-sm font-normal text-white transition hover:opacity-80"
-            style={{ backgroundColor: "#023da6", borderRadius: "20px" }}
-          >
+          <Link href="/urunler" className="btn-cta btn-cta--primary shrink-0">
             Tüm ürünler
           </Link>
         </div>
@@ -123,11 +111,11 @@ function ProductCard({
     >
       <Link
         href={product.href}
-        className="group flex h-full min-h-[22rem] flex-col overflow-hidden border border-zinc-200/90 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md"
+        className="group flex h-full min-h-[22rem] flex-col overflow-hidden border border-zinc-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md"
         onPointerEnter={onPointerEnter}
         onPointerLeave={onPointerLeave}
       >
-        <div className="relative h-48 shrink-0 bg-[#f4f6f9]">
+        <div className="relative h-48 shrink-0 bg-zinc-50/90">
           {isFirst && hasHover ? (
             <>
               <Image
@@ -176,17 +164,16 @@ function ProductCard({
         </div>
 
         <div className="flex flex-1 flex-col p-5 text-left">
-          <h3
-            className="mb-2.5 text-base font-normal leading-snug tracking-tight"
-            style={{ color: "#000" }}
-          >
+          <h3 className="mb-2.5 text-base font-light leading-[1.35] tracking-[-0.01em] text-zinc-900 sm:text-[1.05rem]">
             {product.title}
           </h3>
-          <p className="flex-1 text-sm font-light leading-relaxed" style={{ color: "#555" }}>
+          <p className="flex-1 text-sm font-light leading-[1.65] text-zinc-600 sm:text-[0.95rem] sm:leading-[1.7]">
             {product.description}
           </p>
-          <span className="mt-5 w-fit text-sm font-normal text-[#023da6] underline decoration-[#023da6]/30 underline-offset-2">
-            İncele
+          <span className="mt-4 w-fit text-sm font-light text-zinc-500 transition-colors group-hover:text-navy sm:mt-5">
+            <span className="border-b border-zinc-300/80 pb-px group-hover:border-navy/60">
+              İncele
+            </span>
           </span>
         </div>
       </Link>
