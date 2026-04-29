@@ -158,6 +158,41 @@
   .divider-accent {
     @apply w-12 h-0.5 bg-cyan mt-5;
   }
+
+  /** SloganStrip: breakpoint + keyframes globals.css içinde (mobil: animasyon yok) */
+}
+
+@keyframes slogan-lr-wipe {
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* < sm: düz metin, animasyon yok */
+@media (max-width: 639px) {
+  .slogan-lr-text,
+  .slogan-lr-visible .slogan-lr-text {
+    clip-path: inset(0 0 0 0) !important;
+    animation: none !important;
+  }
+}
+
+/* sm+: önceki tek blok soldan sağa (~20s) */
+@media (min-width: 640px) {
+  .slogan-lr-text {
+    clip-path: inset(0 100% 0 0);
+  }
+  .slogan-lr-visible .slogan-lr-text {
+    animation: slogan-lr-wipe 20s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slogan-lr-text,
+  .slogan-lr-visible .slogan-lr-text {
+    clip-path: inset(0 0 0 0) !important;
+    animation: none !important;
+  }
 }
 
 @media print {
@@ -229,5 +264,10 @@
   section {
     border: 1px solid #ccc !important;
     overflow: visible !important;
+  }
+
+  .slogan-lr-text {
+    clip-path: none !important;
+    animation: none !important;
   }
 }

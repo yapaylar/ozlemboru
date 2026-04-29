@@ -5,6 +5,7 @@ import { SEO, COMPANY } from "@/lib/constants";
 import { CartProvider } from "@/context/CartContext";
 import FloatingButtons from "@/components/ui/FloatingButtons";
 import Navbar from "@/components/layout/Navbar";
+import MainWithSidebarGutter from "@/components/layout/MainWithSidebarGutter";
 import RightSidebar from "@/components/layout/RightSidebar";
 import Footer from "@/components/layout/Footer";
 
@@ -148,10 +149,10 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <CartProvider>
           <Navbar />
-          <div className="flex-1 flex flex-col">
+          <MainWithSidebarGutter>
             {children}
             <Footer />
-          </div>
+          </MainWithSidebarGutter>
           <RightSidebar />
           <FloatingButtons />
         </CartProvider>

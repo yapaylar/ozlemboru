@@ -3,19 +3,25 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { fadeLeft } from "@/hooks/useInView";
+import { HERO_VIDEO } from "@/lib/constants";
 
 export default function Hero() {
   const [ready, setReady] = useState(false);
-  useEffect(() => { setReady(true); }, []);
+  useEffect(() => {
+    setReady(true);
+  }, []);
 
   return (
     <section className="relative min-h-dvh overflow-hidden">
       <video
-        src="/herovideotest1.mp4"
+        src={HERO_VIDEO.src}
+        poster={HERO_VIDEO.poster}
+        preload="auto"
         autoPlay
         loop
         muted
         playsInline
+        disablePictureInPicture
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
 
@@ -27,7 +33,7 @@ export default function Hero() {
             className="max-w-3xl text-balance font-light text-white [font-size:var(--type-hero)] leading-[1.12] tracking-[-0.02em] sm:tracking-[-0.01em]"
             style={fadeLeft(ready, 0)}
           >
-            Beton boru ve altyapı elemanları üretimi
+            Beton Boru ve Altyapı Elemanları Üretimi
           </h1>
 
           <p
@@ -35,8 +41,8 @@ export default function Hero() {
             style={fadeLeft(ready, 150)}
           >
             Ankara&rsquo;da beton boru, betonarme boru ve altyapı elemanları
-            üretiyor; 1989&rsquo;dan bu yana projelere güvenilir çözümler
-            sunuyoruz.
+            üretiyoruz. 1989&rsquo;dan bu yana kurumsal projelere standartlara
+            uygun, güvenilir ve sürdürülebilir altyapı çözümleri sunuyoruz.
           </p>
 
           <div
@@ -44,10 +50,10 @@ export default function Hero() {
             style={fadeLeft(ready, 300)}
           >
             <Link href="/urunler" className="btn-cta btn-cta--primary sm:shrink-0">
-              Ürünleri gör
+              Ürünleri Gör
             </Link>
             <Link href="/iletisim" className="btn-cta btn-cta--soft sm:shrink-0">
-              İletişime geç
+              İletişime Geç
             </Link>
           </div>
         </div>

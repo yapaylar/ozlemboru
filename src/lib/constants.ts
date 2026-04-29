@@ -15,6 +15,12 @@ export const COMPANY = {
   website: "www.ozlemboru.com",
 };
 
+/** Anasayfa hero arka plan videosu (daha hızlı his için: küçük bitrate / kısa loop / WebM ekleyin) */
+export const HERO_VIDEO = {
+  src: "/herovideotest1.mp4",
+  poster: "/images/hero-bg-1.jpg",
+} as const;
+
 export const NAV_LINKS = [
   { label: "Anasayfa", href: "/" },
   { label: "Kurumsal", href: "/kurumsal" },

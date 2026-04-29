@@ -5,19 +5,19 @@ import { useInView, fadeUp } from "@/hooks/useInView";
 
 const STAT_CARDS = [
   {
-    line: "Sektörde 35+ yıllık deneyim",
+    line: "Sektörde 35+ Yıllık Deneyim",
     href: "/kurumsal",
     bg: "#023da6",
     dark: true,
   },
   {
-    line: "TSE ve ISO yeterlilik",
+    line: "TSE ve ISO Yeterlilik",
     href: "/kurumsal",
     bg: "#6db0e0",
     dark: true,
   },
   {
-    line: "60+ referans",
+    line: "60+ Referans",
     href: "/bilgi/referanslar",
     bg: "#f4f6fa",
     dark: false,
@@ -40,11 +40,13 @@ export default function About() {
       <div ref={ref} className="container-max">
         <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7" style={fadeUp(inView, 0)}>
-            <p className="section-eyebrow">Kurumsal</p>
+            <p className="section-eyebrow max-w-full text-balance">
+              Özlem Beton Boru ve Altyapı Elemanları
+            </p>
 
             <h2 className="section-h2 max-w-xl">
-              <span className="block">Beton boru ve altyapı elemanlarında</span>
-              <span className="mt-1.5 block sm:mt-2">güvenilir üretim gücü</span>
+              <span className="block">Beton Boru ve Altyapı Elemanlarında</span>
+              <span className="mt-1.5 block sm:mt-2">Güvenilir Üretim Gücü</span>
             </h2>
 
             <div className="mb-7 mt-7 max-w-sm border-t border-zinc-200" />
@@ -58,7 +60,7 @@ export default function About() {
 
             <div className="mt-10">
               <Link href="/kurumsal" className="btn-cta btn-cta--primary">
-                Detaylı bilgi
+                Detaylı Bilgi
               </Link>
             </div>
           </div>

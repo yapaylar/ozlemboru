@@ -93,31 +93,26 @@ export default function Navbar() {
     >
       {/* ── MAIN BAR ── */}
       <div
-        className={`relative w-full flex items-center px-4 sm:px-6 transition-all duration-700 border-b border-zinc-200/90 ${scrolled ? "h-14" : "h-[68px] sm:h-[72px]"}`}
+        className={`relative flex w-full items-center border-b border-zinc-200/90 transition-all duration-700 ${scrolled ? "h-14" : "h-[68px] sm:h-[72px]"}`}
       >
+        <div className="container-max flex w-full max-w-full items-center justify-between">
+          <Link href="/" className="flex shrink-0 items-center">
+            <Logo />
+          </Link>
 
-        {/* ── Sol nav (desktop) ── */}
-        <nav className="hidden lg:flex items-center justify-center gap-1 flex-1">
-          <Link href="/" className={navLinkClass} style={{ color: "#000" }}>Anasayfa</Link>
-          <Link href="/kurumsal" className={navLinkClass} style={{ color: "#000" }}>Kurumsal</Link>
-        </nav>
+          <nav className="hidden min-w-0 items-center justify-end gap-1 lg:flex">
+          <Link href="/" className={navLinkClass} style={{ color: "#000" }}>
+            Anasayfa
+          </Link>
+          <Link href="/kurumsal" className={navLinkClass} style={{ color: "#000" }}>
+            Kurumsal
+          </Link>
 
-        {/* ── Logo — ortada (desktop), sola yaslı (mobile) ── */}
-        <Link href="/" className="hidden lg:flex items-center shrink-0 absolute left-1/2 -translate-x-1/2">
-          <Logo />
-        </Link>
-        <Link href="/" className="flex lg:hidden items-center shrink-0">
-          <Logo />
-        </Link>
-
-        {/* ── Sağ nav (desktop) ── */}
-        <nav className="hidden lg:flex items-center justify-center gap-1 flex-1">
-          {/* Ürünlerimiz */}
           <div
             ref={urunlerRef}
             onMouseEnter={openUrunler}
             onMouseLeave={closeUrunler}
-            className="relative"
+            className="relative shrink-0"
           >
             <button
               className={`${navLinkClass} flex items-center gap-1.5`}
@@ -129,12 +124,11 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Bilgi */}
           <div
             ref={bilgiRef}
             onMouseEnter={openBilgi}
             onMouseLeave={closeBilgi}
-            className="relative"
+            className="relative shrink-0"
           >
             <button
               className={`${navLinkClass} flex items-center gap-1.5`}
@@ -151,8 +145,7 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* ── Mobile: sadece menü ── */}
-        <div className="ml-auto flex items-center lg:hidden">
+        <div className="flex items-center lg:hidden">
           <button
             type="button"
             className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md p-2 text-zinc-900 transition-opacity hover:opacity-60 -mr-1"
@@ -162,6 +155,7 @@ export default function Navbar() {
           >
             {menuOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
           </button>
+        </div>
         </div>
       </div>
 

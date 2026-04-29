@@ -23,8 +23,10 @@ export default function Products() {
           style={fadeUp(headerInView, 0)}
         >
           <div>
-            <p className="section-eyebrow">Katalog</p>
-            <h2 className="section-h2">Ürün kataloğu</h2>
+            <p className="section-eyebrow max-w-full text-balance">
+              Beton Boru ve Altyapı Elemanları
+            </p>
+            <h2 className="section-h2">Ürün Kataloğu</h2>
             <p className="mt-0.5 text-balance text-sm font-light leading-snug text-zinc-500 sm:hidden">
               Tüm ürünler TSE standartlarına uygun üretilmektedir.
             </p>

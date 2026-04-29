@@ -9,7 +9,7 @@ import { useInView, fadeUp } from "@/hooks/useInView";
 const LOGO_IDS = [1, 2, 3, 4, 5, 6, 7];
 const STRIP: number[] = [...LOGO_IDS, ...LOGO_IDS];
 const SLOTS = 5;
-const SCALES = [0.8, 0.9, 1, 0.9, 0.8] as const;
+const SCALES = [0.26, 0.63, 1, 0.63, 0.26] as const;
 const ZORDER = [1, 2, 5, 2, 1] as const;
 const AUTO_MS = 2800;
 
@@ -73,7 +73,7 @@ function ReferenceLogosStepper({ inView }: { inView: boolean }) {
         {LOGO_IDS.slice(0, SLOTS).map((n, i) => (
           <div
             key={n}
-            className="box-border flex min-h-28 min-w-0 flex-1 items-center justify-center border-y border-l border-zinc-200/80 bg-white p-2 first:rounded-l first:border-l last:rounded-r last:border-r sm:min-h-40 sm:p-3"
+            className="flex min-h-28 min-w-0 flex-1 items-center justify-center p-2 sm:min-h-40 sm:p-3"
             style={{ transform: `scale(${SCALES[i]})` }}
           >
             <Image
@@ -108,12 +108,12 @@ function ReferenceLogosStepper({ inView }: { inView: boolean }) {
             const k = offset;
             const inViewSlot = i >= k && i <= k + 4;
             const j = inViewSlot ? i - k : -1;
-            const scale = j >= 0 && j < 5 ? SCALES[j] : 0.8;
+            const scale = j >= 0 && j < 5 ? SCALES[j] : SCALES[0];
             const z = j >= 0 && j < 5 ? ZORDER[j] : 0;
             return (
               <div
                 key={`strip-${i}`}
-                className="-ml-px box-border flex min-h-28 min-w-0 flex-1 items-center justify-center border border-zinc-200/80 bg-white p-2.5 first:ml-0 sm:min-h-40 sm:p-3"
+                className="flex min-h-28 min-w-0 flex-1 items-center justify-center p-2 sm:min-h-40 sm:p-3"
                 style={{ transform: `scale(${scale})`, zIndex: z }}
               >
                 <Image
