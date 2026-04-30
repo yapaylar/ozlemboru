@@ -15,7 +15,6 @@ export default function Hero() {
     <section className="relative min-h-dvh overflow-hidden">
       <video
         src={HERO_VIDEO.src}
-        poster={HERO_VIDEO.poster}
         preload="auto"
         autoPlay
         loop
