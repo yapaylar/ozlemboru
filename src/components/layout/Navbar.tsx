@@ -85,9 +85,9 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? "lg:right-16" : "lg:right-20"}`}
       style={{
-        backgroundColor: scrollingDown ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,1)",
-        backdropFilter: scrollingDown ? "blur(12px)" : "none",
-        WebkitBackdropFilter: scrollingDown ? "blur(12px)" : "none",
+        backgroundColor: scrollingDown ? "rgba(255,255,255,0.52)" : "rgba(255,255,255,1)",
+        backdropFilter: scrollingDown ? "blur(8px)" : "none",
+        WebkitBackdropFilter: scrollingDown ? "blur(8px)" : "none",
         boxShadow: scrolled ? "0 2px 12px rgba(0,0,0,0.10)" : "0 1px 6px rgba(0,0,0,0.06)",
       }}
     >
