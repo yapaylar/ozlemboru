@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       <link rel="preload" href={HERO_VIDEO.src} as="video" type="video/mp4" fetchPriority="high" />
-      <main className="w-full min-w-0 overflow-x-clip">
+      <main className="w-full min-w-0 overflow-x-hidden">
       <Hero />
       <SloganStrip />
       <About />

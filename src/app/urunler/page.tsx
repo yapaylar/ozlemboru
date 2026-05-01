@@ -80,13 +80,33 @@ export default function UrunlerPage() {
                 className="group flex min-h-[20rem] flex-col overflow-hidden border border-zinc-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md sm:min-h-[22rem]"
               >
                 <div className="relative h-48 shrink-0 bg-zinc-50/90">
-                  <Image
-                    src={cat.image}
-                    alt={cat.title}
-                    fill
-                    className="object-contain p-3 transition-transform duration-300 group-hover:scale-[1.02]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
+                  {cat.hoverImage ? (
+                    <>
+                      <Image
+                        src={cat.image}
+                        alt={cat.title}
+                        fill
+                        className="object-contain p-3 transition-opacity duration-300 group-hover:opacity-0"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                      <Image
+                        src={cat.hoverImage}
+                        alt=""
+                        fill
+                        className="pointer-events-none absolute inset-0 object-contain p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        aria-hidden
+                      />
+                    </>
+                  ) : (
+                    <Image
+                      src={cat.image}
+                      alt={cat.title}
+                      fill
+                      className="object-contain p-3 transition-transform duration-300 group-hover:scale-[1.02]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  )}
                 </div>
 
                 <div className="flex flex-1 flex-col border-t border-zinc-100 p-4 text-left sm:p-5">

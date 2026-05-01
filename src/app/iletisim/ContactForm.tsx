@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 type Field = {
   id: string;
@@ -11,16 +12,31 @@ type Field = {
 };
 
 const FIELDS: Field[] = [
-  { id: "name",    label: "Ad Soyad",      placeholder: "Adınız ve soyadınız",         required: true },
-  { id: "company", label: "Firma",          placeholder: "Firma adı (isteğe bağlı)" },
-  { id: "phone",   label: "Telefon",        placeholder: "(0___) ___ __ __",            required: true },
-  { id: "email",   label: "E-posta",        type: "email", placeholder: "ornek@firma.com", required: true },
+  { id: "name", label: "Ad Soyad", placeholder: "Adınız ve soyadınız", required: true },
+  { id: "company", label: "Firma", placeholder: "Firma adı (isteğe bağlı)" },
+  { id: "phone", label: "Telefon", placeholder: "(0___) ___ __ __", required: true },
+  {
+    id: "email",
+    label: "E-posta",
+    type: "email",
+    placeholder: "ornek@firma.com",
+    required: true,
+  },
 ];
+
+const labelClass = "text-[11px] font-light uppercase tracking-[0.14em] text-zinc-500";
+const fieldBase =
+  "w-full border-b border-zinc-200 bg-transparent py-2.5 text-sm font-light text-zinc-900 outline-none transition-colors placeholder:text-zinc-400 focus:border-zinc-900";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
   const [form, setForm] = useState({
-    name: "", company: "", phone: "", email: "", subject: "", message: "",
+    name: "",
+    company: "",
+    phone: "",
+    email: "",
+    subject: "",
+    message: "",
   });
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
@@ -36,29 +52,31 @@ export default function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div className="flex flex-col items-start justify-center h-full min-h-[400px] gap-6">
-        <div
-          className="w-12 h-12 flex items-center justify-center border"
-          style={{ borderColor: "#000" }}
-        >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <polyline points="3,10 8,15 17,5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <div className="flex min-h-[400px] flex-col items-start justify-center gap-6">
+        <div className="flex h-12 w-12 items-center justify-center border border-zinc-200 bg-white">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+            <polyline
+              points="3,10 8,15 17,5"
+              className="stroke-zinc-900"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
         <div>
-          <p className="font-medium uppercase tracking-wide text-sm mb-2" style={{ color: "#000" }}>
-            Mesajınız İletildi
-          </p>
-          <p className="text-sm font-light leading-relaxed" style={{ color: "#555" }}>
-            En kısa sürede sizinle iletişime geçeceğiz.
-          </p>
+          <p className="mb-2 text-base font-light text-zinc-900">Mesajınız iletildi</p>
+          <p className="section-body text-zinc-600">En kısa sürede sizinle iletişime geçeceğiz.</p>
         </div>
         <button
-          onClick={() => { setStatus("idle"); setForm({ name: "", company: "", phone: "", email: "", subject: "", message: "" }); }}
-          className="text-xs font-light uppercase tracking-widest underline underline-offset-4"
-          style={{ color: "#888" }}
+          type="button"
+          onClick={() => {
+            setStatus("idle");
+            setForm({ name: "", company: "", phone: "", email: "", subject: "", message: "" });
+          }}
+          className="text-sm font-light text-zinc-500 underline underline-offset-4 transition-colors hover:text-navy"
         >
-          Yeni Mesaj Gönder
+          Yeni mesaj gönder
         </button>
       </div>
     );
@@ -66,15 +84,12 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="grid sm:grid-cols-2 gap-5">
+      <div className="grid gap-5 sm:grid-cols-2">
         {FIELDS.map((f) => (
           <div key={f.id} className="flex flex-col gap-2">
-            <label
-              htmlFor={f.id}
-              className="text-xs font-light uppercase tracking-[0.15em]"
-              style={{ color: "#888" }}
-            >
-              {f.label}{f.required && <span style={{ color: "#000" }}> *</span>}
+            <label htmlFor={f.id} className={labelClass}>
+              {f.label}
+              {f.required ? <span className="text-zinc-900"> *</span> : null}
             </label>
             <input
               id={f.id}
@@ -83,47 +98,35 @@ export default function ContactForm() {
               value={form[f.id as keyof typeof form]}
               onChange={handleChange}
               required={f.required}
-              className="w-full border-b py-2.5 text-sm font-light bg-transparent outline-none transition-colors placeholder:text-[#bbb]"
-              style={{ borderColor: "#ddd", color: "#000" }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "#000")}
-              onBlur={(e) => (e.currentTarget.style.borderColor = "#ddd")}
+              className={fieldBase}
             />
           </div>
         ))}
       </div>
 
       <div className="flex flex-col gap-2">
-        <label
-          htmlFor="subject"
-          className="text-xs font-light uppercase tracking-[0.15em]"
-          style={{ color: "#888" }}
-        >
+        <label htmlFor="subject" className={labelClass}>
           Konu
         </label>
         <select
           id="subject"
           value={form.subject}
           onChange={handleChange}
-          className="w-full border-b py-2.5 text-sm font-light bg-transparent outline-none appearance-none cursor-pointer"
-          style={{ borderColor: "#ddd", color: form.subject ? "#000" : "#bbb" }}
-          onFocus={(e) => (e.currentTarget.style.borderColor = "#000")}
-          onBlur={(e) => (e.currentTarget.style.borderColor = "#ddd")}
+          className={cn(`${fieldBase} cursor-pointer appearance-none`, !form.subject && "text-zinc-400")}
         >
-          <option value="" disabled>Lütfen bir konu seçin</option>
-          <option value="fiyat">Fiyat Teklifi</option>
-          <option value="teknik">Teknik Bilgi</option>
-          <option value="sevkiyat">Sevkiyat & Lojistik</option>
+          <option value="" disabled>
+            Lütfen bir konu seçin
+          </option>
+          <option value="fiyat">Fiyat teklifi</option>
+          <option value="teknik">Teknik bilgi</option>
+          <option value="sevkiyat">Sevkiyat ve lojistik</option>
           <option value="diger">Diğer</option>
         </select>
       </div>
 
       <div className="flex flex-col gap-2">
-        <label
-          htmlFor="message"
-          className="text-xs font-light uppercase tracking-[0.15em]"
-          style={{ color: "#888" }}
-        >
-          Mesajınız <span style={{ color: "#000" }}>*</span>
+        <label htmlFor="message" className={labelClass}>
+          Mesajınız <span className="text-zinc-900">*</span>
         </label>
         <textarea
           id="message"
@@ -132,10 +135,7 @@ export default function ContactForm() {
           value={form.message}
           onChange={handleChange}
           required
-          className="w-full border-b py-2.5 text-sm font-light bg-transparent outline-none resize-none placeholder:text-[#bbb]"
-          style={{ borderColor: "#ddd", color: "#000" }}
-          onFocus={(e) => (e.currentTarget.style.borderColor = "#000")}
-          onBlur={(e) => (e.currentTarget.style.borderColor = "#ddd")}
+          className={`${fieldBase} resize-none`}
         />
       </div>
 
@@ -143,15 +143,9 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex items-center gap-3 font-light uppercase tracking-widest px-8 py-3.5 text-sm text-white transition-opacity disabled:opacity-60"
-          style={{ backgroundColor: "#000" }}
+          className="btn-cta btn-cta--primary disabled:opacity-60"
         >
-          {status === "sending" ? "Gönderiliyor..." : "Mesaj Gönder"}
-          {status === "idle" && (
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M1 7h12M7 1l6 6-6 6" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          )}
+          {status === "sending" ? "Gönderiliyor..." : "Mesaj gönder"}
         </button>
       </div>
     </form>

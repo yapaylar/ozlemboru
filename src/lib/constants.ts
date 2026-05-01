@@ -15,6 +15,13 @@ export const COMPANY = {
   website: "www.ozlemboru.com",
 };
 
+/** Header ve footer ortak logo dosyası (Next/Image width×height gerçek piksel oranı) */
+export const SITE_LOGO = {
+  src: "/images/ozlemyenilogo.png",
+  width: 3840,
+  height: 1800,
+} as const;
+
 /** Anasayfa hero arka plan videosu (daha hızlı his için: küçük bitrate / kısa loop / WebM ekleyin) */
 export const HERO_VIDEO = {
   src: "/herovideotest2.mp4",

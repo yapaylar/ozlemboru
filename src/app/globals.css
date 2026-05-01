@@ -193,6 +193,25 @@
     clip-path: inset(0 0 0 0) !important;
     animation: none !important;
   }
+
+  .reference-marquee-track {
+    animation: none !important;
+  }
+}
+
+@keyframes reference-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.reference-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: reference-marquee-scroll 28s linear infinite;
 }
 
 @media print {

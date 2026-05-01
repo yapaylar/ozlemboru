@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { COMPANY, NAV_LINKS, CERTIFICATES } from "@/lib/constants";
+import { COMPANY, NAV_LINKS, CERTIFICATES, SITE_LOGO } from "@/lib/constants";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -12,26 +13,15 @@ export default function Footer() {
 
         {/* Brand — wide column */}
         <div className="lg:col-span-5">
-          {/* C-mark logo */}
-          <div className="flex items-center gap-3 mb-5">
-            <svg width="36" height="36" viewBox="0 0 56 56" fill="none">
-              <g transform="rotate(-20, 28, 28)">
-                <path d="M 47,39 A 22,22 0 1,1 47,17" stroke="rgba(255,255,255,0.7)" strokeWidth="1.3" strokeLinecap="round" fill="none" />
-                <path d="M 41,35.5 A 15,15 0 1,1 41,20.5" stroke="rgba(255,255,255,0.7)" strokeWidth="2.8" strokeLinecap="round" fill="none" />
-                <path d="M 35.8,32.5 A 9,9 0 1,1 35.8,23.5" stroke="rgba(255,255,255,0.7)" strokeWidth="1.3" strokeLinecap="round" fill="none" />
-                <circle cx="41" cy="20.5" r="2.6" fill="#00a8d6" />
-                <circle cx="41" cy="35.5" r="2.6" fill="#00a8d6" />
-              </g>
-            </svg>
-            <div className="flex flex-col leading-none">
-              <span className="font-medium uppercase tracking-[0.18em]" style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.85)" }}>
-                Özlem İnşaat
-              </span>
-              <span className="font-light uppercase tracking-[0.13em]" style={{ fontSize: "0.58rem", color: "rgba(255,255,255,0.3)", marginTop: "4px" }}>
-                Beton Boru ve Beton Elemanları Sanayi
-              </span>
-            </div>
-          </div>
+          <Link href="/" className="mb-5 inline-block">
+            <Image
+              src={SITE_LOGO.src}
+              alt="Özlem İnşaat"
+              width={SITE_LOGO.width}
+              height={SITE_LOGO.height}
+              className="h-10 w-auto sm:h-11 drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
+            />
+          </Link>
 
           <p className="mt-6 text-xs font-light leading-relaxed max-w-xs" style={{ color: "rgba(255,255,255,0.55)", lineHeight: "1.8" }}>
             {COMPANY.founded}&rsquo;dan bu yana Ankara&rsquo;da üretim yapan firmamız;

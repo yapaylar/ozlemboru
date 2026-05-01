@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Referanslar | Özlem Beton Boru",
   description:
     "1989'dan bu yana İller Bankası, ASKİ, TOKİ ve 60'ı aşkın kamu ve özel sektör kuruluşuyla tamamlanan referans projelerimiz.",
 };
+
+const HERO_SRC = "/kurumsalhero.jpg";
 
 const LOGOS = [1, 2, 3, 4, 5, 6, 7];
 
@@ -26,7 +29,7 @@ const GROUPS = [
   },
   {
     title: "Belediyeler",
-    tag: "Yerel Yönetim",
+    tag: "Yerel yönetim",
     refs: [
       "Eflanı Belediye Başkanlığı",
       "Mengen Belediye Başkanlığı",
@@ -80,7 +83,7 @@ const GROUPS = [
   },
   {
     title: "Özel Sektör Firmaları",
-    tag: "Özel Sektör",
+    tag: "Özel sektör",
     refs: [
       "Özdoğanlar İnşaat",
       "MSK Grup Yatırım A.Ş.",
@@ -105,176 +108,156 @@ const GROUPS = [
 ];
 
 const STATS = [
-  { value: "35+", label: "Yıl Deneyim" },
+  { value: "35+", label: "Yıl deneyim" },
   { value: "63+", label: "Referans" },
   { value: "20+", label: "İl" },
-  { value: "8",   label: "Kamu Kurumu" },
+  { value: "8", label: "Kamu kurumu" },
 ];
 
 export default function ReferanslarPage() {
   const total = GROUPS.reduce((acc, g) => acc + g.refs.length, 0);
 
   return (
-    <main>
+    <main className="w-full min-w-0 overflow-x-hidden">
+      <section className="relative min-h-[min(52vh,26rem)] overflow-hidden border-b border-zinc-200/90 sm:min-h-[min(56vh,28rem)] md:min-h-[min(58vh,30rem)]">
+        <Image
+          src={HERO_SRC}
+          alt="Referans projeler ve iş ortakları"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/55" aria-hidden />
 
-        {/* ── PAGE HEADER ─────────────────────────────────────────── */}
-        <section
-          className="relative pt-[80px]"
-          style={{ backgroundColor: "#0a0a0a", minHeight: "280px" }}
-        >
-          <div
-            className="relative z-10 flex items-end container-max pb-14"
-            style={{ minHeight: "calc(280px - 80px)" }}
-          >
-            <div>
-              <p className="text-xs font-light uppercase tracking-[0.2em] mb-4" style={{ color: "rgba(255,255,255,0.4)" }}>
-                Anasayfa / Bilgi / Referanslar
-              </p>
-              <h1
-                className="font-light uppercase tracking-wide text-white leading-none"
-                style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+        <div className="relative z-10 flex min-h-[min(52vh,26rem)] flex-col justify-end pt-[68px] sm:min-h-[min(56vh,28rem)] sm:pt-[72px] md:min-h-[min(58vh,30rem)]">
+          <div className="container-max w-full pb-10 [padding-bottom:max(2.5rem,env(safe-area-inset-bottom))] sm:pb-14 md:pb-16">
+            <nav aria-label="İçerik yolu" className="mb-5">
+              <Link
+                href="/"
+                className="text-[11px] font-light tracking-[0.14em] text-white/60 transition-colors hover:text-white"
               >
-                Referanslarımız
-              </h1>
-            </div>
-          </div>
-        </section>
-
-        {/* ── STATS STRIP ─────────────────────────────────────────── */}
-        <div style={{ backgroundColor: "#f7f7f7", borderBottom: "1px solid #e8e8e8" }}>
-          <div className="container-max">
-            <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-[#e8e8e8]">
-              {STATS.map((s) => (
-                <div key={s.label} className="py-7 px-6 text-center">
-                  <p
-                    className="font-light leading-none mb-2"
-                    style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)", color: "#000" }}
-                  >
-                    {s.value}
-                  </p>
-                  <p className="text-xs font-light uppercase tracking-[0.15em]" style={{ color: "#888" }}>
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+                Anasayfa
+              </Link>
+              <span className="mx-2 text-white/35">/</span>
+              <Link
+                href="/bilgi"
+                className="text-[11px] font-light tracking-[0.14em] text-white/60 transition-colors hover:text-white"
+              >
+                Bilgi
+              </Link>
+              <span className="mx-2 text-white/35">/</span>
+              <span className="text-[11px] font-light tracking-[0.14em] text-white/90">Referanslar</span>
+            </nav>
+            <h1 className="max-w-4xl text-balance font-light leading-[1.12] tracking-[-0.02em] text-white [font-size:var(--type-hero)] sm:max-w-5xl sm:tracking-[-0.01em]">
+              Referanslarımız
+            </h1>
+            <p className="mt-4 max-w-2xl text-balance text-base font-light leading-[1.65] text-white/75 sm:text-[1.05rem] sm:leading-[1.7]">
+              Kamu kurumları, belediyeler, TOKİ ve özel sektör projelerinde güvenilir altyapı tedariki.
+            </p>
           </div>
         </div>
+      </section>
 
-        {/* ── LOGOS ────────────────────────────────────────────────── */}
-        <section className="section-y bg-white">
-          <div className="container-max">
+      <div className="border-b border-zinc-200 bg-zinc-50/80">
+        <div className="container-max grid grid-cols-2 divide-x divide-zinc-200 border-zinc-200 sm:grid-cols-4">
+          {STATS.map((s) => (
+            <div key={s.label} className="px-4 py-7 text-center sm:px-6">
+              <p className="font-light tabular-nums leading-none text-zinc-900 [font-size:clamp(1.5rem,3vw,2rem)]">
+                {s.value}
+              </p>
+              <p className="mt-2 text-[11px] font-light uppercase tracking-[0.14em] text-zinc-500">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-            <div className="flex items-end justify-between mb-10 pb-6 border-b" style={{ borderColor: "#000" }}>
-              <div>
-                <p className="text-xs font-light uppercase tracking-[0.2em] mb-4" style={{ color: "#888" }}>
-                  Kurum ve Kuruluşlar
-                </p>
-                <h2
-                  className="font-light uppercase leading-none tracking-wide"
-                  style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "#000" }}
-                >
-                  Birlikte Çalıştıklarımız
-                </h2>
-              </div>
-              <p className="hidden sm:block text-sm font-light text-right" style={{ color: "#888" }}>
+      <section className="section-y bg-white">
+        <div className="container-max">
+          <div className="section-header-row">
+            <div>
+              <p className="section-eyebrow max-w-full text-balance">Kurum ve kuruluşlar</p>
+              <h2 className="section-h2 max-w-xl">Birlikte çalıştıklarımız</h2>
+              <p className="mt-0.5 text-balance text-sm font-light leading-snug text-zinc-500 sm:hidden">
                 {total} referans proje
               </p>
             </div>
-
-            {/* Logo grid */}
-            <div className="grid grid-cols-4 sm:grid-cols-7 gap-px mb-16" style={{ backgroundColor: "#000" }}>
-              {LOGOS.map((n) => (
-                <div
-                  key={n}
-                  className="aspect-square bg-white flex items-center justify-center p-5"
-                >
-                  <Image
-                    src={`/images/references/${n}.png`}
-                    alt={`Referans Kurum ${n}`}
-                    width={100}
-                    height={100}
-                    className="object-contain w-full h-full"
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* ── GROUPED REFERENCE LIST ─────────────────────────── */}
-            <div className="space-y-14">
-              {GROUPS.map((group) => (
-                <div key={group.title}>
-
-                  {/* Group header */}
-                  <div className="flex items-center gap-4 mb-6">
-                    <span
-                      className="text-[10px] font-light uppercase tracking-[0.18em] px-2.5 py-1 border shrink-0"
-                      style={{ borderColor: "#000", color: "#000" }}
-                    >
-                      {group.tag}
-                    </span>
-                    <h3 className="text-sm font-medium uppercase tracking-wide" style={{ color: "#000" }}>
-                      {group.title}
-                    </h3>
-                    <div className="flex-1 border-t" style={{ borderColor: "#e8e8e8" }} />
-                    <span className="text-xs font-light shrink-0" style={{ color: "#bbb" }}>
-                      {group.refs.length}
-                    </span>
-                  </div>
-
-                  {/* Reference items — 2 column grid */}
-                  <div className="grid sm:grid-cols-2 border-l border-t" style={{ borderColor: "#e8e8e8" }}>
-                    {group.refs.map((ref, i) => (
-                      <div
-                        key={ref}
-                        className="flex items-center gap-4 px-5 py-4 bg-white border-r border-b"
-                        style={{ borderColor: "#e8e8e8" }}
-                      >
-                        <span
-                          className="text-xs font-light shrink-0 w-5 text-right tabular-nums"
-                          style={{ color: "#ccc" }}
-                        >
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span className="text-sm font-light leading-snug" style={{ color: "#222" }}>
-                          {ref}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                </div>
-              ))}
-            </div>
-
-            {/* CTA */}
-            <div
-              className="mt-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-8 border"
-              style={{ borderColor: "#e8e8e8" }}
-            >
-              <div>
-                <p className="font-medium uppercase tracking-wide text-sm mb-1.5" style={{ color: "#000" }}>
-                  Projenize Katkı Sağlayalım
-                </p>
-                <p className="text-sm font-light" style={{ color: "#888" }}>
-                  Listemizdeki kurum ve firmalar gibi siz de güvenilir bir tedarik ortağı arıyorsanız bize ulaşın.
-                </p>
-              </div>
-              <a
-                href="/iletisim"
-                className="inline-flex items-center gap-3 font-light uppercase tracking-widest px-7 py-3.5 text-sm text-white shrink-0 transition-opacity hover:opacity-80"
-                style={{ backgroundColor: "#000" }}
-              >
-                İletişime Geç
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                  <path d="M1 6.5h11M6.5 1l5.5 5.5-5.5 5.5" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            </div>
-
+            <p className="section-rail section-rail--right hidden max-w-[11rem] text-balance sm:block sm:max-w-xs">
+              {total} referans proje
+            </p>
           </div>
-        </section>
 
+          <div className="mt-10 grid grid-cols-4 gap-3 sm:mt-12 sm:grid-cols-7 sm:gap-4 lg:mt-14">
+            {LOGOS.map((n) => (
+              <div
+                key={n}
+                className="flex aspect-square items-center justify-center border border-zinc-200 bg-zinc-50/40 p-4 shadow-sm sm:p-5"
+              >
+                <Image
+                  src={`/images/references/${n}.png`}
+                  alt={`Referans kurumu ${n}`}
+                  width={100}
+                  height={100}
+                  className="h-full w-full object-contain opacity-95"
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-14 space-y-12 sm:mt-16 sm:space-y-14">
+            {GROUPS.map((group) => (
+              <div key={group.title}>
+                <div className="mb-5 flex flex-wrap items-center gap-3 gap-y-2 sm:mb-6">
+                  <span className="shrink-0 border border-zinc-200 bg-white px-2.5 py-1 text-[10px] font-light uppercase tracking-[0.14em] text-zinc-700">
+                    {group.tag}
+                  </span>
+                  <h3 className="min-w-0 text-sm font-light uppercase tracking-[0.12em] text-zinc-900 sm:text-[0.95rem]">
+                    {group.title}
+                  </h3>
+                  <div className="hidden min-h-px min-w-[2rem] flex-1 bg-zinc-200 sm:block" aria-hidden />
+                  <span className="ml-auto shrink-0 text-xs font-light tabular-nums text-zinc-400 sm:ml-0">
+                    {group.refs.length}
+                  </span>
+                </div>
+
+                <div className="grid gap-px border border-zinc-200 bg-zinc-200 sm:grid-cols-2">
+                  {group.refs.map((ref, i) => (
+                    <div key={ref} className="flex items-start gap-4 bg-white px-4 py-3.5 sm:px-5 sm:py-4">
+                      <span className="w-7 shrink-0 text-right text-[11px] font-light tabular-nums text-zinc-400 sm:w-8 sm:text-xs">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="min-w-0 text-sm font-light leading-snug text-zinc-800 sm:text-[0.95rem] sm:leading-relaxed">
+                        {ref}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-14 flex flex-col gap-6 border border-zinc-200 bg-zinc-50/80 p-6 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div>
+              <p className="text-base font-light text-zinc-900">Projenize katkı sağlayalım</p>
+              <p className="section-body mt-1 max-w-xl text-zinc-600">
+                Listemizdeki kurum ve firmalar gibi güvenilir bir tedarik ortağı arıyorsanız bize ulaşın.
+              </p>
+            </div>
+            <Link href="/iletisim" className="btn-cta btn-cta--primary inline-flex shrink-0 items-center gap-2">
+              İletişime geç
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden>
+                <path
+                  d="M1 6.5h11M6.5 1l5.5 5.5-5.5 5.5"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

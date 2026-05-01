@@ -29,67 +29,80 @@ export default async function ProductPage({ params }: Props) {
   const siblings = getProductsByCategory(slug).filter((p) => p.id !== productId);
 
   return (
-    <main>
-
-        {/* ── BREADCRUMB ───────────────────────────────────────────── */}
-        <div className="bg-white border-b" style={{ paddingTop: "calc(80px + 40px)", borderColor: "#e8e8e8" }}>
-          <div className="container-max pb-8">
-            <p className="text-xs font-light uppercase tracking-[0.2em]" style={{ color: "#bbb" }}>
-              <Link href="/urunler" className="hover:opacity-60 transition-opacity" style={{ color: "#bbb" }}>Ürünlerimiz</Link>
-              {" / "}
-              <Link href={`/urunler/${slug}`} className="hover:opacity-60 transition-opacity" style={{ color: "#bbb" }}>{category.shortTitle}</Link>
-              {" / "}<span style={{ color: "#555" }}>{product.shortTitle}</span>
-            </p>
-          </div>
+    <main className="w-full min-w-0 overflow-x-hidden">
+      <div className="border-b border-zinc-200 bg-white pt-[calc(68px+1.5rem)] pb-8 sm:pt-[calc(72px+2rem)]">
+        <div className="container-max">
+          <nav aria-label="İçerik yolu" className="flex flex-wrap items-center gap-x-2 text-[11px] font-light tracking-[0.14em]">
+            <Link href="/" className="text-zinc-500 transition-colors hover:text-zinc-900">
+              Anasayfa
+            </Link>
+            <span className="text-zinc-300">/</span>
+            <Link href="/urunler" className="text-zinc-500 transition-colors hover:text-zinc-900">
+              Ürünlerimiz
+            </Link>
+            <span className="text-zinc-300">/</span>
+            <Link href={`/urunler/${slug}`} className="text-zinc-500 transition-colors hover:text-zinc-900">
+              {category.shortTitle}
+            </Link>
+            <span className="text-zinc-300">/</span>
+            <span className="text-zinc-700">{product.shortTitle}</span>
+          </nav>
         </div>
+      </div>
 
-        {/* ── PRODUCT DETAIL ───────────────────────────────────────── */}
-        <section className="section-y bg-white">
+      <section className="section-y bg-white">
+        <div className="container-max">
+          <ProductClient product={product} category={category} />
+        </div>
+      </section>
+
+      {siblings.length > 0 ? (
+        <section className="section-y bg-zinc-50/80">
           <div className="container-max">
-            <ProductClient product={product} category={category} />
+            <div className="section-header-row">
+              <div>
+                <p className="section-eyebrow max-w-full text-balance">Aynı kategori</p>
+                <h2 className="section-h2 max-w-xl">Diğer ürünler</h2>
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-px border border-zinc-200 bg-zinc-200 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4 lg:mt-14">
+              {siblings.slice(0, 4).map((sib) => (
+                <Link
+                  key={sib.id}
+                  href={`/urunler/${slug}/${sib.id}`}
+                  className="group flex items-center gap-4 bg-white px-5 py-4 transition-colors hover:bg-zinc-50 sm:min-h-[4.5rem]"
+                >
+                  <div className="flex min-w-0 flex-1 flex-col">
+                    <span className="truncate text-sm font-light leading-snug text-zinc-900 transition-colors group-hover:text-navy">
+                      {sib.shortTitle}
+                    </span>
+                    <span className="mt-1 text-[10px] font-light uppercase tracking-[0.12em] text-zinc-400">
+                      {sib.options.length} seçenek
+                    </span>
+                  </div>
+                  <svg
+                    className="shrink-0 text-zinc-400 transition-transform group-hover:translate-x-0.5 group-hover:text-zinc-700"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M1 6h10M6 1l5 5-5 5"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
-
-        {/* ── RELATED PRODUCTS ─────────────────────────────────────── */}
-        {siblings.length > 0 && (
-          <section className="section-y" style={{ backgroundColor: "#f7f7f7" }}>
-            <div className="container-max">
-
-              <div className="flex items-center gap-4 mb-8">
-                <p className="text-xs font-medium uppercase tracking-[0.18em] shrink-0" style={{ color: "#888" }}>
-                  Bu Kategorideki Diğer Ürünler
-                </p>
-                <div className="flex-1 border-t" style={{ borderColor: "#e8e8e8" }} />
-              </div>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-l border-t" style={{ borderColor: "#e0e0e0" }}>
-                {siblings.slice(0, 4).map((sib) => (
-                  <Link
-                    key={sib.id}
-                    href={`/urunler/${slug}/${sib.id}`}
-                    className="group flex items-center gap-4 bg-white px-5 py-4 border-r border-b transition-colors hover:bg-[#f7f7f7]"
-                    style={{ borderColor: "#e0e0e0" }}
-                  >
-                    <div className="flex flex-col flex-1 min-w-0">
-                      <span className="text-sm font-light leading-snug group-hover:underline underline-offset-2 truncate" style={{ color: "#222" }}>
-                        {sib.shortTitle}
-                      </span>
-                      <span className="text-[10px] font-light uppercase tracking-widest mt-1" style={{ color: "#bbb" }}>
-                        {sib.options.length} seçenek
-                      </span>
-                    </div>
-                    <svg className="shrink-0 transition-transform group-hover:translate-x-1"
-                      width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M1 6h10M6 1l5 5-5 5" stroke="#000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </Link>
-                ))}
-              </div>
-
-            </div>
-          </section>
-        )}
-
+      ) : null}
     </main>
   );
 }

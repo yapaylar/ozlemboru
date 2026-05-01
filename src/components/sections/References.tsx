@@ -1,17 +1,12 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { REFERENCES } from "@/lib/constants";
 import { useInView, fadeUp } from "@/hooks/useInView";
 
 const LOGO_IDS = [1, 2, 3, 4, 5, 6, 7];
-const STRIP: number[] = [...LOGO_IDS, ...LOGO_IDS];
-const SLOTS = 5;
-const SCALES = [0.26, 0.63, 1, 0.63, 0.26] as const;
-const ZORDER = [1, 2, 5, 2, 1] as const;
-const AUTO_MS = 2800;
 
 const VISIBLE_REFS = REFERENCES.slice(0, 10);
 
@@ -28,10 +23,23 @@ function RefItem({ n, text }: { n: number; text: string }) {
   );
 }
 
-function ReferenceLogosStepper({ inView }: { inView: boolean }) {
+/** Tek tip boyutta logo — marquee ve statik görünüm ortak */
+function RefLogoCell({ id }: { id: number }) {
+  return (
+    <div className="flex h-16 w-[7rem] shrink-0 items-center justify-center px-3 sm:h-[5.25rem] sm:w-[8.25rem] sm:px-4">
+      <Image
+        src={`/images/references/${id}.png`}
+        alt=""
+        width={140}
+        height={140}
+        className="max-h-full max-w-full object-contain opacity-90"
+      />
+    </div>
+  );
+}
+
+function ReferenceLogosMarquee() {
   const [reduced, setReduced] = useState(false);
-  const [offset, setOffset] = useState(0);
-  const [snap, setSnap] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -42,90 +50,30 @@ function ReferenceLogosStepper({ inView }: { inView: boolean }) {
     return () => mq.removeEventListener("change", on);
   }, []);
 
-  useLayoutEffect(() => {
-    if (!snap) return;
-    const a = requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setSnap(false);
-      });
-    });
-    return () => cancelAnimationFrame(a);
-  }, [snap]);
-
-  useEffect(() => {
-    if (reduced || !inView) return;
-    const id = window.setInterval(() => {
-      setOffset((k) => (k < 6 ? k + 1 : 7));
-    }, AUTO_MS);
-    return () => clearInterval(id);
-  }, [inView, reduced]);
-
-  const onTrackTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
-    if (e.propertyName !== "transform" || e.target !== e.currentTarget) return;
-    if (offset !== 7) return;
-    setSnap(true);
-    setOffset(0);
-  };
-
   if (reduced) {
     return (
-      <div className="mt-7 flex w-full items-stretch justify-center gap-0 sm:mt-8">
-        {LOGO_IDS.slice(0, SLOTS).map((n, i) => (
-          <div
-            key={n}
-            className="flex min-h-28 min-w-0 flex-1 items-center justify-center p-2 sm:min-h-40 sm:p-3"
-            style={{ transform: `scale(${SCALES[i]})` }}
-          >
-            <Image
-              src={`/images/references/${n}.png`}
-              alt=""
-              width={120}
-              height={120}
-              className="h-full w-full object-contain p-1"
-            />
-          </div>
+      <div className="mt-7 flex w-full flex-wrap items-center justify-center gap-x-6 gap-y-5 sm:mt-8 sm:gap-x-10">
+        {LOGO_IDS.map((id) => (
+          <RefLogoCell key={id} id={id} />
         ))}
       </div>
     );
   }
 
-  const step = Math.min(offset, 7);
   return (
-    <div className="mt-7 w-full min-w-0 sm:mt-8">
-      <div className="w-full min-w-0 overflow-hidden" style={{ minHeight: "7.25rem" }} aria-hidden>
-        <div
-          onTransitionEnd={onTrackTransitionEnd}
-          className={
-            "flex w-[280%] will-change-transform gap-0" +
-            (snap ? " transition-none" : " transition-transform") +
-            (snap ? "" : " duration-500 [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]")
-          }
-          style={{
-            transform: `translate3d(calc(-1 * ${step} * (100% / 14)),0,0)`,
-          }}
-        >
-          {STRIP.map((n, i) => {
-            const k = offset;
-            const inViewSlot = i >= k && i <= k + 4;
-            const j = inViewSlot ? i - k : -1;
-            const scale = j >= 0 && j < 5 ? SCALES[j] : SCALES[0];
-            const z = j >= 0 && j < 5 ? ZORDER[j] : 0;
-            return (
-              <div
-                key={`strip-${i}`}
-                className="flex min-h-28 min-w-0 flex-1 items-center justify-center p-2 sm:min-h-40 sm:p-3"
-                style={{ transform: `scale(${scale})`, zIndex: z }}
-              >
-                <Image
-                  src={`/images/references/${n}.png`}
-                  alt=""
-                  width={120}
-                  height={120}
-                  className="h-full w-full object-contain"
-                />
-              </div>
-            );
-          })}
+    <div className="mt-7 w-full min-w-0 sm:mt-8" aria-hidden>
+      <div className="overflow-hidden py-1">
+        <div className="reference-marquee-track">
+          <div className="flex shrink-0 items-center gap-8 sm:gap-12 md:gap-14">
+            {LOGO_IDS.map((id) => (
+              <RefLogoCell key={`a-${id}`} id={id} />
+            ))}
+          </div>
+          <div className="flex shrink-0 items-center gap-8 sm:gap-12 md:gap-14" aria-hidden>
+            {LOGO_IDS.map((id) => (
+              <RefLogoCell key={`b-${id}`} id={id} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -153,8 +101,13 @@ export default function References() {
           </p>
         </div>
 
-        <div style={fadeUp(inView, 80)}>
-          <ReferenceLogosStepper inView={inView} />
+        <div
+          style={{
+            opacity: inView ? 1 : 0,
+            transition: `opacity 0.65s ease 80ms`,
+          }}
+        >
+          <ReferenceLogosMarquee />
         </div>
 
         <ul

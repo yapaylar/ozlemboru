@@ -1,14 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PRODUCTS } from "@/lib/constants";
 import { useInView, fadeUp } from "@/hooks/useInView";
 
 type ProductItem = (typeof PRODUCTS)[number] & { hoverImage?: string };
-
-const AUTO_HOVER_MS = 2000;
 
 export default function Products() {
   const { ref: headerRef, inView: headerInView } = useInView<HTMLDivElement>({ threshold: 0.2 });
@@ -54,7 +51,6 @@ export default function Products() {
                 product={p as ProductItem}
                 inView={scrollerInView}
                 delayIndex={i}
-                isFirst={i === 0}
               />
             ))}
           </div>
@@ -82,32 +78,12 @@ function ProductCard({
   product,
   inView,
   delayIndex,
-  isFirst,
 }: {
   product: ProductItem;
   inView: boolean;
   delayIndex: number;
-  isFirst: boolean;
 }) {
   const hasHover = Boolean(product.hoverImage);
-  const [autoShowTech, setAutoShowTech] = useState(false);
-  const [pointerOnCard, setPointerOnCard] = useState(false);
-
-  useEffect(() => {
-    if (!isFirst || !hasHover) return;
-    if (pointerOnCard) return;
-    const id = window.setInterval(() => setAutoShowTech((s) => !s), AUTO_HOVER_MS);
-    return () => window.clearInterval(id);
-  }, [isFirst, hasHover, pointerOnCard]);
-
-  const onPointerEnter = useCallback(() => setPointerOnCard(true), []);
-  const onPointerLeave = useCallback(() => setPointerOnCard(false), []);
-
-  const showSecond =
-    hasHover &&
-    (isFirst
-      ? pointerOnCard || autoShowTech
-      : false);
 
   return (
     <div
@@ -117,54 +93,26 @@ function ProductCard({
       <Link
         href={product.href}
         className="group flex h-full min-h-[20rem] flex-col overflow-hidden border border-zinc-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md sm:min-h-[22rem]"
-        onPointerEnter={onPointerEnter}
-        onPointerLeave={onPointerLeave}
       >
         <div className="relative h-48 shrink-0 bg-zinc-50/90">
-          {isFirst && hasHover ? (
-            <>
-              <Image
-                src={`/images/products/${product.id}.png`}
-                alt=""
-                fill
-                className="object-contain p-3 transition-opacity duration-500"
-                style={{ opacity: showSecond ? 0 : 1 }}
-                sizes="300px"
-              />
-              {product.hoverImage && (
-                <Image
-                  src={`/images/products/${product.hoverImage}`}
-                  alt=""
-                  fill
-                  className="pointer-events-none absolute inset-0 object-contain p-3 transition-opacity duration-500"
-                  style={{ opacity: showSecond ? 1 : 0 }}
-                  sizes="300px"
-                  aria-hidden
-                />
-              )}
-            </>
-          ) : (
-            <>
-              <Image
-                src={`/images/products/${product.id}.png`}
-                alt=""
-                fill
-                className={`object-contain p-3 ${
-                  hasHover ? "transition-opacity duration-300 group-hover:opacity-0" : ""
-                }`}
-                sizes="300px"
-              />
-              {hasHover && product.hoverImage && (
-                <Image
-                  src={`/images/products/${product.hoverImage}`}
-                  alt=""
-                  fill
-                  className="pointer-events-none absolute inset-0 object-contain p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  sizes="300px"
-                  aria-hidden
-                />
-              )}
-            </>
+          <Image
+            src={`/images/products/${product.id}.png`}
+            alt=""
+            fill
+            className={`object-contain p-3 ${
+              hasHover ? "transition-opacity duration-300 group-hover:opacity-0" : ""
+            }`}
+            sizes="300px"
+          />
+          {hasHover && product.hoverImage && (
+            <Image
+              src={`/images/products/${product.hoverImage}`}
+              alt=""
+              fill
+              className="pointer-events-none absolute inset-0 object-contain p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              sizes="300px"
+              aria-hidden
+            />
           )}
         </div>
 

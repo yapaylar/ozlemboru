@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { SITE_LOGO } from "@/lib/constants";
 import { PRODUCT_CATEGORIES } from "@/lib/products";
 
 const BILGI_ITEMS = [
@@ -17,10 +18,10 @@ function Logo() {
   return (
     <div aria-label="Özlem İnşaat">
       <Image
-        src="/images/ozlemlogotest4.png"
+        src={SITE_LOGO.src}
         alt="Özlem İnşaat"
-        width={260}
-        height={80}
+        width={SITE_LOGO.width}
+        height={SITE_LOGO.height}
         className="h-12 w-auto sm:h-16"
         priority
       />

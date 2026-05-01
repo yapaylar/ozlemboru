@@ -25,6 +25,8 @@ export type ProductCategory = {
   shortTitle: string;
   description: string;
   image: string;
+  /** Anasayfa ürün kartları ile aynı teknik çizim hover görseli (varsa) */
+  hoverImage?: string;
   standard?: string;
 };
 
@@ -37,6 +39,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     shortTitle: "Beton Borular",
     description: "Ø150–Ø2000mm, buhar kürlü, entegre contalı muflu ve lamba zıvanalı beton-betonarme borular.",
     image: "/images/products/beton-betonarme-borular.png",
+    hoverImage: "/images/products/beton-betonarme-borular-hover.png",
     standard: "TS 821 EN 1916",
   },
   {
@@ -45,6 +48,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     shortTitle: "Muayene Bacası",
     description: "TS EN 1917 standardına uygun taban elemanları, gövde bilezikleri ve konik elemanlar.",
     image: "/images/products/muayene-bacasi-elemanlari.png",
+    hoverImage: "/images/products/muayene-bacasi-elemanlari-hover.png",
     standard: "TS EN 1917",
   },
   {
@@ -53,6 +57,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     shortTitle: "Parsel Bacası",
     description: "TS 13473 standardına uygun, konut ve sanayi parsellerinde kanalizasyon bağlantı elemanları.",
     image: "/images/products/parsel-bacasi-elemanlari.png",
+    hoverImage: "/images/products/parsel-bacasi-elemanlari-hover.png",
     standard: "TS 13473",
   },
   {
@@ -61,6 +66,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     shortTitle: "YS Izgara",
     description: "Yol ve kaldırım yüzey sularının toplanması için yüksek taşıma kapasiteli beton ızgara elemanları.",
     image: "/images/products/yagmur-suyu-izgara-elemanlari.png",
+    hoverImage: "/images/products/yagmur-suyu-izgara-elemanlari-hover.png",
   },
   {
     id: "kanalizasyon-beton-ek-parcalari",
@@ -68,6 +74,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     shortTitle: "Ek Parçalar",
     description: "Hat değişimi, çap geçişi ve yön değiştirme için entegre contalı beton ek parçaları.",
     image: "/images/products/kanalizasyon-beton-ek-parcalari.png",
+    hoverImage: "/images/products/kanalizasyon-beton-ek-parcalari-hover.png",
   },
   {
     id: "betonarme-su-depolari",
