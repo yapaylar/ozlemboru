@@ -30,15 +30,15 @@ export default function RightSidebar() {
       {/* ── E-Katalog — header yüksekliğiyle hizalı ── */}
       <div
         className="w-full flex items-center justify-center shrink-0 border-b transition-all duration-700"
-        style={{ height: scrolled ? "56px" : "72px", borderColor: "#e4e9f0", backgroundColor: "#fff" }}
+        style={{ height: scrolled ? "56px" : "72px", borderColor: "#e4e9f0", backgroundColor: "#6db0e0" }}
       >
         <Link
           href="/urunler"
-          className="flex flex-col items-center gap-1.5 text-[#6db0e0] transition-opacity hover:opacity-60"
+          className="flex flex-col items-center gap-1.5 text-white transition-opacity hover:opacity-60"
           aria-label="e-Katalog"
         >
           <CatalogIcon className="w-6 h-6" />
-          <span className="text-[8px] font-light tracking-[0.12em]" style={{ color: "#023da6" }}>
+          <span className="text-[8px] font-light tracking-[0.12em]" style={{ color: "#fff" }}>
             e-Katalog
           </span>
         </Link>

@@ -82,7 +82,7 @@ export default function Navbar() {
       width="10" height="10" viewBox="0 0 10 10" fill="none"
       className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
     >
-      <path d="M2 3.5l3 3 3-3" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M2 3.5l3 3 3-3" stroke="#000" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 
@@ -90,7 +90,7 @@ export default function Navbar() {
     <header
       className={`site-header fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? "lg:right-16" : "lg:right-20"}`}
       style={{
-        backgroundColor: scrollingDown ? "rgba(109,176,224,0.75)" : "#6db0e0",
+        backgroundColor: scrollingDown ? "rgba(255,255,255,0.52)" : "rgba(255,255,255,1)",
         backdropFilter: scrollingDown ? "blur(8px)" : "none",
         WebkitBackdropFilter: scrollingDown ? "blur(8px)" : "none",
         boxShadow: scrolled ? "0 2px 12px rgba(0,0,0,0.10)" : "0 1px 6px rgba(0,0,0,0.06)",
@@ -106,10 +106,10 @@ export default function Navbar() {
           </Link>
 
           <nav className="hidden min-w-0 items-center justify-end gap-1 lg:flex">
-          <Link href="/" className={navLinkClass} style={{ color: "#fff" }}>
+          <Link href="/" className={navLinkClass} style={{ color: "#000" }}>
             Anasayfa
           </Link>
-          <Link href="/kurumsal" className={navLinkClass} style={{ color: "#fff" }}>
+          <Link href="/kurumsal" className={navLinkClass} style={{ color: "#000" }}>
             Kurumsal
           </Link>
 
@@ -121,7 +121,7 @@ export default function Navbar() {
           >
             <button
               className={`${navLinkClass} flex items-center gap-1.5`}
-              style={{ color: "#fff" }}
+              style={{ color: "#000" }}
               aria-haspopup="true"
               aria-expanded={urunlerOpen}
             >
@@ -137,7 +137,7 @@ export default function Navbar() {
           >
             <button
               className={`${navLinkClass} flex items-center gap-1.5`}
-              style={{ color: "#fff" }}
+              style={{ color: "#000" }}
               aria-haspopup="true"
               aria-expanded={bilgiOpen}
             >
@@ -145,7 +145,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          <Link href="/iletisim" className={navLinkClass} style={{ color: "#fff" }}>
+          <Link href="/iletisim" className={navLinkClass} style={{ color: "#000" }}>
             İletişim
           </Link>
         </nav>
@@ -153,7 +153,7 @@ export default function Navbar() {
         <div className="flex items-center lg:hidden">
           <button
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md p-2 text-white transition-opacity hover:opacity-60 -mr-1"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md p-2 text-zinc-900 transition-opacity hover:opacity-60 -mr-1"
             onClick={() => setMenuOpen((o) => !o)}
             aria-expanded={menuOpen}
             aria-label="Menü"

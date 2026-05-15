@@ -19,7 +19,7 @@ export const COMPANY = {
 
 /** Header logo (Next/Image width×height gerçek piksel oranı) */
 export const SITE_LOGO = {
-  src: "/images/ozlemnewlogo.png",
+  src: "/images/ozlemlogo6.png",
   width: 2880,
   height: 900,
 } as const;

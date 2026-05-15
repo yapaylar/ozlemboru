@@ -19,7 +19,7 @@ const STAT_CARDS = [
   {
     line: "100+ Referans",
     href: "/bilgi/referanslar",
-    bg: "#f4f6fa",
+    bg: "#dde5f2",
     dark: false,
   },
 ] as const;
