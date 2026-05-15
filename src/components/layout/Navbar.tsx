@@ -25,7 +25,7 @@ function Logo({ compact }: { compact: boolean }) {
         height={SITE_LOGO.height}
         className={cn(
           "w-auto transition-[height] duration-700 ease-in-out",
-          compact ? "h-10 sm:h-[3.125rem]" : "h-12 sm:h-16"
+          compact ? "h-9 sm:h-11" : "h-11 sm:h-14"
         )}
         priority
       />
