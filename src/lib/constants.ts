@@ -33,7 +33,7 @@ export const FOOTER_LOGO = {
 
 /** Anasayfa hero arka plan videosu */
 export const HERO_VIDEO = {
-  src: "/yeniheroo.mp4",
+  src: "/herovideoson.mp4",
   poster: "/heroyertutucu.png",
 } as const;
 
