@@ -17,7 +17,7 @@ export default function SloganStrip() {
     <section
       ref={ref}
       className={cn(
-        "w-full min-w-0 scroll-mt-2 overflow-x-clip bg-white py-10 sm:py-16 md:py-20",
+        "w-full min-w-0 scroll-mt-2 overflow-x-clip bg-white pt-[132px] pb-12 sm:pb-14",
         inView && "slogan-lr-visible"
       )}
     >

@@ -36,16 +36,16 @@ export default function Hero() {
           </h1>
 
           <p
-            className="mt-6 max-w-2xl text-balance text-base leading-[1.65] text-white/70 sm:text-[1.05rem] sm:leading-[1.7]"
+            className="mt-4 max-w-2xl text-balance text-base leading-[1.65] text-white/70 sm:mt-6 sm:text-[1.05rem] sm:leading-[1.7]"
             style={fadeLeft(ready, 150)}
           >
-            Ankara&rsquo;da beton boru, betonarme boru ve altyapı elemanları
-            üretiyoruz. 1989&rsquo;dan bu yana kurumsal projelere standartlara
-            uygun, güvenilir ve sürdürülebilir altyapı çözümleri sunuyoruz.
+            Ankara&rsquo;da beton boru, betonarme prefabrik su depoları ve altyapı elemanları
+            üretiyoruz. 1989&rsquo;dan bu yana kurumsal proje standartlarına uygun,
+            güvenilir ve sürdürülebilir altyapı çözümleri sunuyoruz.
           </p>
 
           <div
-            className="mt-8 flex w-full max-w-md flex-col gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:flex-wrap sm:gap-4"
+            className="mt-6 flex max-w-[11rem] flex-col gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:flex-wrap sm:gap-4"
             style={fadeLeft(ready, 300)}
           >
             <Link href="/urunler" className="btn-cta btn-cta--primary sm:shrink-0">

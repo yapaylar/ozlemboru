@@ -5,7 +5,6 @@ import { CERTIFICATES } from "@/lib/constants";
 
 export default function Certificates() {
   const { ref: headerRef, inView: headerInView } = useInView<HTMLDivElement>({ threshold: 0.2 });
-  const { ref: gridRef, inView: gridInView } = useInView<HTMLDivElement>({ threshold: 0.05 });
 
   return (
     <section id="sertifikalar" className="section-y bg-zinc-50/80">
@@ -27,15 +26,11 @@ export default function Certificates() {
           </p>
         </div>
 
-        <div
-          ref={gridRef}
-          className="mt-0 grid grid-cols-1 gap-px overflow-hidden border border-zinc-200/80 bg-zinc-200/50 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {CERTIFICATES.map((cert, i) => (
+        <div className="mt-0 grid grid-cols-1 gap-px overflow-hidden border-x border-b border-zinc-200/50 bg-zinc-200/50 sm:grid-cols-2 lg:grid-cols-3">
+          {CERTIFICATES.map((cert) => (
             <div
               key={cert.code}
               className="flex min-h-0 flex-col gap-3 bg-zinc-50/90 p-5 sm:gap-4 sm:p-7"
-              style={fadeUp(gridInView, i * 90)}
             >
               <span className="self-start border border-zinc-200/90 bg-white px-2.5 py-1 text-[10px] font-light uppercase tracking-[0.14em] text-zinc-600">
                 {cert.issuer}

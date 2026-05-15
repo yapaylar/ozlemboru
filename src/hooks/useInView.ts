@@ -55,3 +55,11 @@ export function fadeLeft(inView: boolean, delay = 0): CSSProperties {
     transition: `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`,
   };
 }
+
+export function fadeRight(inView: boolean, delay = 0): CSSProperties {
+  return {
+    opacity: inView ? 1 : 0,
+    transform: inView ? "translateX(0)" : "translateX(28px)",
+    transition: `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`,
+  };
+}

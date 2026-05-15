@@ -38,7 +38,7 @@ export default function About() {
   return (
     <section id="hakkimizda" className="section-y bg-white">
       <div ref={ref} className="container-max">
-        <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-16">
+        <div className="grid items-start gap-6 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7" style={fadeUp(inView, 0)}>
             <p className="section-eyebrow max-w-full text-balance">
               Özlem Beton Boru ve Altyapı Elemanları
@@ -49,7 +49,7 @@ export default function About() {
               <span className="mt-1.5 block sm:mt-2">Güvenilir Üretim Gücü</span>
             </h2>
 
-            <div className="mb-7 mt-7 max-w-sm border-t border-zinc-200" />
+            <div className="mb-5 mt-5 border-t border-zinc-200 sm:mb-7 sm:mt-7" />
 
             <p className="section-body leading-[1.75]">
               Her güçlü yapının arkasında, doğru üretilmiş altyapı elemanları ve tavizsiz bir kalite anlayışı
@@ -58,7 +58,7 @@ export default function About() {
               projelerin ihtiyaç duyduğu sağlamlığı ve sürekliliği en doğru biçimde karşılamaktadır.
             </p>
 
-            <div className="mt-10">
+            <div className="mt-7 sm:mt-10">
               <Link href="/kurumsal" className="btn-cta btn-cta--primary">
                 Detaylı Bilgi
               </Link>
@@ -73,7 +73,7 @@ export default function About() {
                   key={cardIndex}
                   href={card.href}
                   className={`flex min-h-[5.5rem] items-center justify-center overflow-hidden px-4 py-5 sm:min-h-28 sm:px-6 ${STAT_STACK_WIDTH[i]}`}
-                  style={{ backgroundColor: card.bg, ...fadeUp(inView, 160 + i * 100) }}
+                  style={{ backgroundColor: card.bg, ...fadeUp(inView, (2 - i + 1) * 300) }}
                 >
                   <p
                     className={`px-1 text-center text-balance text-[0.75rem] font-light leading-snug tracking-[-0.01em] sm:text-[0.85rem] ${
