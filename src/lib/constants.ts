@@ -11,20 +11,22 @@ export const COMPANY = {
   address: "Yenice Mah. Yolüstü Küme Ev. No:6/A, Çubuk / ANKARA",
   phone1: "(0312) 354 64 84",
   phone2: "(0312) 385 27 77",
+  /** Cep (teklif / iletişim blokları) */
+  mobile: "0532 766 72 43",
   email: "info@ozlemboru.com",
   website: "www.ozlemboru.com",
 };
 
 /** Header ve footer ortak logo dosyası (Next/Image width×height gerçek piksel oranı) */
 export const SITE_LOGO = {
-  src: "/images/ozlemyenilogo.png",
-  width: 3840,
-  height: 1800,
+  src: "/images/ozlemlogo.png",
+  width: 1920,
+  height: 900,
 } as const;
 
 /** Anasayfa hero arka plan videosu (daha hızlı his için: küçük bitrate / kısa loop / WebM ekleyin) */
 export const HERO_VIDEO = {
-  src: "/herovideotest2.mp4",
+  src: "/herovideotest5.mp4",
 } as const;
 
 export const NAV_LINKS = [
