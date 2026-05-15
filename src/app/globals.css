@@ -214,10 +214,18 @@
   animation: reference-marquee-scroll 28s linear infinite;
 }
 
+/* Teklif PDF: dar kenar — tarayıcı üst/altbilgisi için Yazdır → Üstbilgi ve altbilgileri kapatın */
+@page teklif-doc {
+  margin: 0;
+}
+
 @media print {
   @page {
-    size: A4 landscape;
-    margin: 12mm 10mm;
+    margin: 10mm 12mm;
+  }
+
+  .teklif-print-sheet {
+    page: teklif-doc;
   }
 
   body {
@@ -226,12 +234,12 @@
     background: #fff !important;
   }
 
-  /* Hide layout chrome */
+  /* Hide layout chrome (teklif letterhead <header> site-header değil — gizlenmez) */
   nav,
   footer,
   .floating-buttons,
   [data-floating],
-  header {
+  .site-header {
     display: none !important;
   }
 
@@ -280,7 +288,20 @@
     print-color-adjust: exact;
   }
 
-  section {
+  /* Teklif tablolarında açıklama satırı kırılsın */
+  .teklif-print-sheet table td,
+  .teklif-print-sheet table th,
+  .teklif-preview-sheet table td,
+  .teklif-preview-sheet table th {
+    white-space: normal !important;
+  }
+
+  .teklif-print-sheet tbody tr:nth-child(even) td,
+  .teklif-preview-sheet tbody tr:nth-child(even) td {
+    background-color: transparent !important;
+  }
+
+  section:not(.teklif-print-sheet) {
     border: 1px solid #ccc !important;
     overflow: visible !important;
   }

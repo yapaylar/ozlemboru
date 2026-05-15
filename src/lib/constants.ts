@@ -19,8 +19,8 @@ export const COMPANY = {
 
 /** Header ve footer ortak logo dosyası (Next/Image width×height gerçek piksel oranı) */
 export const SITE_LOGO = {
-  src: "/images/ozlemlogo.png",
-  width: 1920,
+  src: "/images/ozlemlogo6.png",
+  width: 2880,
   height: 900,
 } as const;
 

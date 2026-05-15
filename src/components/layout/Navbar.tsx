@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE_LOGO } from "@/lib/constants";
 import { PRODUCT_CATEGORIES } from "@/lib/products";
+import { cn } from "@/lib/utils";
 
 const BILGI_ITEMS = [
   { href: "/bilgi/teknik-sartnameler", label: "Teknik Şartnameler", desc: "Et kalınlıkları ve tepe yük dayanımı", no: "01" },
@@ -14,7 +15,7 @@ const BILGI_ITEMS = [
   { href: "/bilgi/galeri", label: "Galeri", desc: "Üretim tesisi ve proje görselleri", no: "05" },
 ];
 
-function Logo() {
+function Logo({ compact }: { compact: boolean }) {
   return (
     <div aria-label="Özlem İnşaat">
       <Image
@@ -22,7 +23,10 @@ function Logo() {
         alt="Özlem İnşaat"
         width={SITE_LOGO.width}
         height={SITE_LOGO.height}
-        className="h-12 w-auto sm:h-16"
+        className={cn(
+          "w-auto transition-[height] duration-700 ease-in-out",
+          compact ? "h-10 sm:h-[3.125rem]" : "h-12 sm:h-16"
+        )}
         priority
       />
     </div>
@@ -84,7 +88,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? "lg:right-16" : "lg:right-20"}`}
+      className={`site-header fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? "lg:right-16" : "lg:right-20"}`}
       style={{
         backgroundColor: scrollingDown ? "rgba(255,255,255,0.52)" : "rgba(255,255,255,1)",
         backdropFilter: scrollingDown ? "blur(8px)" : "none",
@@ -98,7 +102,7 @@ export default function Navbar() {
       >
         <div className="container-max flex w-full max-w-full items-center justify-between">
           <Link href="/" className="flex shrink-0 items-center">
-            <Logo />
+            <Logo compact={scrolled} />
           </Link>
 
           <nav className="hidden min-w-0 items-center justify-end gap-1 lg:flex">
