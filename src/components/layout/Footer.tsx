@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { COMPANY, NAV_LINKS, CERTIFICATES, SITE_LOGO } from "@/lib/constants";
+import { COMPANY, NAV_LINKS, CERTIFICATES, FOOTER_LOGO } from "@/lib/constants";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -15,10 +15,10 @@ export default function Footer() {
         <div className="lg:col-span-5">
           <Link href="/" className="mb-5 inline-block">
             <Image
-              src={SITE_LOGO.src}
+              src={FOOTER_LOGO.src}
               alt="Özlem İnşaat"
-              width={SITE_LOGO.width}
-              height={SITE_LOGO.height}
+              width={FOOTER_LOGO.width}
+              height={FOOTER_LOGO.height}
               className="h-10 w-auto sm:h-11 drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
             />
           </Link>

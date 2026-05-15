@@ -17,9 +17,16 @@ export const COMPANY = {
   website: "www.ozlemboru.com",
 };
 
-/** Header ve footer ortak logo dosyası (Next/Image width×height gerçek piksel oranı) */
+/** Header logo (Next/Image width×height gerçek piksel oranı) */
 export const SITE_LOGO = {
   src: "/images/ozlemlogo6.png",
+  width: 2880,
+  height: 900,
+} as const;
+
+/** Footer logo — mavi zemin için ayrı varyant */
+export const FOOTER_LOGO = {
+  src: "/images/ozlemfooterlogo.png",
   width: 2880,
   height: 900,
 } as const;
