@@ -31,9 +31,10 @@ export const FOOTER_LOGO = {
   height: 900,
 } as const;
 
-/** Anasayfa hero arka plan videosu (daha hızlı his için: küçük bitrate / kısa loop / WebM ekleyin) */
+/** Anasayfa hero arka plan videosu */
 export const HERO_VIDEO = {
-  src: "/herovideotest5.mp4",
+  src: "/yeniheroo.mp4",
+  poster: "/heroyertutucu.png",
 } as const;
 
 export const NAV_LINKS = [
