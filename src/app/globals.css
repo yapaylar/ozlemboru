@@ -214,32 +214,27 @@
   animation: reference-marquee-scroll 28s linear infinite;
 }
 
-/* Teklif PDF: her sayfa eşit kenar boşluğu — thead otomatik tekrarlanır */
+/* Teklif PDF: her sayfa eşit kenar boşluğu */
 @page teklif-doc {
-  margin: 10mm 12mm;
+  margin: 8mm 10mm;
 }
 
 @media print {
   @page {
-    margin: 10mm 12mm;
+    margin: 8mm 10mm;
   }
 
   .teklif-print-sheet {
     page: teklif-doc;
   }
 
-  /* thead her sayfada tekrarlanır, satırlar kırılır */
-  .teklif-print-sheet table {
-    page-break-inside: auto;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  .teklif-print-sheet table thead {
-    display: table-header-group;
-  }
-  .teklif-print-sheet table tbody tr {
+  /* Her teklif sayfası ayrı bir baskı sayfasıdır */
+  .teklif-form-doc {
     page-break-inside: avoid;
-    page-break-after: auto;
+  }
+  .teklif-form-doc + .teklif-form-doc {
+    page-break-before: always;
+    break-before: page;
   }
 
   body {
