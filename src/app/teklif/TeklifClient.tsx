@@ -165,7 +165,7 @@ export default function TeklifClient() {
   if (!authed) return <PasswordGate onSuccess={() => setAuthed(true)} />;
 
   return (
-    <main className="min-h-screen bg-[#f5f5f5] pt-[68px] sm:pt-[72px] pb-16">
+    <main className="min-h-screen bg-[#f5f5f5] pt-[68px] sm:pt-[72px] pb-16 print:p-0 print:bg-white print:min-h-0">
 
 
       <div className="container-max space-y-6 py-8 print:hidden">

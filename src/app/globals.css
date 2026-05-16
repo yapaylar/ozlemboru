@@ -228,10 +228,7 @@
     page: teklif-doc;
   }
 
-  /* Her teklif sayfası ayrı bir baskı sayfasıdır */
-  .teklif-form-doc {
-    page-break-inside: avoid;
-  }
+  /* İkinci ve sonraki sayfalar her zaman yeni sayfada başlar */
   .teklif-form-doc + .teklif-form-doc {
     page-break-before: always;
     break-before: page;

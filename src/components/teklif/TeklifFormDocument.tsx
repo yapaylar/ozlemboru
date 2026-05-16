@@ -20,6 +20,7 @@ type Props = {
  * Her sayfada tam şablon tekrarlanır.
  * min-w-[210mm] ile her zaman A4 genişliğinde — mobilde de masaüstü formatı.
  */
+// Sayfa div'i h-[297mm] overflow-hidden ile kilitli — taşma yok.
 const ROWS_PER_PAGE = 18;
 
 export default function TeklifFormDocument({
@@ -43,15 +44,15 @@ export default function TeklifFormDocument({
       {pages.map((pageLines, pageIndex) => (
         <div
           key={pageIndex}
-          className={`teklif-form-doc mx-auto w-[210mm] min-w-[210mm] bg-white px-6 py-5 text-black ${sheetClassName}`}
+          className={`teklif-form-doc mx-auto flex h-[297mm] w-[210mm] min-w-[210mm] flex-col overflow-hidden bg-white px-6 py-4 text-black ${sheetClassName}`}
           style={{
             fontFamily: "var(--font-montserrat), ui-sans-serif, system-ui, sans-serif",
-            pageBreakBefore: pageIndex > 0 ? "always" : "auto",
-            breakBefore: pageIndex > 0 ? "page" : "auto",
+            pageBreakAfter: pageIndex < pages.length - 1 ? "always" : "auto",
+            breakAfter: pageIndex < pages.length - 1 ? "page" : "auto",
           }}
         >
           {/* ── Firma başlığı ── */}
-          <div className="flex items-start justify-between gap-4 border-b-[3px] border-black pb-4">
+          <div className="flex items-start justify-between gap-4 border-b-2 border-black pb-3">
             <div className="flex min-w-0 flex-1 items-start gap-5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -79,16 +80,15 @@ export default function TeklifFormDocument({
           </div>
 
           {/* ── Müşteri / teklif kutusu ── */}
-          <div className="mt-3 border-2 border-black">
+          <div className="mt-2 border border-black text-[10px]">
             <div className="grid grid-cols-2 divide-x divide-black">
-              <div className="divide-y divide-black text-[11px]">
+              <div>
                 <FieldRow label="Ünvan" value={meta.unvan} />
                 <FieldRow label="Yetkili" value={meta.yetkili} />
                 <FieldRow label="Adres" value={meta.adres} />
                 <FieldRow label="Telefon" value={meta.telefon} />
-                <FieldRow label="Faks" value={meta.faks} />
               </div>
-              <div className="divide-y divide-black text-[11px]">
+              <div>
                 <FieldRow label="Teklif No" value={meta.teklifNo} alignRight />
                 <FieldRow label="Teklif Tarihi" value={meta.teklifTarihi} alignRight />
                 <FieldRow label="Teklif Süresi" value={meta.teklifSuresi} alignRight />
@@ -97,47 +97,46 @@ export default function TeklifFormDocument({
             </div>
           </div>
 
-          <h2 className="my-3 border-y-[3px] border-black py-2 text-center text-[13px] font-bold uppercase tracking-[0.2em]">
+          <h2 className="my-2 text-center text-[12px] font-bold uppercase tracking-[0.2em]">
             Teklif Formu
           </h2>
 
           {/* ── Ürün tablosu ── */}
           <table className="w-full border-collapse border-2 border-black text-[10px]">
             <thead>
-              <tr className="bg-neutral-100">
-                <th className="border border-black px-2 py-2 text-left font-bold">Açıklama</th>
-                <th className="border border-black px-2 py-2 text-right font-bold">Miktar</th>
-                <th className="border border-black px-2 py-2 text-center font-bold">Birim</th>
-                <th className="border border-black px-2 py-2 text-right font-bold">Birim Fiyat</th>
-                <th className="border border-black px-2 py-2 text-right font-bold">İsk.</th>
-                <th className="border border-black px-2 py-2 text-right font-bold">Tutar</th>
+              <tr className="divide-x divide-black border-b-2 border-black bg-neutral-100">
+                <th className="px-2 py-1.5 text-left font-bold">Açıklama</th>
+                <th className="px-2 py-1.5 text-right font-bold">Miktar</th>
+                <th className="px-2 py-1.5 text-center font-bold">Birim</th>
+                <th className="px-2 py-1.5 text-right font-bold">Birim Fiyat</th>
+                <th className="px-2 py-1.5 text-right font-bold">İsk.</th>
+                <th className="px-2 py-1.5 text-right font-bold">Tutar</th>
               </tr>
             </thead>
             <tbody>
               {pageLines.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="border border-black px-2 py-8 text-center text-neutral-400">
+                  <td colSpan={6} className="px-2 py-8 text-center text-neutral-400">
                     Satır eklenmedi
                   </td>
                 </tr>
               ) : (
                 pageLines.map((line) => (
-                  <tr key={line.id}>
-                    <td className="border border-black px-2 py-1.5 align-top">
+                  <tr key={line.id} className="divide-x divide-black">
+                    <td className="px-2 py-1 align-top">
                       <span className="font-medium">{line.label}</span>
-                      <span className="mt-0.5 block text-[9px] text-neutral-600">{line.sectionTitle}</span>
                     </td>
-                    <td className="border border-black px-2 py-1.5 text-right tabular-nums align-top">
+                    <td className="px-2 py-1 text-right tabular-nums align-top">
                       {line.quantity.toLocaleString("tr-TR", { minimumFractionDigits: 2 })}
                     </td>
-                    <td className="border border-black px-2 py-1.5 text-center align-top">{line.unit}</td>
-                    <td className="border border-black px-2 py-1.5 text-right tabular-nums align-top">
+                    <td className="px-2 py-1 text-center align-top">{line.unit}</td>
+                    <td className="px-2 py-1 text-right tabular-nums align-top">
                       {fmtTeklifMoney(line.unitPrice)}
                     </td>
-                    <td className="border border-black px-2 py-1.5 text-right tabular-nums align-top">
+                    <td className="px-2 py-1 text-right tabular-nums align-top">
                       {line.discountPct.toLocaleString("tr-TR")}
                     </td>
-                    <td className="border border-black px-2 py-1.5 text-right tabular-nums font-semibold align-top">
+                    <td className="px-2 py-1 text-right tabular-nums font-semibold align-top">
                       {fmtTeklifMoney(lineTutar(line))}
                     </td>
                   </tr>
@@ -146,86 +145,85 @@ export default function TeklifFormDocument({
             </tbody>
           </table>
 
-          {/* ── Toplamlar ── */}
-          <div className="mt-3 flex w-full justify-end text-[10px]">
-            <div className="w-full max-w-[280px] shrink-0 border-2 border-black">
-              <table className="w-full border-collapse">
-                <tbody>
-                  <tr>
-                    <td className="border border-black px-2 py-1 font-medium">Toplam</td>
-                    <td className="border border-black px-2 py-1 text-right tabular-nums">{fmtTeklifMoney(tabloToplam)}</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-black px-2 py-1 font-medium">Toplam İskonto</td>
-                    <td className="border border-black px-2 py-1 text-right tabular-nums">{fmtTeklifMoney(meta.toplamIskontoTutar)}</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-black px-2 py-1 font-bold">Ara Toplam</td>
-                    <td className="border border-black px-2 py-1 text-right tabular-nums font-bold">{fmtTeklifMoney(araToplam)}</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-black px-2 py-1 font-medium">KDV Toplam (%{meta.kdvOrani})</td>
-                    <td className="border border-black px-2 py-1 text-right tabular-nums">{fmtTeklifMoney(kdvTutari)}</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-black px-2 py-1.5 text-[11px] font-bold">Genel Toplam</td>
-                    <td className="border border-black px-2 py-1.5 text-right text-[11px] font-bold tabular-nums">{fmtTeklifMoney(genelToplam)}</td>
-                  </tr>
-                </tbody>
-              </table>
+          {/* ── Alt bölüm ── */}
+          <div style={{ breakInside: "avoid", pageBreakInside: "avoid" }}>
+
+            {/* Satır 1: Ödeme bilgileri (sol) + Toplamlar (sağ) */}
+            <div className="mt-2 flex items-start gap-3 text-[9px]">
+              {/* Sol: ödeme/nakliye — alta hizalı */}
+              <div className="flex-1 self-end leading-relaxed">
+                <p><strong>Ödeme Şekli:</strong> {meta.odemeSekli || "—"}</p>
+                <p className="mt-0.5"><strong>Teslimat:</strong> {meta.teslimatSuresi || "—"}</p>
+                <p className="mt-0.5 flex flex-wrap items-center gap-1">
+                  <strong>Nakliye:</strong>
+                  <span className="inline-flex items-center gap-0.5 border border-black px-1 py-0.5">
+                    <span className="inline-block w-3 text-center">{meta.nakliye === "dahil" ? "✕" : ""}</span>
+                    DAHİL
+                  </span>
+                  <span className="inline-flex items-center gap-0.5 border border-black px-1 py-0.5">
+                    <span className="inline-block w-3 text-center">{meta.nakliye === "harici" ? "✕" : ""}</span>
+                    HARİÇ
+                  </span>
+                </p>
+                <p className="mt-1 text-[8px] italic text-neutral-600">* KDV dahil değildir.</p>
+              </div>
+              {/* Sağ: toplamlar */}
+              <div className="w-[260px] shrink-0 border border-black text-[9px]">
+                <table className="w-full border-collapse">
+                  <tbody>
+                    <tr className="divide-x divide-black">
+                      <td className="px-2 py-0.5 font-medium">Toplam</td>
+                      <td className="px-2 py-0.5 text-right tabular-nums">{fmtTeklifMoney(tabloToplam)}</td>
+                    </tr>
+                    <tr className="divide-x divide-black border-t border-black">
+                      <td className="px-2 py-0.5 font-medium">Toplam İskonto</td>
+                      <td className="px-2 py-0.5 text-right tabular-nums">{fmtTeklifMoney(meta.toplamIskontoTutar)}</td>
+                    </tr>
+                    <tr className="divide-x divide-black border-t border-black">
+                      <td className="px-2 py-0.5 font-bold">Ara Toplam</td>
+                      <td className="px-2 py-0.5 text-right tabular-nums font-bold">{fmtTeklifMoney(araToplam)}</td>
+                    </tr>
+                    <tr className="divide-x divide-black border-t border-black">
+                      <td className="px-2 py-0.5">KDV (%{meta.kdvOrani})</td>
+                      <td className="px-2 py-0.5 text-right tabular-nums">{fmtTeklifMoney(kdvTutari)}</td>
+                    </tr>
+                    <tr className="divide-x divide-black border-t-2 border-black bg-neutral-50">
+                      <td className="px-2 py-1 text-[10px] font-bold">Genel Toplam</td>
+                      <td className="px-2 py-1 text-right text-[10px] font-bold tabular-nums">{fmtTeklifMoney(genelToplam)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
 
-          {/* ── Ödeme / teslimat / nakliye ── */}
-          <div className="mt-2 flex w-full flex-wrap items-center gap-x-6 gap-y-1 border border-black px-2 py-1.5 text-[9px] leading-tight">
-            <span><strong>Ödeme Şekli:</strong> {meta.odemeSekli || "—"}</span>
-            <span className="text-neutral-400" aria-hidden>|</span>
-            <span><strong>Teslimat Süresi:</strong> {meta.teslimatSuresi || "—"}</span>
-            <span className="text-neutral-400" aria-hidden>|</span>
-            <span className="inline-flex flex-wrap items-center gap-2">
-              <strong>Nakliye:</strong>
-              <span className="inline-flex items-center gap-1 border border-black px-1.5 py-0.5">
-                <span className="inline-block w-4 text-center">{meta.nakliye === "dahil" ? "✕" : ""}</span>
-                DAHİL
-              </span>
-              <span className="inline-flex items-center gap-1 border border-black px-1.5 py-0.5">
-                <span className="inline-block w-4 text-center">{meta.nakliye === "harici" ? "✕" : ""}</span>
-                HARİÇ
-              </span>
-            </span>
-            <span className="basis-auto text-[8px] italic text-neutral-700">
-              * Birim fiyatlarımıza KDV dahil değildir.
-            </span>
-          </div>
-
-          {/* ── Sertifika metni + imzalar ── */}
-          <p className="mt-3 border-t border-black pt-2 text-[9px] leading-relaxed text-neutral-800">
-            {TEKLIF_CERT_TEXT}
-          </p>
-
-          <div className="mt-3 min-h-[72px] border-2 border-black p-3 text-[10px] whitespace-pre-wrap">
-            <span className="font-bold">Teklif Açıklaması</span>
-            <div className="mt-1.5 text-[10px] leading-relaxed text-neutral-900">
-              {meta.teklifAciklamasi || "—"}
+            {/* Satır 2: Teklif açıklaması (sol) + İmzalar (sağ) — tek uzun üst çizgi */}
+            <div className="mt-2 grid grid-cols-3 gap-4 border-t-2 border-black pt-2 text-[9px]">
+              {/* Sol: açıklama */}
+              <div>
+                <p className="font-bold">Teklif Açıklaması</p>
+                <p className="mt-1 leading-relaxed text-neutral-800 whitespace-pre-wrap">
+                  {meta.teklifAciklamasi || "—"}
+                </p>
+              </div>
+              {/* Orta: müşteri onayı */}
+              <div>
+                <p className="font-bold uppercase">Müşteri Onayı</p>
+                <p className="text-[8px] text-neutral-600">Alıcı Firma Kaşe / İmza</p>
+                <p className="mt-8 text-[8px] text-neutral-600">Kaşe / İmza</p>
+              </div>
+              {/* Sağ: firma onayı */}
+              <div>
+                <p className="font-bold uppercase">Onay</p>
+                <p className="mt-0.5 text-[8px] font-semibold leading-snug">{COMPANY.fullName}</p>
+                <p className="text-[8px] text-neutral-600">{COMPANY.gmTitle}</p>
+                <p className="mt-8 text-[8px] text-neutral-600">Kaşe / İmza</p>
+              </div>
             </div>
-          </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-6 text-[10px]">
-            <div className="flex min-h-[100px] flex-col border-2 border-black p-4">
-              <p className="font-bold uppercase">Müşteri Onayı</p>
-              <p className="mt-auto pt-8 text-[9px] text-neutral-700">Alıcı Firma Kaşe / İmza</p>
-            </div>
-            <div className="flex min-h-[100px] flex-col border-2 border-black p-4 text-right">
-              <p className="font-bold uppercase">Onay</p>
-              <p className="mt-1 font-semibold">{COMPANY.brandName}</p>
-              <p className="text-[9px]">{COMPANY.gmTitle}</p>
-              <p className="mt-auto pt-6 text-[9px] text-neutral-700">Kaşe / İmza</p>
-            </div>
-          </div>
-
-          <p className="mt-6 text-center text-[10px] font-medium tracking-wide">
-            Bizi tercih ettiğiniz için teşekkür ederiz.
-          </p>
+            <p className="mt-2 text-center text-[9px] text-neutral-500 tracking-wide">
+              Bizi tercih ettiğiniz için teşekkür ederiz.
+            </p>
+          </div> {/* end break-inside:avoid wrapper */}
         </div>
       ))}
     </>
@@ -244,16 +242,16 @@ function FieldRow({
   const display = value?.trim() ? value : "…………………………";
   if (alignRight) {
     return (
-      <div className="flex justify-between gap-4 px-2 py-1.5 text-right">
+      <div className="flex justify-between gap-4 px-2 py-1 text-right">
         <span className="font-bold">{label}:</span>
         <span className="min-w-0 tabular-nums">{display}</span>
       </div>
     );
   }
   return (
-    <div className="flex justify-between gap-x-3 px-2 py-1.5">
-      <span className="font-bold">{label}:</span>
-      <span className="min-w-0 flex-1 text-right">{display}</span>
+    <div className="flex gap-x-3 px-2 py-1">
+      <span className="font-bold shrink-0">{label}:</span>
+      <span className="min-w-0">{display}</span>
     </div>
   );
 }
