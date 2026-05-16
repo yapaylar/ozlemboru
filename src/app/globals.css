@@ -228,6 +228,21 @@
     page: teklif-doc;
   }
 
+  /* Wrapper'larda sıfır boşluk — boş ekstra sayfa engellenir */
+  main, body, html {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    background: white !important;
+  }
+
+  .teklif-print-sheet {
+    overflow: hidden;
+    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
   /* İkinci ve sonraki sayfalar her zaman yeni sayfada başlar */
   .teklif-form-doc + .teklif-form-doc {
     page-break-before: always;
