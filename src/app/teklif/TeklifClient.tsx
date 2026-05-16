@@ -481,19 +481,18 @@ export default function TeklifClient() {
 
           {/* Aksiyon çubuğu */}
           <div
-            className="mt-6 flex items-center justify-between rounded-lg border px-5 py-4"
-            style={{ backgroundColor: "#0a0a0a", borderColor: "rgba(255,255,255,0.07)" }}
+            className="mt-6 flex items-center justify-between rounded-lg px-5 py-4"
+            style={{ backgroundColor: "#6db0e0" }}
           >
-            <span className="text-[11px] font-light uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)" }}>
+            <span className="text-[11px] font-semibold uppercase tracking-widest text-white/80">
               {COMPANY.brandName}
             </span>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
               <button
                 type="button"
                 onClick={() => { setLines([]); setMeta(defaultTeklifMeta()); }}
-                className="group flex items-center gap-1.5 rounded px-3 py-2 text-[11px] transition-colors hover:bg-white/10"
-                style={{ color: "rgba(255,255,255,0.45)" }}
+                className="flex items-center gap-1.5 rounded px-3 py-2 text-[11px] text-white/70 transition-colors hover:bg-white/20 hover:text-white"
               >
                 <Trash2 size={13} />
                 <span>Temizle</span>
@@ -502,7 +501,8 @@ export default function TeklifClient() {
               <button
                 type="button"
                 onClick={() => window.print()}
-                className="flex items-center gap-2 rounded bg-white px-5 py-2 text-[11px] font-semibold uppercase tracking-widest text-black transition-opacity hover:opacity-85"
+                className="flex items-center gap-2 rounded bg-white px-5 py-2 text-[11px] font-semibold uppercase tracking-widest transition-opacity hover:opacity-90"
+                style={{ color: "#1b3563" }}
               >
                 <Printer size={13} />
                 Yazdır / PDF
@@ -511,11 +511,10 @@ export default function TeklifClient() {
               <button
                 type="button"
                 onClick={() => { sessionStorage.removeItem(SESSION_KEY); setAuthed(false); }}
-                className="group flex items-center gap-1.5 rounded px-3 py-2 text-[11px] transition-colors hover:bg-white/10"
-                style={{ color: "rgba(255,255,255,0.25)" }}
+                className="flex items-center gap-1.5 rounded px-3 py-2 text-[11px] text-white/50 transition-colors hover:bg-white/20 hover:text-white"
               >
                 <LogOut size={13} />
-                <span className="hidden sm:inline">Çıkış</span>
+                <span>Çıkış</span>
               </button>
             </div>
           </div>
