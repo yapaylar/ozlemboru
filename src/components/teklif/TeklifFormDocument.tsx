@@ -144,7 +144,7 @@ export default function TeklifFormDocument({
       </table>
 
       {/* ── Toplamlar + ödeme + imzalar — yalnızca son sayfada ── */}
-      <div className="mt-4 w-full text-[9px] sm:text-[10px]">
+      <div className="mt-4 w-full text-[9px] sm:text-[10px]" style={{ pageBreakInside: "avoid", breakInside: "avoid" }}>
         <div className="flex w-full justify-end">
           <div className="w-full max-w-[280px] shrink-0 border-2 border-black">
             <table className="w-full border-collapse">
@@ -202,18 +202,18 @@ export default function TeklifFormDocument({
         </div>
       </div>
 
-      <p className="mt-4 border-t border-black pt-3 text-[8px] leading-relaxed text-neutral-800 sm:text-[9px]">
+      <p className="mt-4 border-t border-black pt-3 text-[8px] leading-relaxed text-neutral-800 sm:text-[9px]" style={{ pageBreakBefore: "avoid", breakBefore: "avoid" }}>
         {TEKLIF_CERT_TEXT}
       </p>
 
-      <div className="mt-4 min-h-[88px] border-2 border-black p-3 text-[10px] whitespace-pre-wrap">
+      <div className="mt-4 min-h-[88px] border-2 border-black p-3 text-[10px] whitespace-pre-wrap" style={{ pageBreakInside: "avoid", breakInside: "avoid" }}>
         <span className="font-bold">Teklif Açıklaması</span>
         <div className="mt-2 text-[9px] leading-relaxed text-neutral-900 sm:text-[10px]">
           {meta.teklifAciklamasi || "—"}
         </div>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-6 text-[10px] sm:grid-cols-2">
+      <div className="mt-8 grid grid-cols-1 gap-6 text-[10px] sm:grid-cols-2" style={{ pageBreakInside: "avoid", breakInside: "avoid" }}>
         <div className="flex min-h-[120px] flex-col border-2 border-black p-4">
           <p className="font-bold uppercase">Müşteri Onayı</p>
           <p className="mt-auto pt-10 text-[9px] text-neutral-700">Alıcı Firma Kaşe / İmza</p>
