@@ -153,7 +153,7 @@ export default function TeklifFormDocument({
               {/* Sol: ödeme/nakliye — alta hizalı */}
               <div className="flex-1 self-end leading-relaxed">
                 <p><strong>Ödeme Şekli:</strong> {meta.odemeSekli || "—"}</p>
-                <p className="mt-0.5"><strong>Teslimat:</strong> {meta.teslimatSuresi || "—"}</p>
+                <p className="mt-0.5"><strong>Teslimat Süresi:</strong> {meta.teslimatSuresi || "—"}</p>
                 <p className="mt-0.5 flex flex-wrap items-center gap-1">
                   <strong>Nakliye:</strong>
                   <span className="inline-flex items-center gap-0.5 border border-black px-1 py-0.5">
@@ -165,7 +165,7 @@ export default function TeklifFormDocument({
                     HARİÇ
                   </span>
                 </p>
-                <p className="mt-1 text-[8px] italic text-neutral-600">* KDV dahil değildir.</p>
+                <p className="mt-1 text-[8px] italic text-neutral-600">* Birim fiyatlarımıza KDV dahil değildir.</p>
               </div>
               {/* Sağ: toplamlar */}
               <div className="w-[260px] shrink-0 border border-black text-[9px]">
