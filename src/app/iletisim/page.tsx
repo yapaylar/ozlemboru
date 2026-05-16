@@ -4,7 +4,7 @@ import Link from "next/link";
 import { COMPANY } from "@/lib/constants";
 import ContactForm from "./ContactForm";
 
-const ILETISIM_HERO_SRC = "/kurumsalhero.jpg";
+const ILETISIM_HERO_SRC = "/images/products/kataloghero.jpg";
 
 export const metadata: Metadata = {
   title: "İletişim | Özlem Beton Boru",
