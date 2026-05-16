@@ -165,73 +165,8 @@ export default function TeklifClient() {
   if (!authed) return <PasswordGate onSuccess={() => setAuthed(true)} />;
 
   return (
-    <main className="min-h-screen bg-[#f5f5f5] pt-[68px] sm:pt-[72px]">
+    <main className="min-h-screen bg-[#f5f5f5] pt-[68px] sm:pt-[72px] pb-16">
 
-      {/* Üst araç çubuğu */}
-      <header
-        className="sticky top-[68px] sm:top-[72px] z-40 border-b print:hidden"
-        style={{ backgroundColor: "#0a0a0a", borderColor: "rgba(255,255,255,0.07)" }}
-      >
-        <div className="container-max flex items-center justify-between py-2.5">
-          {/* Sol: başlık */}
-          <div className="flex items-center gap-3">
-            <div
-              className="hidden h-7 w-px sm:block"
-              style={{ backgroundColor: "rgba(255,255,255,0.12)" }}
-            />
-            <div>
-              <span className="text-[11px] font-light tracking-widest text-white/90 uppercase">
-                Teklif
-              </span>
-              <span
-                className="ml-2 hidden text-[10px] sm:inline"
-                style={{ color: "rgba(255,255,255,0.3)" }}
-              >
-                {COMPANY.brandName}
-              </span>
-            </div>
-          </div>
-
-          {/* Sağ: aksiyonlar */}
-          <div className="flex items-center divide-x divide-white/[0.08]">
-            {/* Temizle */}
-            <button
-              type="button"
-              title="Teklifi temizle"
-              onClick={() => { setLines([]); setMeta(defaultTeklifMeta()); }}
-              className="group flex items-center gap-2 px-4 py-2.5 text-[11px] transition-colors hover:bg-white/5"
-              style={{ color: "rgba(255,255,255,0.45)" }}
-            >
-              <Trash2 size={13} className="group-hover:text-white/70 transition-colors" />
-              <span className="hidden sm:inline">Temizle</span>
-            </button>
-
-            {/* Yazdır */}
-            <button
-              type="button"
-              title="Yazdır / PDF"
-              onClick={() => window.print()}
-              className="group flex items-center gap-2 px-4 py-2.5 text-[11px] font-medium transition-colors hover:bg-white/10"
-              style={{ color: "rgba(255,255,255,0.85)" }}
-            >
-              <Printer size={13} className="transition-colors group-hover:text-white" />
-              <span>Yazdır</span>
-            </button>
-
-            {/* Çıkış */}
-            <button
-              type="button"
-              title="Çıkış"
-              onClick={() => { sessionStorage.removeItem(SESSION_KEY); setAuthed(false); }}
-              className="group flex items-center gap-2 px-4 py-2.5 text-[11px] transition-colors hover:bg-white/5"
-              style={{ color: "rgba(255,255,255,0.3)" }}
-            >
-              <LogOut size={13} className="transition-colors group-hover:text-white/50" />
-              <span className="hidden sm:inline">Çıkış</span>
-            </button>
-          </div>
-        </div>
-      </header>
 
       <div className="container-max space-y-6 py-8 print:hidden">
 
@@ -542,6 +477,47 @@ export default function TeklifClient() {
               genelToplam={genelToplam}
               sheetClassName="teklif-preview-sheet mb-6 rounded-sm border border-neutral-300 bg-white px-4 py-6 shadow-lg sm:px-8"
             />
+          </div>
+
+          {/* Aksiyon çubuğu */}
+          <div
+            className="mt-6 flex items-center justify-between rounded-lg border px-5 py-4"
+            style={{ backgroundColor: "#0a0a0a", borderColor: "rgba(255,255,255,0.07)" }}
+          >
+            <span className="text-[11px] font-light uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.35)" }}>
+              {COMPANY.brandName}
+            </span>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => { setLines([]); setMeta(defaultTeklifMeta()); }}
+                className="group flex items-center gap-1.5 rounded px-3 py-2 text-[11px] transition-colors hover:bg-white/10"
+                style={{ color: "rgba(255,255,255,0.45)" }}
+              >
+                <Trash2 size={13} />
+                <span>Temizle</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="flex items-center gap-2 rounded bg-white px-5 py-2 text-[11px] font-semibold uppercase tracking-widest text-black transition-opacity hover:opacity-85"
+              >
+                <Printer size={13} />
+                Yazdır / PDF
+              </button>
+
+              <button
+                type="button"
+                onClick={() => { sessionStorage.removeItem(SESSION_KEY); setAuthed(false); }}
+                className="group flex items-center gap-1.5 rounded px-3 py-2 text-[11px] transition-colors hover:bg-white/10"
+                style={{ color: "rgba(255,255,255,0.25)" }}
+              >
+                <LogOut size={13} />
+                <span className="hidden sm:inline">Çıkış</span>
+              </button>
+            </div>
           </div>
         </section>
 
