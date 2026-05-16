@@ -43,7 +43,7 @@ export default function TeklifFormDocument({
       {pages.map((pageLines, pageIndex) => (
         <div
           key={pageIndex}
-          className={`teklif-form-doc mx-auto w-[210mm] min-w-[210mm] bg-white px-3 py-2 text-black ${sheetClassName}`}
+          className={`teklif-form-doc mx-auto w-[210mm] min-w-[210mm] bg-white px-6 py-5 text-black ${sheetClassName}`}
           style={{
             fontFamily: "var(--font-montserrat), ui-sans-serif, system-ui, sans-serif",
             pageBreakBefore: pageIndex > 0 ? "always" : "auto",

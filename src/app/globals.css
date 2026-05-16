@@ -214,14 +214,14 @@
   animation: reference-marquee-scroll 28s linear infinite;
 }
 
-/* Teklif PDF: her sayfa eşit kenar boşluğu */
+/* Teklif PDF: margin sıfır → tarayıcı üst/alt bilgisi gizlenir */
 @page teklif-doc {
-  margin: 8mm 10mm;
+  margin: 0;
 }
 
 @media print {
   @page {
-    margin: 8mm 10mm;
+    margin: 0;
   }
 
   .teklif-print-sheet {
