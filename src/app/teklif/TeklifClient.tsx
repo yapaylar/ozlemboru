@@ -1,10 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Package } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
-import { PRICE_SECTIONS, HESAP_PASSWORD, type PriceSection, type ProductRecipe } from "@/lib/pricing";
-import { getTeklifProductImageSrc } from "@/lib/teklif-images";
+import { HESAP_PASSWORD } from "@/lib/pricing";
+import { TEKLIF_CATALOG, type CatalogSection, type CatalogItem } from "@/lib/teklif-catalog";
 import {
   defaultTeklifMeta,
   fmtTeklifMoney,
@@ -19,6 +18,11 @@ export type { TeklifLine, TeklifMeta };
 const SESSION_KEY = "teklif_auth";
 
 const fmtMoney = fmtTeklifMoney;
+
+function fmtDefaultPrice(n: number) {
+  if (!n) return "";
+  return n.toLocaleString("tr-TR", { minimumFractionDigits: 2 });
+}
 
 function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
   const [value, setValue] = useState("");
@@ -90,55 +94,18 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
   );
 }
 
-function ProductThumb({
-  sectionId,
-  productId,
-  label,
-}: {
-  sectionId: string;
-  productId: string;
-  label: string;
-}) {
-  const [broken, setBroken] = useState(false);
-  const src = getTeklifProductImageSrc(sectionId, productId);
-
-  return (
-    <div
-      className="relative w-full aspect-square overflow-hidden flex items-center justify-center"
-      style={{ backgroundColor: "#f0f2f5" }}
-    >
-      {!broken ? (
-        <img
-          src={src}
-          alt=""
-          className="max-h-full max-w-full object-contain p-2"
-          onError={() => setBroken(true)}
-        />
-      ) : (
-        <div className="flex flex-col items-center gap-1 p-3 text-center">
-          <Package className="w-8 h-8 opacity-25" style={{ color: "#1b3563" }} aria-hidden />
-          <span className="text-[9px] leading-tight uppercase tracking-wide opacity-40" style={{ color: "#1b3563" }}>
-            Görsel ekleyin
-          </span>
-          <span className="text-[8px] opacity-30 font-mono truncate max-w-full px-1">{sectionId}/{productId}</span>
-        </div>
-      )}
-      <span className="sr-only">{label}</span>
-    </div>
-  );
-}
-
 export default function TeklifClient() {
   const [authed, setAuthed] = useState<boolean | null>(null);
   const [meta, setMeta] = useState<TeklifMeta>(() => defaultTeklifMeta());
   const [lines, setLines] = useState<TeklifLine[]>([]);
   const [openSections, setOpenSections] = useState<Record<string, boolean>>(
-    () => Object.fromEntries(PRICE_SECTIONS.map((s) => [s.id, true]))
+    () => Object.fromEntries(TEKLIF_CATALOG.map((s) => [s.id, false]))
   );
+  const [search, setSearch] = useState("");
 
   const [picker, setPicker] = useState<{
-    section: PriceSection;
-    item: ProductRecipe;
+    section: CatalogSection;
+    item: CatalogItem;
   } | null>(null);
   const [draftQty, setDraftQty] = useState("1");
   const [draftPrice, setDraftPrice] = useState("");
@@ -159,10 +126,10 @@ export default function TeklifClient() {
 
   const genelToplam = useMemo(() => araToplam + kdvTutari, [araToplam, kdvTutari]);
 
-  const openPicker = useCallback((section: PriceSection, item: ProductRecipe) => {
+  const openPicker = useCallback((section: CatalogSection, item: CatalogItem) => {
     setPicker({ section, item });
     setDraftQty("1");
-    setDraftPrice("");
+    setDraftPrice(item.defaultPrice ? String(item.defaultPrice) : "");
     setDraftIsk("0");
   }, []);
 
@@ -361,7 +328,7 @@ export default function TeklifClient() {
                   className="opacity-60 hover:opacity-100"
                   style={{ color: "#555" }}
                   onClick={() =>
-                    setOpenSections(Object.fromEntries(PRICE_SECTIONS.map((s) => [s.id, true])))
+                    setOpenSections(Object.fromEntries(TEKLIF_CATALOG.map((s) => [s.id, true])))
                   }
                 >
                   Tümünü Aç
@@ -372,7 +339,7 @@ export default function TeklifClient() {
                   className="opacity-60 hover:opacity-100"
                   style={{ color: "#555" }}
                   onClick={() =>
-                    setOpenSections(Object.fromEntries(PRICE_SECTIONS.map((s) => [s.id, false])))
+                    setOpenSections(Object.fromEntries(TEKLIF_CATALOG.map((s) => [s.id, false])))
                   }
                 >
                   Kapat
@@ -380,49 +347,74 @@ export default function TeklifClient() {
               </div>
             </div>
 
-            <div className="space-y-3">
-              {PRICE_SECTIONS.map((section) => (
-                <div key={section.id} className="bg-white border overflow-hidden" style={{ borderColor: "#e0e0e0" }}>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setOpenSections((prev) => ({ ...prev, [section.id]: !prev[section.id] }))
-                    }
-                    className="w-full flex items-center justify-between px-4 py-3 text-left border-b hover:bg-gray-50"
-                    style={{ borderColor: "#eee" }}
-                  >
-                    <span className="text-xs font-semibold uppercase tracking-[0.12em]" style={{ color: "#111" }}>
-                      {section.title}
-                    </span>
-                    <span className="text-[10px]" style={{ color: "#aaa" }}>
-                      {section.items.length}
-                    </span>
-                  </button>
-                  {openSections[section.id] !== false && (
-                    <div className="p-3 grid grid-cols-2 sm:grid-cols-3 gap-3">
-                      {section.items.map((item) => (
-                        <button
-                          key={item.id}
-                          type="button"
-                          onClick={() => openPicker(section, item)}
-                          className="text-left border overflow-hidden transition-shadow hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#1b3563]/30"
-                          style={{ borderColor: "#e8e8e8" }}
-                        >
-                          <ProductThumb sectionId={section.id} productId={item.id} label={item.label} />
-                          <div className="p-2">
-                            <p className="text-[11px] font-medium leading-snug line-clamp-2" style={{ color: "#111" }}>
-                              {item.label}
-                            </p>
-                            <p className="text-[9px] mt-1 uppercase tracking-wide" style={{ color: "#999" }}>
-                              {item.unit}
-                            </p>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+            {/* Arama */}
+            <div className="mb-3">
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  if (e.target.value.trim()) {
+                    setOpenSections(Object.fromEntries(TEKLIF_CATALOG.map((s) => [s.id, true])));
+                  }
+                }}
+                placeholder="Ürün ara..."
+                className="w-full border px-3 py-2 text-sm"
+                style={{ borderColor: "#ddd" }}
+              />
+            </div>
+
+            <div className="space-y-2">
+              {TEKLIF_CATALOG.map((section) => {
+                const q = search.trim().toLowerCase();
+                const filtered = q
+                  ? section.items.filter((i) => i.label.toLowerCase().includes(q))
+                  : section.items;
+                if (q && filtered.length === 0) return null;
+                return (
+                  <div key={section.id} className="bg-white border overflow-hidden" style={{ borderColor: "#e0e0e0" }}>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setOpenSections((prev) => ({ ...prev, [section.id]: !prev[section.id] }))
+                      }
+                      className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-gray-50"
+                      style={{ borderColor: "#eee" }}
+                    >
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.1em]" style={{ color: "#111" }}>
+                        {section.title}
+                      </span>
+                      <span className="text-[10px]" style={{ color: "#aaa" }}>
+                        {filtered.length} {openSections[section.id] ? "▲" : "▼"}
+                      </span>
+                    </button>
+                    {openSections[section.id] && (
+                      <table className="w-full border-t text-xs" style={{ borderColor: "#eee" }}>
+                        <tbody>
+                          {filtered.map((item, idx) => (
+                            <tr
+                              key={item.id}
+                              className="cursor-pointer hover:bg-blue-50 transition-colors"
+                              style={{ backgroundColor: idx % 2 === 0 ? "#fafafa" : "#fff" }}
+                              onClick={() => openPicker(section, item)}
+                            >
+                              <td className="px-3 py-2 font-medium" style={{ color: "#111" }}>
+                                {item.label}
+                              </td>
+                              <td className="px-2 py-2 text-right tabular-nums whitespace-nowrap" style={{ color: "#555", width: "90px" }}>
+                                {item.defaultPrice ? fmtMoney(item.defaultPrice) : "—"}
+                              </td>
+                              <td className="px-2 py-2 text-right whitespace-nowrap text-[10px] uppercase tracking-wide" style={{ color: "#aaa", width: "50px" }}>
+                                {item.unit}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </section>
 
@@ -643,10 +635,6 @@ export default function TeklifClient() {
               />
             </label>
 
-            <p className="text-[10px] font-light leading-relaxed" style={{ color: "#aaa" }}>
-              Görseller:{" "}
-              <code className="font-mono text-[9px]">public/images/teklif/&lt;kategori&gt;/&lt;ürün-id&gt;.png</code>
-            </p>
           </aside>
         </div>
       </div>
