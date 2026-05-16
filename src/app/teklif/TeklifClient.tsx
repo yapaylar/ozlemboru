@@ -740,7 +740,7 @@ export default function TeklifClient() {
       )}
 
       {/* Yazdırma: @page teklif-doc margin 0; iç padding kağıt boşluğu */}
-      <section className="hidden print:block bg-white px-[10mm] py-[10mm] text-black teklif-print-sheet sm:px-[12mm] sm:py-[12mm]">
+      <section className="hidden print:block bg-white text-black teklif-print-sheet">
         <TeklifFormDocument
           meta={meta}
           lines={lines}

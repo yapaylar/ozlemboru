@@ -214,9 +214,9 @@
   animation: reference-marquee-scroll 28s linear infinite;
 }
 
-/* Teklif PDF: dar kenar — tarayıcı üst/altbilgisi için Yazdır → Üstbilgi ve altbilgileri kapatın */
+/* Teklif PDF: her sayfa eşit kenar boşluğu — thead otomatik tekrarlanır */
 @page teklif-doc {
-  margin: 0;
+  margin: 10mm 12mm;
 }
 
 @media print {
@@ -226,6 +226,20 @@
 
   .teklif-print-sheet {
     page: teklif-doc;
+  }
+
+  /* thead her sayfada tekrarlanır, satırlar kırılır */
+  .teklif-print-sheet table {
+    page-break-inside: auto;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .teklif-print-sheet table thead {
+    display: table-header-group;
+  }
+  .teklif-print-sheet table tbody tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
   }
 
   body {
