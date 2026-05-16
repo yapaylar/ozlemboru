@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Printer, Trash2, LogOut } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 import { HESAP_PASSWORD } from "@/lib/pricing";
 import { TEKLIF_CATALOG, type CatalogSection, type CatalogItem } from "@/lib/teklif-catalog";
@@ -169,38 +170,64 @@ export default function TeklifClient() {
       {/* Üst araç çubuğu */}
       <header
         className="sticky top-[68px] sm:top-[72px] z-40 border-b print:hidden"
-        style={{ backgroundColor: "#0a0a0a", borderColor: "rgba(255,255,255,0.08)" }}
+        style={{ backgroundColor: "#0a0a0a", borderColor: "rgba(255,255,255,0.07)" }}
       >
-        <div className="container-max flex flex-wrap items-center justify-between gap-x-4 gap-y-3 py-3 sm:py-4">
-          <div>
-            <p className="text-[10px] font-light uppercase tracking-[0.2em]" style={{ color: "rgba(255,255,255,0.35)" }}>
-              Dahili — Teklif oluştur
-            </p>
-            <h1 className="mt-0.5 text-base font-light uppercase tracking-wide text-white">Teklif</h1>
+        <div className="container-max flex items-center justify-between py-2.5">
+          {/* Sol: başlık */}
+          <div className="flex items-center gap-3">
+            <div
+              className="hidden h-7 w-px sm:block"
+              style={{ backgroundColor: "rgba(255,255,255,0.12)" }}
+            />
+            <div>
+              <span className="text-[11px] font-light tracking-widest text-white/90 uppercase">
+                Teklif
+              </span>
+              <span
+                className="ml-2 hidden text-[10px] sm:inline"
+                style={{ color: "rgba(255,255,255,0.3)" }}
+              >
+                {COMPANY.brandName}
+              </span>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
+
+          {/* Sağ: aksiyonlar */}
+          <div className="flex items-center divide-x divide-white/[0.08]">
+            {/* Temizle */}
             <button
               type="button"
+              title="Teklifi temizle"
               onClick={() => { setLines([]); setMeta(defaultTeklifMeta()); }}
-              className="border px-3 py-2 text-[10px] font-light uppercase tracking-widest transition-opacity hover:opacity-60"
-              style={{ borderColor: "rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.65)" }}
+              className="group flex items-center gap-2 px-4 py-2.5 text-[11px] transition-colors hover:bg-white/5"
+              style={{ color: "rgba(255,255,255,0.45)" }}
             >
-              Temizle
+              <Trash2 size={13} className="group-hover:text-white/70 transition-colors" />
+              <span className="hidden sm:inline">Temizle</span>
             </button>
+
+            {/* Yazdır */}
             <button
               type="button"
+              title="Yazdır / PDF"
               onClick={() => window.print()}
-              className="bg-white px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-black transition-opacity hover:opacity-85"
+              className="group flex items-center gap-2 px-4 py-2.5 text-[11px] font-medium transition-colors hover:bg-white/10"
+              style={{ color: "rgba(255,255,255,0.85)" }}
             >
-              Yazdır / PDF
+              <Printer size={13} className="transition-colors group-hover:text-white" />
+              <span>Yazdır</span>
             </button>
+
+            {/* Çıkış */}
             <button
               type="button"
+              title="Çıkış"
               onClick={() => { sessionStorage.removeItem(SESSION_KEY); setAuthed(false); }}
-              className="border px-3 py-2 text-[10px] font-light uppercase tracking-widest transition-opacity hover:opacity-60"
-              style={{ borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.4)" }}
+              className="group flex items-center gap-2 px-4 py-2.5 text-[11px] transition-colors hover:bg-white/5"
+              style={{ color: "rgba(255,255,255,0.3)" }}
             >
-              Çıkış
+              <LogOut size={13} className="transition-colors group-hover:text-white/50" />
+              <span className="hidden sm:inline">Çıkış</span>
             </button>
           </div>
         </div>
