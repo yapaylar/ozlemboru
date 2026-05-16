@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "1989'dan bu yana İller Bankası, ASKİ, TOKİ ve 60'ı aşkın kamu ve özel sektör kuruluşuyla tamamlanan referans projelerimiz.",
 };
 
-const HERO_SRC = "/kurumsalhero.jpg";
+const HERO_SRC = "/teknikhero.jpg";
 
 const LOGOS = [1, 2, 3, 4, 5, 6, 7];
 

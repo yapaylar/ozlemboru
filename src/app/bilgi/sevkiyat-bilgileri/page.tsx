@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Özlem Beton Boru ürünleri için 1 tırda gidecek miktar ve birim bilgileri. Beton boru, muayene bacası ve altyapı elemanları lojistik tablosu.",
 };
 
-const HERO_SRC = "/kurumsalhero.jpg";
+const HERO_SRC = "/teknikhero.jpg";
 
 type Row = { name: string; miktar: number; birim: "MT" | "ADET" | "TK" };
 type Group = { title: string; rows: Row[] };

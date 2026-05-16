@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { COMPANY, KFS_ITEMS, CERTIFICATES } from "@/lib/constants";
 
-const KURUMSAL_HERO_SRC = "/kurumsalhero.jpg";
+const KURUMSAL_HERO_SRC = "/kurumsalhero2.jpg";
 
 export const metadata: Metadata = {
   title: "Kurumsal | Özlem Beton Boru",

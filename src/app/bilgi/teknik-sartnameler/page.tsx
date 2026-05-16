@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Özlem Beton Boru ürünlerine ait teknik şartname tabloları: iç çap, boru uzunluğu, et kalınlıkları ve tepe yük dayanım değerleri.",
 };
 
-const HERO_SRC = "/kurumsalhero.jpg";
+const HERO_SRC = "/teknikhero.jpg";
 
 const SPECS = [
   { name: "Ø 150 mm Buhar Kürlü Muflu Beton Boru", ic: 150, uzunluk: 1500, ozlemEt: 45, ilbankEt: 34, askiEt: 0, ilbankTepe: "3,8", askiTepe: "0,0" },
