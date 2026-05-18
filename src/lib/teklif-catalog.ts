@@ -183,6 +183,24 @@ const DIGER: CatalogItem[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
+// 12. BETONARME SU DEPOLARI VE AKSESUARLARI
+// ─────────────────────────────────────────────────────────────────────────────
+const SU_DEPOLARI: CatalogItem[] = [
+  { id: "sd-30m3",    label: "30 m³ Prefabrik Betonarme Su Deposu",  unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-50m3",    label: "50 m³ Prefabrik Betonarme Su Deposu",  unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-100m3",   label: "100 m³ Prefabrik Betonarme Su Deposu", unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-300m3",   label: "300 m³ Prefabrik Betonarme Su Deposu", unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-manevra", label: "Manevra Odası",                         unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-vantuz",  label: "Vantuz",                                unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-kaptaj",  label: "Kaptaj",                                unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-fos-100", label: "100 kk Prefabrik Foseptik Depo",       unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-fos-125", label: "125 kk Prefabrik Foseptik Depo",       unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-fos-250", label: "250 kk Prefabrik Foseptik Depo",       unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-fos-500", label: "500 kk Prefabrik Foseptik Depo",       unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-fos-1000",label: "1000 kk Prefabrik Foseptik Depo",      unit: "ADET", defaultPrice: 200000 },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
 export const TEKLIF_CATALOG: CatalogSection[] = [
   { id: "borular",      title: "Beton / Betonarme Borular",    items: BORULAR },
   { id: "adaptorler",   title: "Adaptör Borular",              items: ADAPTORLER },
@@ -195,4 +213,5 @@ export const TEKLIF_CATALOG: CatalogSection[] = [
   { id: "kare-bacalar", title: "Kare Bacalar ve Kapaklar",     items: KARE_BACALAR },
   { id: "ayar-bilezik", title: "Ayar Bilezikleri",             items: AYAR_BILEZIKLERI },
   { id: "diger",        title: "Diğer",                       items: DIGER },
+  { id: "su-depolari",  title: "Betonarme Su Depoları ve Aksesuarlar", items: SU_DEPOLARI },
 ];
