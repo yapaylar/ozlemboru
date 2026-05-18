@@ -12,7 +12,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-[55vh] overflow-hidden sm:min-h-dvh">
+    <section className="relative min-h-[85vh] overflow-hidden sm:min-h-dvh">
       <video
         src={HERO_VIDEO.src}
         poster={HERO_VIDEO.poster}
@@ -22,12 +22,12 @@ export default function Hero() {
         muted
         playsInline
         disablePictureInPicture
-        className="absolute inset-0 h-full w-full object-cover object-center"
+        className="absolute inset-0 h-full w-full object-cover object-[75%_center] sm:object-center"
       />
 
       <div className="absolute inset-0 bg-black/55" />
 
-      <div className="relative z-10 flex min-h-[55vh] flex-col justify-end pt-[68px] sm:min-h-dvh sm:pt-[72px]">
+      <div className="relative z-10 flex min-h-[85vh] flex-col justify-end pt-[68px] sm:min-h-dvh sm:pt-[72px]">
         <div className="container-max w-full pb-10 [padding-bottom:max(2.5rem,env(safe-area-inset-bottom))] sm:pb-20">
           <h1
             className="max-w-3xl text-balance font-light text-white [font-size:var(--type-hero)] leading-[1.12] tracking-[-0.02em] sm:tracking-[-0.01em]"

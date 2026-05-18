@@ -65,7 +65,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="lg:col-span-5 w-full flex flex-col gap-3">
+          <div className="hidden sm:flex lg:col-span-5 w-full flex-col gap-3">
             {STAT_STACK_INDEXES.map((cardIndex, i) => {
               const card = STAT_CARDS[cardIndex];
               return (
