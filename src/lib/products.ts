@@ -373,8 +373,9 @@ export const PRODUCTS: Product[] = [
     unit: "ADET",
     optionLabel: "Kapasite",
     options: [
-      { id: "25m3",  label: "25 m³",  length: "—", weight: "—" },
-      { id: "30m3",  label: "30 m³",  length: "—", weight: "—" },
+      { id: "25m3",          label: "25 m³",                    length: "—", weight: "—" },
+      { id: "25m3-fayansli", label: "25 m³ (Fayans Kaplamalı)", length: "—", weight: "—" },
+      { id: "30m3",          label: "30 m³",                    length: "—", weight: "—" },
       { id: "50m3",  label: "50 m³",  length: "—", weight: "—" },
       { id: "100m3", label: "100 m³", length: "—", weight: "—" },
       { id: "300m3", label: "300 m³", length: "—", weight: "—" },
@@ -429,6 +430,7 @@ export const PRODUCTS: Product[] = [
     unit: "ADET",
     optionLabel: "Kapasite",
     options: [
+      { id: "25kk",   label: "25 m³",   length: "—", weight: "—" },
       { id: "100kk",  label: "100 kk",  length: "—", weight: "—" },
       { id: "125kk",  label: "125 kk",  length: "—", weight: "—" },
       { id: "250kk",  label: "250 kk",  length: "—", weight: "—" },

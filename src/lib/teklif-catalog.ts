@@ -186,14 +186,16 @@ const DIGER: CatalogItem[] = [
 // 12. BETONARME SU DEPOLARI VE AKSESUARLARI
 // ─────────────────────────────────────────────────────────────────────────────
 const SU_DEPOLARI: CatalogItem[] = [
-  { id: "sd-25m3",    label: "25 m³ Prefabrik Betonarme Su Deposu",  unit: "ADET", defaultPrice: 200000 },
-  { id: "sd-30m3",    label: "30 m³ Prefabrik Betonarme Su Deposu",  unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-25m3",         label: "25 m³ Prefabrik Betonarme Su Deposu",                unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-25m3-fayans", label: "25 m³ Prefabrik Betonarme Su Deposu (Fayans Kaplamalı)", unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-30m3",         label: "30 m³ Prefabrik Betonarme Su Deposu",                unit: "ADET", defaultPrice: 200000 },
   { id: "sd-50m3",    label: "50 m³ Prefabrik Betonarme Su Deposu",  unit: "ADET", defaultPrice: 200000 },
   { id: "sd-100m3",   label: "100 m³ Prefabrik Betonarme Su Deposu", unit: "ADET", defaultPrice: 200000 },
   { id: "sd-300m3",   label: "300 m³ Prefabrik Betonarme Su Deposu", unit: "ADET", defaultPrice: 200000 },
   { id: "sd-manevra", label: "Manevra Odası",                         unit: "ADET", defaultPrice: 200000 },
   { id: "sd-vantuz",  label: "Vantuz",                                unit: "ADET", defaultPrice: 200000 },
   { id: "sd-kaptaj",  label: "Kaptaj",                                unit: "ADET", defaultPrice: 200000 },
+  { id: "sd-fos-25",  label: "25 m³ Prefabrik Foseptik Depo",        unit: "ADET", defaultPrice: 200000 },
   { id: "sd-fos-100", label: "100 kk Prefabrik Foseptik Depo",       unit: "ADET", defaultPrice: 200000 },
   { id: "sd-fos-125", label: "125 kk Prefabrik Foseptik Depo",       unit: "ADET", defaultPrice: 200000 },
   { id: "sd-fos-250", label: "250 kk Prefabrik Foseptik Depo",       unit: "ADET", defaultPrice: 200000 },
