@@ -373,6 +373,7 @@ export const PRODUCTS: Product[] = [
     unit: "ADET",
     optionLabel: "Kapasite",
     options: [
+      { id: "25m3",  label: "25 m³",  length: "—", weight: "—" },
       { id: "30m3",  label: "30 m³",  length: "—", weight: "—" },
       { id: "50m3",  label: "50 m³",  length: "—", weight: "—" },
       { id: "100m3", label: "100 m³", length: "—", weight: "—" },

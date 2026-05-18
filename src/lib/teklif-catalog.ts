@@ -186,6 +186,7 @@ const DIGER: CatalogItem[] = [
 // 12. BETONARME SU DEPOLARI VE AKSESUARLARI
 // ─────────────────────────────────────────────────────────────────────────────
 const SU_DEPOLARI: CatalogItem[] = [
+  { id: "sd-25m3",    label: "25 m³ Prefabrik Betonarme Su Deposu",  unit: "ADET", defaultPrice: 200000 },
   { id: "sd-30m3",    label: "30 m³ Prefabrik Betonarme Su Deposu",  unit: "ADET", defaultPrice: 200000 },
   { id: "sd-50m3",    label: "50 m³ Prefabrik Betonarme Su Deposu",  unit: "ADET", defaultPrice: 200000 },
   { id: "sd-100m3",   label: "100 m³ Prefabrik Betonarme Su Deposu", unit: "ADET", defaultPrice: 200000 },
