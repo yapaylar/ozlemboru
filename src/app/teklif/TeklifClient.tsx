@@ -500,7 +500,15 @@ export default function TeklifClient() {
 
               <button
                 type="button"
-                onClick={() => window.print()}
+                onClick={() => {
+                  const vp = document.querySelector('meta[name=viewport]');
+                  const original = vp?.getAttribute("content") ?? "";
+                  vp?.setAttribute("content", "width=794");
+                  window.addEventListener("afterprint", () => {
+                    vp?.setAttribute("content", original);
+                  }, { once: true });
+                  window.print();
+                }}
                 className="flex items-center gap-2 rounded bg-white px-5 py-2 text-[11px] font-semibold uppercase tracking-widest transition-opacity hover:opacity-90"
                 style={{ color: "#1b3563" }}
               >
