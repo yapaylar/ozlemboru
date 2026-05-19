@@ -103,6 +103,11 @@ export default function TeklifClient() {
   const [draftPrice, setDraftPrice] = useState("");
   const [draftIsk, setDraftIsk] = useState("0");
 
+  const [manualLabel, setManualLabel] = useState("");
+  const [manualUnit, setManualUnit]   = useState("ADET");
+  const [manualQty, setManualQty]     = useState("1");
+  const [manualPrice, setManualPrice] = useState("");
+
   useEffect(() => { setAuthed(sessionStorage.getItem(SESSION_KEY) === "1"); }, []);
 
   const tabloToplam = useMemo(() => lines.reduce((s, l) => s + lineTutar(l), 0), [lines]);
@@ -141,6 +146,30 @@ export default function TeklifClient() {
     ]);
     closePicker();
   }, [picker, draftQty, draftPrice, draftIsk, closePicker]);
+
+  const addManualLine = useCallback(() => {
+    const label = manualLabel.trim();
+    const qty   = parseFloat(manualQty.replace(",", "."));
+    const price = parseFloat(manualPrice.replace(",", "."));
+    if (!label || isNaN(qty) || qty <= 0 || isNaN(price) || price < 0) return;
+    setLines((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        sectionId: "manuel",
+        sectionTitle: "Manuel",
+        productId: `manuel-${Date.now()}`,
+        label,
+        unit: manualUnit.trim() || "ADET",
+        quantity: qty,
+        unitPrice: price,
+        discountPct: 0,
+      },
+    ]);
+    setManualLabel("");
+    setManualQty("1");
+    setManualPrice("");
+  }, [manualLabel, manualUnit, manualQty, manualPrice]);
 
   const removeLine = useCallback((id: string) => setLines((prev) => prev.filter((l) => l.id !== id)), []);
 
@@ -304,6 +333,61 @@ export default function TeklifClient() {
                   </div>
                 );
               })}
+            </div>
+
+            {/* Manuel ürün ekleme */}
+            <div className="mt-3 border bg-white p-4" style={{ borderColor: "#e0e0e0" }}>
+              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.12em]" style={{ color: "#888" }}>
+                Listede olmayan ürün ekle
+              </p>
+              <div className="grid grid-cols-[1fr_80px] gap-2 sm:grid-cols-[1fr_80px_80px_80px]">
+                <input
+                  type="text"
+                  value={manualLabel}
+                  onChange={(e) => setManualLabel(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === "Enter") addManualLine(); }}
+                  placeholder="Ürün adı"
+                  className="col-span-2 border px-3 py-2 text-xs sm:col-span-1"
+                  style={{ borderColor: "#ddd" }}
+                />
+                <input
+                  type="text"
+                  value={manualUnit}
+                  onChange={(e) => setManualUnit(e.target.value)}
+                  placeholder="Birim"
+                  className="border px-2 py-2 text-xs"
+                  style={{ borderColor: "#ddd" }}
+                />
+                <input
+                  type="number"
+                  min={0.01} step={0.01}
+                  value={manualQty}
+                  onChange={(e) => setManualQty(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === "Enter") addManualLine(); }}
+                  placeholder="Miktar"
+                  className="border px-2 py-2 text-xs"
+                  style={{ borderColor: "#ddd" }}
+                />
+                <input
+                  type="number"
+                  min={0} step={0.01}
+                  value={manualPrice}
+                  onChange={(e) => setManualPrice(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === "Enter") addManualLine(); }}
+                  placeholder="Birim fiyat ₺"
+                  className="border px-2 py-2 text-xs"
+                  style={{ borderColor: "#ddd" }}
+                />
+              </div>
+              <button
+                type="button"
+                onClick={addManualLine}
+                disabled={!manualLabel.trim() || !manualPrice}
+                className="mt-2 w-full py-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-white transition-opacity hover:opacity-90 disabled:opacity-30"
+                style={{ backgroundColor: "#1b3563" }}
+              >
+                + Teklife ekle
+              </button>
             </div>
           </section>
 
